@@ -6,15 +6,17 @@ import globalStyles from "./Styles/StylesGlobal";
 import ThemeProvider from "./Theme/ThemeContext";
 
 
+
 function CamerasStatsApp() {
   return (
     <ThemeProvider>
-      <CssBaseline />
+      <CssBaseline enableColorScheme />
       <GlobalStyles styles={globalStyles} />
       <AppEntry />
     </ThemeProvider>
   );
 }
+
 
 
 const container = document.getElementById("Root");
