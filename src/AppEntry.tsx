@@ -3,6 +3,7 @@ import { useAdminScrollbar } from "./Utils/theme";
 import { Stack, Typography, Button as MUIButton, Paper } from "@mui/material";
 import Centered from "./Components/Centered";
 import { useContextTheme } from "./Theme/ThemeContext";
+import { BrowserRouter } from "react-router-dom";
 
 
 
@@ -12,7 +13,8 @@ function AppEntry() {
 
 
   return (
-    <Stack
+    <BrowserRouter>
+    {/* <Stack
       className={adminscrollbar}
       sx={{ gap: 4, height: 1, py: 2, alignItems: "center", overflowY: "auto", position: "relative", px: { xs: 1, sm: 2 } }}
     >
@@ -38,7 +40,9 @@ function AppEntry() {
         </Sheet>
       </Paper>
 
-    </Stack>
+      </Stack> */}
+      
+      </BrowserRouter>
   );
 }
 

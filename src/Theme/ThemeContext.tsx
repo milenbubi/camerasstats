@@ -1,9 +1,9 @@
 import { ThemeProvider as MUIThemeProvider, PaletteMode, THEME_ID } from "@mui/material/styles";
 import { createContext, useContext, useMemo, useState, useEffect, PropsWithChildren } from "react";
-import { muiDarkTheme } from "./muiDark";
-import { muiLightTheme } from "./muiLight";
 import LS from "../Utils/localStorageUtils";
 import { getLsOrBrowserTheme } from "./utils";
+import { muiDarkTheme } from "./muiDarkTheme";
+import { muiLightTheme } from "./muiLightTheme";
 import JoyThemeProvider from "./JoyThemeProvider";
 
 interface ThemeContextType {
