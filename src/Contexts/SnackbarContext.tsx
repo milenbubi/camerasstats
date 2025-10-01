@@ -45,8 +45,8 @@ function SnackbarProvider({ children }: PropsWithChildren) {
       >
 
         <Alert
-          color={severity}  // 'success' | 'danger' | 'warning' | 'neutral' | 'primary'
-          variant={variant}  // стил: 'soft' | 'solid' | 'outlined' | 'plain'
+          color={severity}  // "success" | "danger" | "warning" | "neutral" | "primary"
+          variant={variant}  // "soft" | "solid" | "outlined" | "plain"
           sx={{ minWidth: 200, py: 0.5, pr: 0, fontWeight: 600 }}
           children={message}
           endDecorator={

@@ -8,6 +8,7 @@ import JoyThemeProvider from "./JoyThemeProvider";
 
 interface ThemeContextType {
   themeMode: PaletteMode;
+  isThemeDark: boolean;
   toggleThemeMode: VoidFunction;
 }
 
@@ -38,7 +39,7 @@ function ThemeProvider({ children }: PropsWithChildren) {
 
 
   return (
-    <ThemeContext.Provider value={{ themeMode, toggleThemeMode }}>
+    <ThemeContext.Provider value={{ themeMode, isThemeDark: themeMode === "dark", toggleThemeMode }}>
       <MUIThemeProvider theme={{ [THEME_ID]: muiTheme }}>
         <JoyThemeProvider themeMode={themeMode}>
           {children}

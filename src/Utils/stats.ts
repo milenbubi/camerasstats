@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-
+// TODO remove that file
 
 
 export function useStats(place: string) {

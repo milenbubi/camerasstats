@@ -1,6 +1,6 @@
 import { PaletteMode } from "@mui/material/styles";
 import { useEffect, PropsWithChildren } from "react";
-import { CssVarsProvider as JoyCssVarsProvider, useColorScheme as useJoyColorScheme } from '@mui/joy/styles';
+import { CssVarsProvider as JoyCssVarsProvider, useColorScheme as useJoyColorScheme } from "@mui/joy/styles";
 import { joyTheme } from "./joyTheme";
 
 interface IProps {

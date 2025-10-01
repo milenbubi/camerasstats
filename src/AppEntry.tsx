@@ -1,48 +1,27 @@
-import { Button, Sheet } from "@mui/joy";
-import { useAdminScrollbar } from "./Utils/theme";
-import { Stack, Typography, Button as MUIButton, Paper } from "@mui/material";
-import Centered from "./Components/Centered";
-import { useContextTheme } from "./Theme/ThemeContext";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Home from "./Home";
+import { routes } from "./Network/routes";
+import VisitsTable from "./Visits/VisitsTable";
+import NotFoundPage from "./Components/NotFoundPage";
+import GeneralLayout from "./Components/GeneralLayout/GeneralLayout";
 
 
 
 function AppEntry() {
-  const adminscrollbar = useAdminScrollbar();
-  const { themeMode, toggleThemeMode } = useContextTheme();
-
-
   return (
     <BrowserRouter>
-    {/* <Stack
-      className={adminscrollbar}
-      sx={{ gap: 4, height: 1, py: 2, alignItems: "center", overflowY: "auto", position: "relative", px: { xs: 1, sm: 2 } }}
-    >
+      <Routes>
 
-      <Typography variant="h1" align="center">
-        {"Cameras Stats"}
-      </Typography>
-      <Typography variant="h3" align="center" sx={{ my: 4 }}>
-        {`Текуща тема: ${themeMode}`}
-      </Typography>
+        {/* General layout */}
+        <Route path="/" element={<GeneralLayout />}>
+          <Route index element={<Navigate to={routes.home.path} />} />
+          <Route path={routes.home.path} element={<Home />} />
+          <Route path={routes.visitsstatistics.path} element={<VisitsTable />} />
+          <Route path={routes.catchAll} element={<NotFoundPage />} />
+        </Route>
 
-      <Paper variant="outlined" sx={{ p: 7 }}>
-        <Sheet variant="outlined" sx={{ p: 4, }}>
-          <Centered gap={3}>
-            <Button variant="solid" onClick={toggleThemeMode}>
-              {"Смени тема"}
-            </Button>
-
-            <MUIButton variant="contained" onClick={toggleThemeMode}>
-              {"Смени тема"}
-            </MUIButton>
-          </Centered>
-        </Sheet>
-      </Paper>
-
-      </Stack> */}
-      
-      </BrowserRouter>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

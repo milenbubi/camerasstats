@@ -18,13 +18,13 @@
 .adminscrollbar {
   &::-webkit-scrollbar {
     /* width of the entire scrollbar */
-    width: 10px;
+    width: 8px;
     height: 10px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
     /* color of the scroll thumb when hovered */
-    background-color: #eeeeee;
+    background-color: #b0c4de;
   }
 
   &::-webkit-scrollbar-track {
@@ -34,9 +34,9 @@
 
   &::-webkit-scrollbar-thumb {
     /* color of the scroll thumb */
-    background: #b0c4de;
+    background: #8ba4c5;
     /* roundness of the scroll thumb */
-    border-radius: 5px;
+    border-radius: 2px;
     /* creates padding around scroll thumb */
     border: 0px solid rgb(196, 162, 111);
   }

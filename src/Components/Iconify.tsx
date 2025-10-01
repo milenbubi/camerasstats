@@ -1,7 +1,7 @@
-import { forwardRef } from 'react';
-import { Icon } from '@iconify/react';
-import { IconifyIcon } from '@iconify/react';
-import Box, { BoxProps } from '@mui/material/Box';
+import { forwardRef } from "react";
+import { Icon } from "@iconify/react";
+import { IconifyIcon } from "@iconify/react";
+import Box, { BoxProps } from "@mui/material/Box";
 
 interface IProps extends BoxProps {
   icon?: IconifyIcon | string;
