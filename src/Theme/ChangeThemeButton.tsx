@@ -21,7 +21,7 @@ function ChangeThemeButton(props: IconButtonProps) {
         ...(Array.isArray(sx) ? sx : [sx])
       ]}
     >
-      <Iconify icon={isThemeDark ? "material-symbols:light-mode" : "tdesign:mode-dark-filled"} />
+      <Iconify icon={isThemeDark ? "material-symbols:light-mode" : "material-symbols:dark-mode"} />
     </IconButton>
   );
 }

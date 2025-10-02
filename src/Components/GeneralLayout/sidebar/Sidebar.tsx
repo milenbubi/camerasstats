@@ -1,23 +1,20 @@
-import { CardMedia } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { GlobalStyles, Box, Chip, Divider, IconButton, List, Typography } from "@mui/joy";
+import { GlobalStyles, Box, Chip, List, Typography } from "@mui/joy";
 import { ListItem, ListItemContent, ListItemButton, Sheet, listItemButtonClasses } from "@mui/joy";
 
-import Iconify from "../Iconify";
-import { closeSidebar } from "./utils";
+import Iconify from "../../Iconify";
+import SidebarTop from "./SidebarTop";
 import SidebarCard from "./SidebarCard";
 import SidebarBottom from "./SidebarBottom";
-import NavLinkButton from "../NavLinkButton";
-import { routes } from "../../Network/routes";
-import { layoutConfig } from "./configLayout";
+import NavLinkButton from "./NavLinkButton";
+import { layoutConfig } from "../configLayout";
+import SidebarBackdrop from "./SidebarBackdrop";
+import { routes } from "../../../Network/routes";
 import SidebarItemToggler from "./SidebarItemToggler";
-import { useAdminScrollbar } from "../../Utils/muiHooks";
-import ChangeThemeButton from "../../Theme/ChangeThemeButton";
+import { useAdminScrollbar } from "../../../Utils/muiHooks";
 
 
 
 function Sidebar() {
-  const navigate = useNavigate();
   const adminscrollbar = useAdminScrollbar();
 
 
@@ -34,11 +31,10 @@ function Sidebar() {
         height: "100dvh",
         width: "var(--Sidebar-width)",
         top: 0,
-        py: 2,
+        pt: 1,
         flexShrink: 0,
         display: "flex",
         flexDirection: "column",
-        gap: 2,
         borderRight: "1px solid",
         borderColor: "divider"
       }}
@@ -55,38 +51,10 @@ function Sidebar() {
       />
 
       {/* Backdrop */}
-      <Box
-        sx={{
-          position: "fixed",
-          zIndex: 9998,
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "100vh",
-          opacity: "var(--SideNavigation-slideIn)",
-          backgroundColor: "var(--joy-palette-background-backdrop)",
-          transition: "opacity 0.4s",
-          transform: {
-            xs: "translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1) + var(--SideNavigation-slideIn, 0) * var(--Sidebar-width, 0px)))",
-            lg: "translateX(-100%)"
-          }
-        }}
-        onClick={() => closeSidebar()}
-      />
+      <SidebarBackdrop />
 
       {/* Top */}
-      <Box sx={{ display: "flex", gap: 1, px: 2, alignItems: "center" }}>
-        <IconButton variant="outlined" color="neutral" size="sm" onClick={() => navigate(routes.home.path)}>
-          <CardMedia
-            component="img"
-            src="/shots/logochan180.jpg"
-            sx={{ width: 20, borderRadius: "50%" }}
-            onError={e => { e.currentTarget.style.display = "none"; }}
-          />
-        </IconButton>
-        <Typography level="title-lg">{"Chan 180"}</Typography>
-        <ChangeThemeButton sx={{ ml: "auto" }} />
-      </Box>
+      <SidebarTop />
 
 
       {/* Content */}
@@ -110,6 +78,7 @@ function Sidebar() {
           size="sm"
           sx={{
             gap: 1,
+            pt: 1,
             "--List-nestedInsetStart": "20px",
             "--ListItem-radius": (theme) => theme.vars.radius.sm
           }}
@@ -167,8 +136,6 @@ function Sidebar() {
 
         {/* Card */}
         <SidebarCard />
-
-        <Divider />
 
         {/* Bottom */}
         <SidebarBottom />

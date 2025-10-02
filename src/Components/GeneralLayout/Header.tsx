@@ -20,10 +20,10 @@ function Header() {
         zIndex: 9995,
         p: 2,
         gap: 1,
-        borderBottom: "1px solid",
+        borderBottom: "2px solid",
         borderColor: "background.level1",
         boxShadow: t => t.shadow.xl,
-        background: t => t.palette.mode === "dark" ? "#0b0d0e" : "#fbfcfe"
+        background: t => t.palette.mode === "dark" ? "#0e1012" : "#fbfcfe"
       }}
     >
       <GlobalStyles

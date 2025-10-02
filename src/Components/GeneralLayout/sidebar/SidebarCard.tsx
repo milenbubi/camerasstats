@@ -1,5 +1,5 @@
 import { Button, Card, IconButton, LinearProgress, Typography, Stack } from "@mui/joy";
-import Iconify from "../Iconify";
+import Iconify from "../../Iconify";
 
 
 function SidebarCard() {

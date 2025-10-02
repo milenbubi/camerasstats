@@ -1,7 +1,7 @@
 import { ListItem } from "@mui/joy";
 import { NavLink, NavLinkProps } from "react-router-dom";
 import ListItemButton, { ListItemButtonProps } from "@mui/joy/ListItemButton";
-import { toggleSidebar } from "./GeneralLayout/utils";
+import { toggleSidebar } from "../utils";
 
 interface IProps extends Omit<ListItemButtonProps, "component"> {
   to: NavLinkProps["to"];
@@ -17,7 +17,7 @@ function NavLinkButton({ to, sx, children, ...buttonProps }: IProps) {
           <ListItemButton
             sx={t => ({
               "& .MuiTypography-root": {
-                fontWeight: isActive ? 600 : 500
+                fontWeight: 600
               },
               ":hover": {
                 bgcolor: t.palette.mode === "dark"
