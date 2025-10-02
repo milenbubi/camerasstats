@@ -19,7 +19,7 @@ function SidebarTop() {
 
   return (
     <Box>
-      <Box sx={{ display: "flex", pl: 3, pr: 2, alignItems: "center" }}>
+      <Box sx={{ display: "flex", p: "6px 16px 10px 24px", alignItems: "center" }}>
 
         <Typography
           level="title-lg"
@@ -44,7 +44,7 @@ function SidebarTop() {
 
       </Box>
 
-      <Divider sx={{ mt: 1, mx: 2 }} />
+      <Divider sx={{ mx: 2 }} />
     </Box>
   );
 }

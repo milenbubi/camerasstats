@@ -27,7 +27,7 @@ function SidebarBottom() {
     <Box>
       <Divider />
 
-      <Box sx={{ display: "flex", gap: 1, py: 1.5, alignItems: "center" }}>
+      <Box sx={{ display: "flex", gap: 1, py: "10px", alignItems: "center" }}>
 
         <Avatar
           variant="outlined"
