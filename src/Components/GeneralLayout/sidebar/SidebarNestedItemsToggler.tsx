@@ -11,7 +11,7 @@ interface IProps {
 
 
 
-function SidebarItemToggler({ defaultExpanded = false, renderToggle, children }: PropsWithChildren<IProps>) {
+function SidebarNestedItemsToggler({ defaultExpanded = false, renderToggle, children }: PropsWithChildren<IProps>) {
   const [open, setOpen] = useState(defaultExpanded);
 
 
@@ -40,4 +40,4 @@ function SidebarItemToggler({ defaultExpanded = false, renderToggle, children }:
 
 
 
-export default SidebarItemToggler;
+export default SidebarNestedItemsToggler;

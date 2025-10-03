@@ -9,8 +9,8 @@ import NavLinkButton from "./NavLinkButton";
 import { layoutConfig } from "../configLayout";
 import SidebarBackdrop from "./SidebarBackdrop";
 import { routes } from "../../../Network/routes";
-import SidebarItemToggler from "./SidebarItemToggler";
 import { useAdminScrollbar } from "../../../Utils/muiHooks";
+import SidebarNestedItemsToggler from "./SidebarNestedItemsToggler";
 
 
 
@@ -101,7 +101,7 @@ function Sidebar() {
 
           {/* Tasks */}
           <ListItem nested>
-            <SidebarItemToggler
+            <SidebarNestedItemsToggler
               renderToggle={({ open, setOpen }) => (
                 <ListItemButton onClick={() => setOpen(!open)}>
                   <Iconify icon="streamline-ultimate-color:task-list-to-do" />
@@ -130,7 +130,7 @@ function Sidebar() {
                   <ListItemButton>{"Done"}</ListItemButton>
                 </ListItem>
               </List>
-            </SidebarItemToggler>
+            </SidebarNestedItemsToggler>
           </ListItem>
         </List>
 
