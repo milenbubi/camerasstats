@@ -1,25 +1,25 @@
-import { useCallback } from "react";
+import { Link } from "react-router-dom";
 import { CardMedia } from "@mui/material";
+import { MouseEvent, useCallback } from "react";
 import { Avatar, Box, Divider, IconButton, Typography } from "@mui/joy";
 import { toggleSidebar } from "../utils";
-import { useOpenAuthorProfile } from "../author";
-import { SiteEmail, SiteUrl, AuthorName } from "../../../Utils/constants";
+import { openAuthorProfile, openChan180Website } from "../externalLinks";
+import { SiteEmail, SiteUrl, AuthorName, AuthorProfile } from "../../../Utils/constants";
 
 
 
 function SidebarBottom() {
-  const { openAuthorProfile } = useOpenAuthorProfile();
-
-
-  const handleAuthorProfile = useCallback(() => {
+  const handleSiteClick = useCallback((e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    openChan180Website();
     toggleSidebar();
-    openAuthorProfile();
   }, []);
 
 
-  const openChan180Website = useCallback(() => {
+  const handleAuthorClick = useCallback((e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    openAuthorProfile();
     toggleSidebar();
-    window.open(SiteUrl, "_blank", "noopener,noreferrer");
   }, []);
 
 
@@ -29,20 +29,30 @@ function SidebarBottom() {
 
       <Box sx={{ display: "flex", gap: 1, py: "10px", alignItems: "center" }}>
 
+        {/* Author Profile */}
         <Avatar
+          component={Link}
+          to={AuthorProfile}
           variant="outlined"
           size="sm"
           src="/shots/author.jpg"
-          onClick={handleAuthorProfile}
+          onClick={handleAuthorClick}
           sx={{ cursor: "pointer" }}
         />
 
+        {/* Email */}
         <Box sx={{ minWidth: 0, flex: 1 }}>
           <Typography level="title-sm">{AuthorName}</Typography>
           <Typography level="body-xs" sx={{ fontSize: { xs: "0.65rem", lg: "0.7rem" } }}>{SiteEmail}</Typography>
         </Box>
 
-        <IconButton variant="outlined" color="primary" size="sm" onClick={openChan180Website}>
+        {/* Chan 180 */}
+        <IconButton
+          component={Link}
+          to={SiteUrl}
+          variant="outlined" color="primary" size="sm"
+          onClick={handleSiteClick}
+        >
           <CardMedia
             component="img"
             src="/shots/logochan180.jpg"

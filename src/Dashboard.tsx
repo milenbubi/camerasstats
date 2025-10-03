@@ -6,7 +6,7 @@ import { useContextTheme } from "./Theme/ThemeContext";
 
 
 
-function Home() {
+function Dashboard() {
   const adminscrollbar = useAdminScrollbar();
   const { themeMode, toggleThemeMode } = useContextTheme();
 
@@ -45,4 +45,4 @@ function Home() {
 
 
 
-export default Home;
+export default Dashboard;

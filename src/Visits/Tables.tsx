@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { useContextSnack } from "../Contexts/SnackbarContext";
 
-function VisitsTable() {
+function Tables() {
   const { showSnack } = useContextSnack();
 
   const handleFetch = async () => {
@@ -27,4 +26,4 @@ function VisitsTable() {
 
 
 
-export default VisitsTable
+export default Tables

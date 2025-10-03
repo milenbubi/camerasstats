@@ -10,7 +10,7 @@ function NotFoundPage() {
       variant="outlined"
       sx={{
         height: 1,
-        width:1,
+        width: 1,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -38,7 +38,7 @@ function NotFoundPage() {
         <Button
           variant="solid"
           color="primary"
-          onClick={() => navigate(routes.home.path)}
+          onClick={() => navigate(routes.dashboard.path)}
           sx={{ alignSelf: "center", px: 4 }}
         >
           Начална страница
