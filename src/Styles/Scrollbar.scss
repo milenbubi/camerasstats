@@ -7,6 +7,9 @@
     display: none;
   }
 
+  /* Enable scrolling even when scrollbar is hidden */
+  overflow-y: auto;
+
   /* Hide scrollbar for IE and Edge */
   -ms-overflow-style: none;
 
