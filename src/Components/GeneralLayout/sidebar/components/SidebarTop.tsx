@@ -1,9 +1,9 @@
 import { MouseEvent, useCallback } from "react";
 import { Box, Divider, Typography } from "@mui/joy";
 import { Link, useNavigate } from "react-router-dom";
-import { toggleSidebar } from "../utils";
-import { routes } from "../../../Network/routes";
-import ChangeThemeButton from "../../../Theme/ChangeThemeButton";
+import { toggleSidebar } from "../../utils";
+import { routes } from "../../../../Network/routes";
+import ChangeThemeButton from "../../../../Theme/ChangeThemeButton";
 
 
 
@@ -28,7 +28,7 @@ function SidebarTop() {
           to={routes.index}
           level="title-lg"
           sx={{
-            cursor: "pointer",
+            textDecoration: "none",
             color: t => t.palette.mode === "dark" ? "#a3c3d9" : "#333d44",
             transition: "color 0.2s ease, background 0.2s ease",
             '@media (hover: hover)': {

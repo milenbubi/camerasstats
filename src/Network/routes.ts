@@ -2,7 +2,7 @@ export const routes = {
   index: "/",
 
   dashboard: { path: "/dashboard" },
-  tables: { path: "/tables" },
+  visits: { path: "/visits" },
   aaa: { path: "/aaa" },
   bbb: { path: "/bbb" },
   ccc: { path: "/ccc" },

@@ -1,14 +1,14 @@
 import { NavLink } from "react-router-dom";
 import ListItemButton from "@mui/joy/ListItemButton";
 import { Chip, ListItem, ListItemContent, Typography } from "@mui/joy";
-import { toggleSidebar } from "../utils";
-import { NavItemWithPath } from "./navItem";
+import { closeSidebar } from "../../utils";
+import { NavItemWithPath } from "../utils/navItem";
 
 
 
 function NavLinkButton({ path, icon, title, disabled, hideIfNotAuth }: NavItemWithPath) {
   return (
-    <ListItem onClick={toggleSidebar}>
+    <ListItem onClick={closeSidebar}>
       <NavLink to={path} style={{ textDecoration: "none", width: "100%" }}>
         {({ isActive }) => (
           <ListItemButton

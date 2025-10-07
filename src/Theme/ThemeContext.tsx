@@ -28,7 +28,7 @@ function ThemeProvider({ children }: PropsWithChildren) {
   useEffect(() => {  // Update <meta name="theme-color">
     const meta = document.querySelector("meta[name=theme-color]");
     meta?.setAttribute("content", muiTheme.palette.background.default);
-  }, [themeMode]);
+  }, [muiTheme]);
 
 
   const toggleThemeMode = () => {

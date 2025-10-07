@@ -16,7 +16,6 @@ const Iconify = forwardRef<SVGElement, IProps>(({ icon, width = 20, sx, ...other
   <Box
     ref={ref}
     component={Icon}
-    className="component-iconify"
     icon={icon}
     sx={{ width, height: width, ...sx }}
     {...other}

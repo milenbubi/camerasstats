@@ -9,7 +9,7 @@ export function openChan180Website() {
 
 
 
-export const openAuthorProfile = () => {
+export function openAuthorProfile() {
   const fbUserId = "100000461091188";
 
   const openNewTab = () => {
@@ -34,4 +34,4 @@ export const openAuthorProfile = () => {
       openNewTab();
     }
   }, 1500);
-};
+}

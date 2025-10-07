@@ -4,6 +4,7 @@ import Header from "./Header";
 import Sidebar from "./sidebar/Sidebar";
 import { layoutConfig } from "./configLayout";
 import { useAdminScrollbar } from "../../Utils/muiHooks";
+import SidebarRouteWatcher from "./sidebar/utils/SidebarRouteWatcher";
 
 
 
@@ -20,7 +21,7 @@ function GeneralLayout() {
       }}
       className={adminscrollbar}
     >
-      
+      <SidebarRouteWatcher />
       <Header />
       <Sidebar />
 

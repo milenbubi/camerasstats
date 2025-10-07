@@ -21,6 +21,7 @@ type BaseNavItem = {
  * Use this type for leaf items that navigate directly to a route.
  */
 export type NavItemWithPath = BaseNavItem & {
+  type: "link";  // <- discriminator
   path: string;
   subMenu?: never;
   // Disallow `subMenu` when `path` is defined — ensures only one navigation mode per item.
@@ -36,6 +37,7 @@ export type NavItemWithPath = BaseNavItem & {
  * Use this type for expandable items that group multiple navigation targets.
  */
 export type NavItemWithSubMenu = BaseNavItem & {
+  type: "group";  // <- discriminator
   subMenu: NavItem[];
   path?: never;
   // Disallow `path` when `subMenu` is defined — ensures that parent items with children don't have a path.

@@ -1,8 +1,11 @@
 import { useContextSnack } from "../Contexts/SnackbarContext";
 
-function Tables() {
+
+
+function VisitsStatsTable() {
   const { showSnack } = useContextSnack();
 
+  
   const handleFetch = async () => {
     try {
       const res = await fetch("https://chan18d0.net/php/statistics.php?_start=0&_end=10");
@@ -11,9 +14,10 @@ function Tables() {
       console.log(data);
     }
     catch (err: any) {
-      showSnack("fdd","danger")
+      showSnack("fdd", "danger")
     }
   };
+
 
   return (
     <>
@@ -26,4 +30,4 @@ function Tables() {
 
 
 
-export default Tables
+export default VisitsStatsTable;

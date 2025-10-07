@@ -1,9 +1,9 @@
 import ListItemButton from "@mui/joy/ListItemButton";
 import { List, ListItem, ListItemContent, Typography } from "@mui/joy";
-import Iconify from "../../Iconify";
-import { NavItemWithSubMenu } from "./navItem";
+import Iconify from "../../../Iconify";
 import NavLinkButton from "./NavLinkButton";
-import SidebarNestedItemsToggler from "./SidebarNestedItemsToggler";
+import { NavItemWithSubMenu } from "../utils/navItem";
+import SidebarNestedItemsToggler from "../components/SidebarNestedItemsToggler";
 
 
 

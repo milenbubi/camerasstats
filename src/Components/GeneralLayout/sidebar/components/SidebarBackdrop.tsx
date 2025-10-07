@@ -1,5 +1,5 @@
 import { Box } from "@mui/joy";
-import { closeSidebar } from "../utils";
+import { closeSidebar } from "../../utils";
 
 
 function SidebarBackdrop() {
@@ -20,7 +20,7 @@ function SidebarBackdrop() {
           lg: "translateX(-100%)"
         }
       }}
-      onClick={() => closeSidebar()}
+      onClick={closeSidebar}
     />
   );
 }

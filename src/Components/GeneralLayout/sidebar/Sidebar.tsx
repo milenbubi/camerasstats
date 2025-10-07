@@ -1,15 +1,15 @@
 import { GlobalStyles, Box, List } from "@mui/joy";
 import { Sheet, listItemButtonClasses } from "@mui/joy";
 
-import SidebarTop from "./SidebarTop";
-import SidebarCard from "./SidebarCard";
-import SidebarBottom from "./SidebarBottom";
-import NavLinkButton from "./NavLinkButton";
-import { useNavData } from "./sidebarNavData";
 import { layoutConfig } from "../configLayout";
-import SidebarBackdrop from "./SidebarBackdrop";
+import SidebarTop from "./components/SidebarTop";
+import SidebarCard from "./components/SidebarCard";
+import SidebarBottom from "./components/SidebarBottom";
+import NavLinkButton from "./common/NavLinkButton";
+import { useNavData } from "./utils/sidebarNavData";
+import SidebarBackdrop from "./components/SidebarBackdrop";
 import { useAdminScrollbar } from "../../../Utils/muiHooks";
-import NavLinkButtonWithChilds from "./NavLinkButtonWithChilds";
+import NavLinkButtonWithChilds from "./common/NavLinkButtonWithChilds";
 
 
 
@@ -79,15 +79,16 @@ function Sidebar() {
             gap: 1,
             pt: 1,
             "--List-nestedInsetStart": "20px",
-            "--ListItem-radius": (theme) => theme.vars.radius.sm
+            "--ListItem-radius": theme => theme.vars.radius.sm
           }}
         >
-
           {/* Nav Links */}
           {navData.map((nav, index) => {
-            if (nav.path) { return <NavLinkButton key={index} {...nav} /> }
-            else if (nav.subMenu) { return <NavLinkButtonWithChilds key={index} {...nav} /> }
-            else { return null; }
+            switch (nav.type) {
+              case "link": return <NavLinkButton key={index} {...nav} />;
+              case "group": return <NavLinkButtonWithChilds key={index} {...nav} />;
+              default: return null;
+            }
           })}
         </List>
 
