@@ -4,16 +4,19 @@ import { Link, useNavigate } from "react-router-dom";
 import { toggleSidebar } from "../../utils";
 import { routes } from "../../../../Network/routes";
 import ChangeThemeButton from "../../../../Theme/ChangeThemeButton";
+import { useContextNavPathRefresh } from "../../../../Contexts/NavPathRefreshProvider";
 
 
 
 function SidebarTop() {
   const navigate = useNavigate();
+  const { triggerNavRefresh } = useContextNavPathRefresh();
 
 
   const goToHomePage = useCallback((e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     navigate(routes.dashboard.path);
+    triggerNavRefresh(routes.dashboard.path);
     toggleSidebar();
   }, []);
 
@@ -31,8 +34,8 @@ function SidebarTop() {
             textDecoration: "none",
             color: t => t.palette.mode === "dark" ? "#a3c3d9" : "#333d44",
             transition: "color 0.2s ease, background 0.2s ease",
-            '@media (hover: hover)': {
-              '&:hover': {
+            "@media (hover: hover)": {
+              "&:hover": {
                 color: t => t.palette.mode === "dark"
                   ? "rgba(163, 195, 217, 0.8)"  // леко по-тъмен blue-gray
                   : "#000000"

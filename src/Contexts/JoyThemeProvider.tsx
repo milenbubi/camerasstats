@@ -1,12 +1,11 @@
 import { PaletteMode } from "@mui/material/styles";
 import { useEffect, PropsWithChildren } from "react";
 import { CssVarsProvider as JoyCssVarsProvider, useColorScheme as useJoyColorScheme } from "@mui/joy/styles";
-import { joyTheme } from "./joyTheme";
+import { joyTheme } from "../Theme/joyTheme";
 
 interface IProps {
   themeMode: PaletteMode;
 }
-
 
 
 function JoyThemeProvider({ themeMode, children }: PropsWithChildren<IProps>) {
@@ -19,7 +18,6 @@ function JoyThemeProvider({ themeMode, children }: PropsWithChildren<IProps>) {
 }
 
 
-
 function JoyColorSchemeConfigurator({ themeMode }: IProps) {
   const { setMode: setJoyMode } = useJoyColorScheme();
 
@@ -29,7 +27,6 @@ function JoyColorSchemeConfigurator({ themeMode }: IProps) {
 
   return null;
 }
-
 
 
 export default JoyThemeProvider;

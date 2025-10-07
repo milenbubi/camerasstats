@@ -23,7 +23,7 @@ function SnackbarProvider({ children }: PropsWithChildren) {
   const [severity, setSeverity] = useState<ColorPaletteProp>("danger");
 
 
-  const showSnack: any = useCallback((msg: string, alertSeverity: ColorPaletteProp = "neutral", alertStyle: VariantProp = "solid") => {
+  const showSnack = useCallback((msg: string, alertSeverity: ColorPaletteProp = "neutral", alertStyle: VariantProp = "solid") => {
     setOpen(true);
     setMessage(msg);
     setVariant(alertStyle);
