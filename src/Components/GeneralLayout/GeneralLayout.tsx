@@ -6,7 +6,7 @@ import Sidebar from "./sidebar/Sidebar";
 import { layoutConfig } from "./configLayout";
 import { useAdminScrollbar } from "../../Utils/muiHooks";
 import SidebarRouteWatcher from "./sidebar/utils/SidebarRouteWatcher";
-import { BusEventPayloads, useChan180EventListener } from "../../Utils/busEvents";
+import { BusEventPayloads, useChan180EventListener } from "../../Contexts/eventBus";
 import { GeneralLayoutWrapperElementId, getGeneralLayoutWrapperELement } from "../../Utils/htmlUtils";
 
 
@@ -16,7 +16,7 @@ function OutletWithRefresh() {
 
   const handleNavPathRefresh = useCallback((data?: BusEventPayloads["navPathRefresh"]) => {
     setOutletKey(data?.key);
-    getGeneralLayoutWrapperELement()?.scrollTo({ top: 2, behavior: "smooth" });
+    getGeneralLayoutWrapperELement()?.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   useChan180EventListener("navPathRefresh", handleNavPathRefresh);

@@ -1,6 +1,7 @@
 import { Handler } from "mitt";
 import { useCallback } from "react";
-import { useBus, useListener } from "react-bus";
+import { useListener } from "react-bus";
+import { __useInternalBus } from "./EventBusProvider";
 
 type BusEventPayloads = {
   navPathRefresh: { key: number; };
@@ -21,11 +22,11 @@ type EventEmitterKeys = keyof BusEventPayloads;
  * - Always provide a valid payload; undefined may not be allowed depending on the event.
  */
 function useChan180EventEmitter() {
-  const bus = useBus();
+  const bus = __useInternalBus();
 
   const emitEvent = useCallback(<K extends EventEmitterKeys>(key: K, data?: BusEventPayloads[K]) => {
     bus.emit(key, data);
-  }, []);
+  }, [bus]);
 
   return { emitEvent };
 }

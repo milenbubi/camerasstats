@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toggleSidebar } from "../../utils";
 import { routes } from "../../../../Network/routes";
 import ChangeThemeButton from "../../../../Theme/ChangeThemeButton";
-import { useContextNavPathRefresh } from "../../../../Contexts/NavPathRefreshProvider";
+import { useContextNavPathRefresh } from "../../../../Contexts/eventBus";
 
 
 

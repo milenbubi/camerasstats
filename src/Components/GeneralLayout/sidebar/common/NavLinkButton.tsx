@@ -3,7 +3,7 @@ import ListItemButton from "@mui/joy/ListItemButton";
 import { Chip, ListItem, ListItemContent, Typography } from "@mui/joy";
 import { closeSidebar } from "../../utils";
 import { NavItemWithPath } from "../utils/navItem";
-import { useContextNavPathRefresh } from "../../../../Contexts/NavPathRefreshProvider";
+import { useContextNavPathRefresh } from "../../../../Contexts/eventBus";
 
 
 
