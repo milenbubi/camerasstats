@@ -1,17 +1,15 @@
 import IconButton, { IconButtonProps } from "@mui/joy/IconButton";
 import Iconify from "../Components/Iconify";
-import { useContextTheme } from "../Contexts/ThemeProvider";
+import { useContextTheme } from "../Contexts/theme";
 
 
 
-function ChangeThemeButton(props: IconButtonProps) {
-  const { onClick, sx, ...other } = props;
+function ChangeThemeButton({ onClick, sx, ...other }: IconButtonProps) {
   const { isThemeDark, toggleThemeMode } = useContextTheme();
 
 
   return (
     <IconButton
-      data-screenshot="toggle-mode"
       size="sm"
       variant="outlined"
       color="neutral"

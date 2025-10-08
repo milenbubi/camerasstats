@@ -1,10 +1,10 @@
 import { ThemeProvider as MUIThemeProvider, PaletteMode, THEME_ID } from "@mui/material/styles";
 import { createContext, useContext, useMemo, useState, useEffect, PropsWithChildren } from "react";
-import LS from "../Utils/localStorageUtils";
-import JoyThemeProvider from "./JoyThemeProvider";
-import { getLsOrBrowserTheme } from "../Theme/utils";
-import { muiDarkTheme } from "../Theme/muiDarkTheme";
-import { muiLightTheme } from "../Theme/muiLightTheme";
+import LS from "../../Utils/localStorageUtils";
+import __JoyThemeProvider from "./__JoyThemeProvider";
+import { getLsOrBrowserTheme } from "../../Theme/utils";
+import { muiDarkTheme } from "../../Theme/muiDarkTheme";
+import { muiLightTheme } from "../../Theme/muiLightTheme";
 
 interface ThemeContextType {
   themeMode: PaletteMode;
@@ -16,7 +16,7 @@ const ThemeContext = createContext<ThemeContextType>({} as ThemeContextType);
 
 
 
-function ThemeProvider({ children }: PropsWithChildren) {
+function __MUI7ThemeProvider({ children }: PropsWithChildren) {
   const [themeMode, setThemeMode] = useState(getLsOrBrowserTheme);
 
 
@@ -41,9 +41,9 @@ function ThemeProvider({ children }: PropsWithChildren) {
   return (
     <ThemeContext.Provider value={{ themeMode, isThemeDark: themeMode === "dark", toggleThemeMode }}>
       <MUIThemeProvider theme={{ [THEME_ID]: muiTheme }}>
-        <JoyThemeProvider themeMode={themeMode}>
+        <__JoyThemeProvider themeMode={themeMode}>
           {children}
-        </JoyThemeProvider>
+        </__JoyThemeProvider>
       </MUIThemeProvider>
     </ThemeContext.Provider>
   );
@@ -56,5 +56,5 @@ function useContextTheme() {
 }
 
 
-export default ThemeProvider;
+export default __MUI7ThemeProvider;
 export { useContextTheme };

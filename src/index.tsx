@@ -4,7 +4,7 @@ import { CssBaseline, GlobalStyles } from "@mui/material";
 import "./Styles/Scrollbar.scss";
 import AppEntry from "./AppEntry";
 import globalStyles from "./Styles/StylesGlobal";
-import ThemeProvider from "./Contexts/ThemeProvider";
+import { ThemeProvider } from "./Contexts/theme";
 import { EventBusProvider } from "./Contexts/eventBus";
 import SnackbarProvider from "./Contexts/SnackbarContext";
 
