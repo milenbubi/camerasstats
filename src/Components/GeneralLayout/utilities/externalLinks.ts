@@ -1,5 +1,5 @@
-import { SiteUrl } from "../../Utils/constants";
-import { isMobile } from "../../Utils/navigator";
+import { SiteUrl } from "../../../Utils/constants";
+import { isMobile } from "../../../Utils/navigator";
 
 
 

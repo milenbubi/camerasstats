@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import { CardMedia } from "@mui/material";
 import { MouseEvent, useCallback } from "react";
 import { Avatar, Box, Divider, IconButton, Typography } from "@mui/joy";
-import { closeSidebar } from "../../utils";
-import { openAuthorProfile, openChan180Website } from "../../externalLinks";
+
+import { closeSidebar } from "../../utilities/toggleSidebar";
+import { openAuthorProfile, openChan180Website } from "../../utilities/externalLinks";
 import { SiteEmail, SiteUrl, AuthorName, AuthorProfile } from "../../../../Utils/constants";
 
 

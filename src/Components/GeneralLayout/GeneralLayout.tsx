@@ -4,7 +4,7 @@ import { useCallback, useState } from "react";
 
 import Header from "./header/Header";
 import Sidebar from "./sidebar/Sidebar";
-import { layoutConfig } from "./configLayout";
+import { layoutConfig } from "./utilities/layoutConfig";
 import { useAdminScrollbar } from "../../Utils/muiHooks";
 import SidebarRouteWatcher from "./sidebar/utils/SidebarRouteWatcher";
 import { BusEventPayloads, useChan180EventListener } from "../../Contexts/eventBus";

@@ -1,6 +1,6 @@
 import { IconButton } from "@mui/joy";
 import Iconify from "../../Iconify";
-import { toggleSidebar } from "../utils";
+import { toggleSidebar } from "../utilities/toggleSidebar";
 
 
 function HamburgerMenu() {

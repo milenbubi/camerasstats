@@ -1,5 +1,5 @@
 import { Box } from "@mui/joy";
-import { closeSidebar } from "../../utils";
+import { closeSidebar } from "../../utilities/toggleSidebar";
 
 
 function SidebarBackdrop() {

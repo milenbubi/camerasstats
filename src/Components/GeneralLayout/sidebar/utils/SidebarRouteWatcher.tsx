@@ -1,4 +1,4 @@
-import useCloseSidebarOnRouteChange from "../../utils";
+import useCloseSidebarOnRouteChange from "../../utilities/toggleSidebar";
 
 
 function SidebarRouteWatcher() {

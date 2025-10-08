@@ -31,7 +31,7 @@ function SidebarTop() {
               }
             }
           }}
-          onClick={()=>handleNavClick({ path: routes.dashboard.path })}
+          onClick={() => handleNavClick({ path: routes.dashboard.path })}
         >
           {"Chan 180 stats"}
         </Typography>

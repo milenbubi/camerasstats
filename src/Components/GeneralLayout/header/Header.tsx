@@ -1,7 +1,7 @@
 import { Sheet, GlobalStyles } from "@mui/joy";
 import HamburgerMenu from "./HamburgerMenu";
 import HomePageButton from "./HomePageButton";
-import { layoutConfig } from "../configLayout";
+import { layoutConfig } from "../utilities/layoutConfig";
 
 
 

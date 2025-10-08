@@ -1,7 +1,7 @@
 import { MouseEvent, useCallback } from "react";
 import { NavigateFunction } from "react-router-dom";
-import { closeSidebar } from "../../Components/GeneralLayout/utils";
 import { useContextNavPathRefresh } from "./__NavPathRefreshProvider";
+import { closeSidebar } from "../../Components/GeneralLayout/utilities/toggleSidebar";
 
 interface IProps {
   path: string;
