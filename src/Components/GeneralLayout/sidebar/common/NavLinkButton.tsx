@@ -1,23 +1,17 @@
 import { NavLink } from "react-router-dom";
 import ListItemButton from "@mui/joy/ListItemButton";
 import { Chip, ListItem, ListItemContent, Typography } from "@mui/joy";
-import { closeSidebar } from "../../utils";
 import { NavItemWithPath } from "../utils/navItem";
-import { useContextNavPathRefresh } from "../../../../Contexts/eventBus";
+import { useNavRefreshNavigator } from "../../../../Contexts/eventBus/useNavRefreshNavigator";
 
 
 
 function NavLinkButton({ path, icon, title, disabled, hideIfNotAuth }: NavItemWithPath) {
-  const { triggerNavRefresh } = useContextNavPathRefresh();
+  const { handleNavClick } = useNavRefreshNavigator();
 
 
   return (
-    <ListItem
-      onClick={() => {
-        closeSidebar();
-        triggerNavRefresh(path);
-      }}
-    >
+    <ListItem onClick={() => handleNavClick({ path })}>
       <NavLink to={path} style={{ textDecoration: "none", width: "100%" }}>
         {({ isActive }) => (
           <ListItemButton

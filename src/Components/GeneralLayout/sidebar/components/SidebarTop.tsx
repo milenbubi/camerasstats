@@ -1,24 +1,13 @@
-import { MouseEvent, useCallback } from "react";
+import { Link } from "react-router-dom";
 import { Box, Divider, Typography } from "@mui/joy";
-import { Link, useNavigate } from "react-router-dom";
-import { toggleSidebar } from "../../utils";
 import { routes } from "../../../../Network/routes";
 import ChangeThemeButton from "../../../../Theme/ChangeThemeButton";
-import { useContextNavPathRefresh } from "../../../../Contexts/eventBus";
+import { useNavRefreshNavigator } from "../../../../Contexts/eventBus/useNavRefreshNavigator";
 
 
 
 function SidebarTop() {
-  const navigate = useNavigate();
-  const { triggerNavRefresh } = useContextNavPathRefresh();
-
-
-  const goToHomePage = useCallback((e: MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    navigate(routes.dashboard.path);
-    triggerNavRefresh(routes.dashboard.path);
-    toggleSidebar();
-  }, []);
+  const { handleNavClick } = useNavRefreshNavigator();
 
 
   return (
@@ -28,7 +17,7 @@ function SidebarTop() {
         {/* Home page */}
         <Typography
           component={Link}
-          to={routes.index}
+          to={routes.dashboard.path}
           level="title-lg"
           sx={{
             textDecoration: "none",
@@ -42,7 +31,7 @@ function SidebarTop() {
               }
             }
           }}
-          onClick={goToHomePage}
+          onClick={()=>handleNavClick({ path: routes.dashboard.path })}
         >
           {"Chan 180 stats"}
         </Typography>

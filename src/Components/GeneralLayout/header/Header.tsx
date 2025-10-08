@@ -1,7 +1,7 @@
-import { Sheet, IconButton, GlobalStyles } from "@mui/joy";
-import Iconify from "../Iconify";
-import { toggleSidebar } from "./utils";
-import { layoutConfig } from "./configLayout";
+import { Sheet, GlobalStyles } from "@mui/joy";
+import HamburgerMenu from "./HamburgerMenu";
+import HomePageButton from "./HomePageButton";
+import { layoutConfig } from "../configLayout";
 
 
 
@@ -10,7 +10,7 @@ function Header() {
     <Sheet
       sx={{
         display: { xs: "flex", md: "none" },
-        flexDirection: "row-reverse",
+        flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
         position: "fixed",
@@ -36,14 +36,10 @@ function Header() {
           }
         })}
       />
-      <IconButton
-        onClick={toggleSidebar}
-        variant="outlined"
-        color="neutral"
-        size="sm"
-      >
-        <Iconify icon="material-symbols:menu-rounded" />
-      </IconButton>
+
+      <HamburgerMenu />
+      <HomePageButton />
+
     </Sheet>
   );
 }

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { CardMedia } from "@mui/material";
 import { MouseEvent, useCallback } from "react";
 import { Avatar, Box, Divider, IconButton, Typography } from "@mui/joy";
-import { toggleSidebar } from "../../utils";
+import { closeSidebar } from "../../utils";
 import { openAuthorProfile, openChan180Website } from "../../externalLinks";
 import { SiteEmail, SiteUrl, AuthorName, AuthorProfile } from "../../../../Utils/constants";
 
@@ -12,14 +12,14 @@ function SidebarBottom() {
   const handleSiteClick = useCallback((e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     openChan180Website();
-    toggleSidebar();
+    closeSidebar();
   }, []);
 
 
   const handleAuthorClick = useCallback((e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     openAuthorProfile();
-    toggleSidebar();
+    closeSidebar();
   }, []);
 
 

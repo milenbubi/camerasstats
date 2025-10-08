@@ -1,7 +1,8 @@
 import { Box } from "@mui/joy";
-import { useCallback, useState } from "react";
 import { Outlet } from "react-router-dom";
-import Header from "./Header";
+import { useCallback, useState } from "react";
+
+import Header from "./header/Header";
 import Sidebar from "./sidebar/Sidebar";
 import { layoutConfig } from "./configLayout";
 import { useAdminScrollbar } from "../../Utils/muiHooks";
