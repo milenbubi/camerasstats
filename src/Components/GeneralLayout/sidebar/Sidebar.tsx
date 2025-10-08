@@ -3,6 +3,7 @@ import { Sheet, listItemButtonClasses } from "@mui/joy";
 
 import SidebarTop from "./components/SidebarTop";
 import SidebarCard from "./components/SidebarCard";
+import { cssVars } from "../../../Utils/htmlUtils";
 import NavLinkButton from "./common/NavLinkButton";
 import { useNavData } from "./utils/sidebarNavData";
 import SidebarBottom from "./components/SidebarBottom";
@@ -23,13 +24,13 @@ function Sidebar() {
       sx={{
         position: { xs: "fixed", md: "sticky" },
         transform: {
-          xs: "translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1)))",
+          xs: `translateX(calc(100% * (var(${cssVars.sidebarSlideIn}, 0) - 1)))`,
           md: "none"
         },
         transition: "transform 0.4s, width 0.4s",
         zIndex: 10000,
         height: "100dvh",
-        width: "var(--Sidebar-width)",
+        width: `var(${cssVars.sidebarWidth})`,
         top: 0,
         pt: 1,
         flexShrink: 0,
@@ -42,9 +43,9 @@ function Sidebar() {
       <GlobalStyles
         styles={theme => ({
           ":root": {
-            "--Sidebar-width": layoutConfig.Sidebar.big,
+            [cssVars.sidebarWidth]: layoutConfig.Sidebar.big,
             [theme.breakpoints.down("md")]: {
-              "--Sidebar-width": layoutConfig.Sidebar.small
+              [cssVars.sidebarWidth]: layoutConfig.Sidebar.small
             }
           }
         })}
@@ -78,8 +79,8 @@ function Sidebar() {
           sx={{
             gap: 1,
             pt: 1,
-            "--List-nestedInsetStart": "20px",
-            "--ListItem-radius": theme => theme.vars.radius.sm
+            [cssVars.listNestedInset]: "20px",
+            [cssVars.listItemRadius]: theme => theme.vars.radius.sm
           }}
         >
           {/* Nav Links */}

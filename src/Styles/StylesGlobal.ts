@@ -1,4 +1,5 @@
 import { Theme } from "@mui/material";
+import { cssVars } from "../Utils/htmlUtils";
 
 
 
@@ -20,8 +21,8 @@ const globalStyles = (theme: Theme) => ({
     width: "100%"
   },
   ":root": {
-    "--Scrollbar-color": theme.palette.mode === "dark" ? "#5a6b8a" : "#6e87a8",
-    "--Scrollbar-color-on-hover": theme.palette.mode === "dark" ? "#8ba4c5" : "#5a6b8a"
+    [cssVars.scrollbarColor]: theme.palette.mode === "dark" ? "#5a6b8a" : "#6e87a8",
+    [cssVars.scrollbarColorOnHover]: theme.palette.mode === "dark" ? "#8ba4c5" : "#5a6b8a"
   }
 });
 

@@ -2,8 +2,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import { Button, Card, LinearProgress, Typography, Stack, List, ListItem, Box } from "@mui/joy";
+
 import Iconify from "../../../Iconify";
 import { routes } from "../../../../Network/routes";
+import { cssVars } from "../../../../Utils/htmlUtils";
 
 const Tasks = {
   completed: 2,
@@ -50,7 +52,7 @@ function SidebarCard() {
         <Typography level="body-xs">
           {`Completed ${Tasks.completed} of ${Tasks.total} features:`}
         </Typography>
-        <List size="sm" sx={{ "--ListItem-minHeight": "0px", pl: 0, py: 0 }}>
+        <List size="sm" sx={{ [cssVars.listItemMinHeight]: "0px", pl: 0, py: 0 }}>
           <ListItem sx={{ pt: "2px" }}>
             <Iconify icon="icon-park-outline:dot" width={16} sx={{ opacity: 0.9 }} />
             <Typography level="body-sm">{"Dashboard"}</Typography>

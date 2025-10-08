@@ -1,6 +1,7 @@
 import { Sheet, GlobalStyles } from "@mui/joy";
 import HamburgerMenu from "./HamburgerMenu";
 import HomePageButton from "./HomePageButton";
+import { cssVars } from "../../../Utils/htmlUtils";
 import { layoutConfig } from "../utilities/layoutConfig";
 
 
@@ -16,7 +17,7 @@ function Header() {
         position: "fixed",
         top: 0,
         width: "100vw",
-        height: "var(--Header-height)",
+        height: `var(${cssVars.headerHeight})`,
         zIndex: 9995,
         p: 2,
         gap: 1,
@@ -29,9 +30,9 @@ function Header() {
       <GlobalStyles
         styles={theme => ({
           ":root": {
-            "--Header-height": "0px",
+            [cssVars.headerHeight]: "0px",
             [theme.breakpoints.down("md")]: {
-              "--Header-height": layoutConfig.HeaderHeight,
+              [cssVars.headerHeight]: layoutConfig.HeaderHeight,
             }
           }
         })}

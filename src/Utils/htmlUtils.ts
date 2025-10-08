@@ -4,3 +4,17 @@ export const GeneralLayoutWrapperElementId = "gn-ly-wrapper";
 export function getGeneralLayoutWrapperELement() {
   return document.getElementById(GeneralLayoutWrapperElementId);
 }
+
+
+
+export const cssVars = {
+  scrollbarColor: "--Scrollbar-color",
+  scrollbarColorOnHover: "--Scrollbar-color-on-hover",
+  headerHeight: "--Header-height",
+  sidebarWidth: "--Sidebar-width",
+  sidebarSlideIn: "--SideNavigation-slideIn",
+  listNestedInset: "--List-nestedInsetStart",
+  listItemRadius: "--ListItem-radius",
+  listItemMinHeight: "--ListItem-minHeight",
+  joyPaletteBackdrop: "--joy-palette-background-backdrop"
+} as const;

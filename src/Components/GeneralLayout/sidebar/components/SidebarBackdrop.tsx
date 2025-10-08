@@ -1,4 +1,5 @@
 import { Box } from "@mui/joy";
+import { cssVars } from "../../../../Utils/htmlUtils";
 import { closeSidebar } from "../../utilities/toggleSidebar";
 
 
@@ -12,11 +13,11 @@ function SidebarBackdrop() {
         left: 0,
         width: "100vw",
         height: "100vh",
-        opacity: "var(--SideNavigation-slideIn)",
-        backgroundColor: "var(--joy-palette-background-backdrop)",
+        opacity: `var(${cssVars.sidebarSlideIn})`,
+        backgroundColor: `var(${cssVars.joyPaletteBackdrop})`,
         transition: "opacity 0.4s",
         transform: {
-          xs: "translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1) + var(--SideNavigation-slideIn, 0) * var(--Sidebar-width, 0px)))",
+          xs: `translateX(calc(100% * (var(${cssVars.sidebarSlideIn}, 0) - 1) + var(${cssVars.sidebarSlideIn}, 0) * var(${cssVars.sidebarWidth}, 0px)))`,
           lg: "translateX(-100%)"
         }
       }}

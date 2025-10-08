@@ -16,7 +16,7 @@ export function useWidth() {
 
 
 
-export function useIsMobile() {
+export function useIsMUIMobile() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -26,7 +26,7 @@ export function useIsMobile() {
 
 
 export function useAdminScrollbar() {
-  const isMobile = useIsMobile();
+  const isMobile = useIsMUIMobile();
   const className = isMobile ? "" : "adminscrollbar";
 
   return className;
