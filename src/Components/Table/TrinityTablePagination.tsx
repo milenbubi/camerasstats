@@ -1,0 +1,67 @@
+import { ChangeEvent, MouseEvent, useMemo } from "react";
+import { Box, TablePagination, TableRow } from "@mui/material";
+import { ITablePage, buildPaginationOptions, setCurrentPage } from "./tableUtils";
+
+interface IProps {
+  totalCount: number;
+  page: ITablePage;
+  rowsPerPageOptions?: number[];
+  onChangePage: (value: number) => void;
+  onChangeRowsPerPage: (value: number) => void;
+}
+
+
+
+function TrinityTablePagination(props: IProps) {
+  const rowsPerPageOptions = useMemo(() => buildPaginationOptions(props.rowsPerPageOptions), []);
+
+
+  const handleChangePage = (event: MouseEvent<HTMLButtonElement> | null, next: number) => {
+    props.onChangePage(next);
+  };
+
+
+  const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
+    props.onChangeRowsPerPage(Number(event.target.value) || 0);
+  };
+
+
+  return (
+    <TableRow>
+      <TablePagination
+        rowsPerPageOptions={rowsPerPageOptions}
+        labelRowsPerPage={"Rows to show"}
+        count={Number(props.totalCount)}
+        rowsPerPage={props.page.rows}
+        page={setCurrentPage(props.page.current, props.page.rows, props.totalCount)}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        labelDisplayedRows={({ from, to, count }) => (
+          <Box component="span">
+            {`${from} - ${to}`}
+            <Box component="span" mx={0.8}>
+              {"of"}
+            </Box>
+            {count}
+          </Box>
+        )}
+        sx={{
+          "& .MuiToolbar-root": { minHeight: 20 },
+          "& .MuiTablePagination-selectLabel": { my: "12px" },
+          "& .MuiTablePagination-displayedRows": { my: "12px" },
+        }}
+        slotProps={{
+          select: {
+            MenuProps: {
+              PaperProps: { sx: { border: t => "2px solid " + t.palette.background.default } }
+            }
+          }
+        }}
+      />
+    </TableRow>
+  );
+}
+
+
+
+export default TrinityTablePagination;

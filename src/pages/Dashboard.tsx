@@ -1,7 +1,7 @@
 import { Button, Sheet } from "@mui/joy";
 import { Stack, Typography, Button as MUIButton, Paper } from "@mui/material";
-import Centered from "./Components/Centered";
-import { useContextTheme } from "./Contexts/theme";
+import Centered from "../Components/Centered";
+import { useContextTheme } from "../Contexts/theme";
 
 
 
