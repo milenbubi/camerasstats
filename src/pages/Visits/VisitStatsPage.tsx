@@ -1,3 +1,4 @@
+import { Paper } from "@mui/material";
 import { createRef, useEffect } from "react";
 import { useAPIRequest } from "../../Network/apiHooks";
 import { useMergedState } from "../../Utils/reactHooks";
@@ -33,8 +34,13 @@ function VisitsStatsPage() {
     table.current?.refresh();
   }, []);
 
+
   const loadVisits = async ({ _end, _start, _order, _sort }: ITableDataQuery) => {
-    const { Data } = await RequestToApi<IVisitStatsResponse>(`/statistics.php?_start=${_start}&_end=${_end}&_order=${_order}&_sort=${_sort}`, "GET");
+    const { Data } = await RequestToApi<IVisitStatsResponse>(
+      `/statistics.php?_start=${_start}&_end=${_end}&_order=${_order}&_sort=${_sort}`,
+      "GET"
+    );
+
     setState({
       totalCount: Data.totalCount,
       visits: Data.items
@@ -43,7 +49,7 @@ function VisitsStatsPage() {
 
 
   return (
-    <>
+    <Paper sx={{ p: 3 }}>
       <FullTable
         ref={table}
         headers={tableHeaders}
@@ -55,8 +61,7 @@ function VisitsStatsPage() {
         pagination
         rowsPerPageOptions={[10, 20, 50, 100]}
       />
-
-    </>
+    </Paper>
   );
 }
 

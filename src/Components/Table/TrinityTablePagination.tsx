@@ -1,5 +1,5 @@
 import { ChangeEvent, MouseEvent, useMemo } from "react";
-import { Box, TablePagination, TableRow } from "@mui/material";
+import { alpha, Box, TablePagination, TableRow } from "@mui/material";
 import { ITablePage, buildPaginationOptions, setCurrentPage } from "./tableUtils";
 
 interface IProps {
@@ -48,12 +48,16 @@ function TrinityTablePagination(props: IProps) {
         sx={{
           "& .MuiToolbar-root": { minHeight: 20 },
           "& .MuiTablePagination-selectLabel": { my: "12px" },
-          "& .MuiTablePagination-displayedRows": { my: "12px" },
+          "& .MuiTablePagination-displayedRows": { my: "12px" }
         }}
         slotProps={{
           select: {
             MenuProps: {
-              PaperProps: { sx: { border: t => "2px solid " + t.palette.background.default } }
+              PaperProps: {
+                sx: {
+                  border: t => "1px solid " + alpha(t.palette.primary.light, 0.5)
+                }
+              }
             }
           }
         }}

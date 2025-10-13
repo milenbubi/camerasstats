@@ -1,21 +1,19 @@
-import { PaletteMode, Theme, ThemeOptions } from "@mui/material/styles";
+import { Theme, ThemeOptions } from "@mui/material/styles";
+import { muiTable } from "./muiTable";
 
 
 
-export function globalMUIOverrides(themeMode: PaletteMode, defaultTheme: Theme): ThemeOptions {
-  const isDark = themeMode === "dark";
-
-
+export function globalMUIOverrides(defaultTheme: Theme): ThemeOptions {
   return {
     components: {
       MuiPaper: {
         styleOverrides: {
           root: {
-            borderRadius: 7,
-            // background: isDark?"#121216":defaultTheme.palette.background.paper
+            borderRadius: 7
           }
         }
-      }
+      },
+      ...muiTable(defaultTheme)
     }
   };
 }

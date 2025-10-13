@@ -1,15 +1,10 @@
-import { createTheme } from "@mui/material/styles";
+import { blueGrey } from "@mui/material/colors";
+import { alpha, createTheme } from "@mui/material/styles";
 import { globalMUIOverrides } from "./muiComponents";
 
 
-const defaultDarkTheme = createTheme({
-  palette: {
-    mode: "dark"
-  }
-});
 
-
-export const muiDarkTheme = createTheme({
+const baseTheme = createTheme({
   palette: {
     mode: "dark",
     // primary: {
@@ -17,12 +12,19 @@ export const muiDarkTheme = createTheme({
     // },
     background: {
       default: "#000000",
-      paper: "#121216"
+      paper: "#0a0b11",
+      neutral: alpha(blueGrey[500], 0.5)
     },
     text: {
       primary: "#ffffff",
       secondary: "#bbbbbb"
     }
-  },
-  ...globalMUIOverrides("dark", defaultDarkTheme)
+  }
+});
+
+
+
+export const muiDarkTheme = createTheme({
+  ...baseTheme,
+  ...globalMUIOverrides(baseTheme)
 });

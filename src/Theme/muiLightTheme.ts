@@ -1,15 +1,10 @@
-import { createTheme } from "@mui/material/styles";
+import { alpha, createTheme } from "@mui/material/styles";
 import { globalMUIOverrides } from "./muiComponents";
+import { blueGrey, grey } from "@mui/material/colors";
 
 
-const defaultLightTheme = createTheme({
-  palette: {
-    mode: "light"
-  }
-});
 
-
-export const muiLightTheme = createTheme({
+const baseTheme = createTheme({
   palette: {
     mode: "light",
     // primary: {
@@ -17,13 +12,18 @@ export const muiLightTheme = createTheme({
     // },
     background: {
       // default: "#fbfcfe",
-      // paper: "#ececec"
-      paper: "#fafbfb"
+      paper: "#f4f4f5",
+      neutral: alpha(blueGrey[500], 0.3)
     },
     text: {
       primary: "#000000",
       secondary: "#555555"
     }
-  },
-  ...globalMUIOverrides("light", defaultLightTheme)
+  }
+});
+
+
+export const muiLightTheme = createTheme({
+  ...baseTheme,
+  ...globalMUIOverrides(baseTheme)
 });

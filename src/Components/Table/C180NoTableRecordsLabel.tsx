@@ -1,19 +1,24 @@
-import { TableCell, TableRow, Typography } from "@mui/material";
-import { ITableHeader } from "./tableUtils";
+import { Typography } from "@mui/joy";
+import { TableCell, TableRow } from "@mui/material";
 
 interface IProps {
-  headers?: ITableHeader[];
+  colSpan: number;
 }
 
 
 
-function C180NoTableRecordsLabel({ headers }: IProps) {
+function C180NoTableRecordsLabel({ colSpan }: IProps) {
   return (
     <TableRow>
-      <TableCell colSpan={headers?.length || 1} align="center">
-        <Typography variant="h4" color="error">
-          {"No Records"}
-        </Typography>
+      <TableCell colSpan={colSpan}>
+
+        <Typography
+          textAlign="center"
+          level="h2"
+          color="danger"
+          children="No Records"
+        />
+
       </TableCell>
     </TableRow>
   );

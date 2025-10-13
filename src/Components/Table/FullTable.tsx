@@ -1,5 +1,6 @@
+import { Sheet } from "@mui/joy";
 import { ReactNode, Ref, forwardRef, useImperativeHandle, useRef, useState } from "react";
-import { Paper, SxProps, Table, TableBody, TableContainer, TableFooter, Theme, alpha } from "@mui/material";
+import { SxProps, Table, TableBody, TableContainer, TableFooter, Theme } from "@mui/material";
 
 import TableHeader from "./TableHeader";
 import TrinityTablePagination from "./TrinityTablePagination";
@@ -103,13 +104,9 @@ function FullTable({ initialSortColumn = "", initialSortDirection = "desc", ...p
 
   return (
     <TableContainer
-      component={Paper}
-      sx={{
-        borderRadius: "4px",
-        border: (t) => "1px solid " + alpha(t.palette.text.disabled, 0.5),
-        ...props.sx,
-      }}
-      elevation={24}
+      component={Sheet}
+      variant="outlined"
+      sx={{ borderRadius: "6px", ...props.sx }}
     >
       <Table size="small">
         <TableHeader
@@ -120,7 +117,7 @@ function FullTable({ initialSortColumn = "", initialSortDirection = "desc", ...p
           initialSortDirection={initialSortDirection}
         />
         <TableBody>
-          {props.totalCount > 0 ? props.itemsRenderer : <C180NoTableRecordsLabel />}
+          {props.totalCount > 0 ? props.itemsRenderer : <C180NoTableRecordsLabel colSpan={props.headers.length} />}
         </TableBody>
 
         {props.pagination && (
