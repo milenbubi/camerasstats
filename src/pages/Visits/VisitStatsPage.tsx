@@ -1,12 +1,15 @@
-import { Paper } from "@mui/material";
-import { createRef, useEffect } from "react";
+import { createRef, useEffect, useRef } from "react";
+import { Container, Paper, Stack } from "@mui/material";
 import { useAPIRequest } from "../../Network/apiHooks";
 import { useMergedState } from "../../Utils/reactHooks";
 import { useContextSnack } from "../../Contexts/SnackbarContext";
 import { IVisit, IVisitStatsResponse } from "../../Utils/models";
 import { ITableDataQuery } from "../../Components/Table/tableUtils";
+import { urlQueryStringFromObject } from "../../Utils/DocumentUtils";
+import DateTimeFilter from "../../Components/DateTime/DateTimeFilter";
 import FullTable, { TableRefresh } from "../../Components/Table/FullTable";
 import VisitsTableItems, { useVisitsTableHeaders } from "./VisitsTableItems";
+import { getFormattedDateString, IPeriodBoundaries } from "../../Components/DateTime/dtUtilities";
 
 interface IState {
   visits: IVisit[];
@@ -21,6 +24,7 @@ function VisitsStatsPage() {
   const { showSnack } = useContextSnack();
   const { RequestToApi } = useAPIRequest();
   const tableHeaders = useVisitsTableHeaders();
+  const period = useRef<IPeriodBoundaries>({ start: 0, end: 0 });
 
 
   const [state, setState] = useMergedState<IState>({
@@ -35,11 +39,15 @@ function VisitsStatsPage() {
   }, []);
 
 
-  const loadVisits = async ({ _end, _start, _order, _sort }: ITableDataQuery) => {
-    const { Data } = await RequestToApi<IVisitStatsResponse>(
-      `/statistics.php?_start=${_start}&_end=${_end}&_order=${_order}&_sort=${_sort}`,
-      "GET"
-    );
+  const loadVisits = async (tableData: ITableDataQuery) => {
+    const urlParams = urlQueryStringFromObject({
+      ...tableData,
+      _visitTimeFrom: getFormattedDateString(period.current.start),
+      _visitTimeTo: getFormattedDateString(period.current.end)
+    });
+
+
+    const { Data } = await RequestToApi<IVisitStatsResponse>("/statistics.php" + urlParams, "GET");
 
     setState({
       totalCount: Data.totalCount,
@@ -49,19 +57,35 @@ function VisitsStatsPage() {
 
 
   return (
-    <Paper sx={{ p: 3 }}>
-      <FullTable
-        ref={table}
-        headers={tableHeaders}
-        itemsRenderer={<VisitsTableItems data={state.visits} />}
-        initialSortDirection="desc"
-        totalCount={state.totalCount}
-        initialSortColumn="createdAt"
-        queryData={loadVisits}
-        pagination
-        rowsPerPageOptions={[10, 20, 50, 100]}
-      />
-    </Paper>
+    <Container maxWidth="lg" disableGutters>
+      <Paper sx={{ p: { xs: 1, sm: 2 } }}>
+        <Stack sx={{ gap: 3, pt: 2 }}>
+
+          <DateTimeFilter
+            onFilterClicked={p => {
+              period.current = p;
+              table.current?.refresh();
+            }}
+            onPeriodChanged={p => {
+              period.current = p;
+            }}
+            initialFilterPeriod={7}
+          />
+
+          <FullTable
+            ref={table}
+            headers={tableHeaders}
+            itemsRenderer={<VisitsTableItems data={state.visits} />}
+            initialSortDirection="desc"
+            totalCount={state.totalCount}
+            initialSortColumn="visit_time"
+            queryData={loadVisits}
+            rowsPerPageOptions={[10, 20, 50, 100]}
+          />
+
+        </Stack>
+      </Paper>
+    </Container>
   );
 }
 

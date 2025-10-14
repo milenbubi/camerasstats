@@ -19,8 +19,8 @@ function BasicTable({ headers, itemsRenderer, hasRecords }: IProps) {
 
         <TableHead>
           <TableRow>
-            {headers?.map((header) => (
-              <TableCell key={header.key} align={header.align} width={header.width}>
+            {headers.map((header, index) => (
+              <TableCell key={index} align={header.align}>
                 <Box whiteSpace="nowrap">{header.text}</Box>
               </TableCell>
             ))}

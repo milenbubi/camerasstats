@@ -1,7 +1,6 @@
-import { forwardRef } from "react";
-import { Icon } from "@iconify/react";
-import { IconifyIcon } from "@iconify/react";
-import Box, { BoxProps } from "@mui/material/Box";
+import { forwardRef, Ref } from "react";
+import { Box, BoxProps } from "@mui/joy";
+import { Icon, IconifyIcon } from "@iconify/react";
 
 interface IProps extends BoxProps {
   icon?: IconifyIcon | string;
@@ -12,16 +11,18 @@ interface IProps extends BoxProps {
 
 
 
-const Iconify = forwardRef<SVGElement, IProps>(({ icon, width = 20, sx, ...other }, ref) => (
-  <Box
-    ref={ref}
-    component={Icon}
-    icon={icon}
-    sx={{ width, height: width, ...sx }}
-    {...other}
-  />
-));
+function Iconify({ icon, width = 20, sx, ...other }: IProps, ref: Ref<SVGElement>) {
+  return (
+    <Box
+      ref={ref}
+      component={Icon}
+      icon={icon}
+      sx={{ width, height: width, ...sx }}
+      {...other}
+    />
+  );
+}
 
 
 
-export default Iconify;
+export default forwardRef<SVGElement, IProps>(Iconify);

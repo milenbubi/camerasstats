@@ -1,5 +1,5 @@
 import { ChangeEvent, MouseEvent, useMemo } from "react";
-import { alpha, Box, TablePagination, TableRow } from "@mui/material";
+import { alpha, Box, TablePagination } from "@mui/material";
 import { ITablePage, buildPaginationOptions, setCurrentPage } from "./tableUtils";
 
 interface IProps {
@@ -12,7 +12,7 @@ interface IProps {
 
 
 
-function TrinityTablePagination(props: IProps) {
+function C180TablePagination(props: IProps) {
   const rowsPerPageOptions = useMemo(() => buildPaginationOptions(props.rowsPerPageOptions), []);
 
 
@@ -27,10 +27,11 @@ function TrinityTablePagination(props: IProps) {
 
 
   return (
-    <TableRow>
+    <Box sx={{ display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
       <TablePagination
+        component={Box}
         rowsPerPageOptions={rowsPerPageOptions}
-        labelRowsPerPage={"Rows to show"}
+        labelRowsPerPage="Rows"
         count={Number(props.totalCount)}
         rowsPerPage={props.page.rows}
         page={setCurrentPage(props.page.current, props.page.rows, props.totalCount)}
@@ -54,18 +55,19 @@ function TrinityTablePagination(props: IProps) {
           select: {
             MenuProps: {
               PaperProps: {
-                sx: {
-                  border: t => "1px solid " + alpha(t.palette.primary.light, 0.5)
-                }
+                sx: { border: t => "1px solid " + alpha(t.palette.primary.light, 0.5) }
               }
+            },
+            inputProps: {
+              id: "pgninp"
             }
           }
         }}
       />
-    </TableRow>
+    </Box>
   );
 }
 
 
 
-export default TrinityTablePagination;
+export default C180TablePagination;

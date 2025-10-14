@@ -1,6 +1,7 @@
 import { memo, useMemo } from "react";
 import { TableCell, TableRow } from "@mui/material";
 import { IVisit } from "../../Utils/models";
+import VisitDeviceLabel from "./VisitDeviceLabel";
 import { ITableHeader } from "../../Components/Table/tableUtils";
 import { formatUTCDateToLocalDateString } from "../../Utils/AdminPanelUtilities";
 
@@ -16,7 +17,7 @@ export function useVisitsTableHeaders() {
       { key: "city", text: "City", sortable: true },
       { key: "region", text: "Region", sortable: true },
       { key: "country", text: "Country", sortable: true },
-      { key: "visitTime", text: "Visit Time", sortable: true },
+      { key: "visit_time", text: "Visit Time", sortable: true },
       { key: "device", text: "Device", sortable: true },
       { key: "ipAddress", text: "IP Address", sortable: false }
     ], []
@@ -37,9 +38,13 @@ function ItemsRenderer({ data }: IProps) {
           <TableCell>{visit.country}</TableCell>
 
           <TableCell sx={{ whiteSpace: "nowrap" }}>
-            {formatUTCDateToLocalDateString(visit.visitTime, "en")}
+            {formatUTCDateToLocalDateString(visit.visitTime, "fullDateTime", "en", true)}
           </TableCell>
-          <TableCell>{visit.device}</TableCell>
+
+          <TableCell>
+            <VisitDeviceLabel visit={visit}  />
+          </TableCell>
+
           <TableCell>{visit.ipAddress}</TableCell>
         </TableRow>
       ))}

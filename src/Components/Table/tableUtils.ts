@@ -21,7 +21,7 @@ function buildPaginationOptions(options?: number[]) {
 
 
 /**
- * Prevent `Thepage prop of a TablePagination is out of range` error raising
+ * Prevent `The page prop of a TablePagination is out of range` error raising
  * when search box is filled and user changes pagination,
  *
  */
@@ -49,7 +49,6 @@ export type SortDirection = "asc" | "desc";
 export interface ITableHeader {
   key: string;
   text: string;
-  width?: string | number;
   disablePadding?: boolean;
   align?: TableCellProps["align"];
   sortable: boolean;

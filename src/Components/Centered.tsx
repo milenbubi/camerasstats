@@ -1,10 +1,12 @@
+import { forwardRef, Ref } from "react";
 import { Stack, StackProps } from "@mui/material";
 
 
-function Centered({ children, ...stackProps }: StackProps) {
+function Centered({ children, ...stackProps }: StackProps, ref: Ref<HTMLDivElement>) {
   return (
     <Stack
-      direction="row"
+      ref={ref}
+      flexDirection="row"
       alignItems="center"
       justifyContent="center"
       {...stackProps}
@@ -15,4 +17,4 @@ function Centered({ children, ...stackProps }: StackProps) {
 }
 
 
-export default Centered;
+export default forwardRef<HTMLDivElement, StackProps>(Centered);

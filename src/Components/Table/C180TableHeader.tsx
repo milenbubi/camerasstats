@@ -12,7 +12,7 @@ interface IProps {
 
 
 
-function TableHeader({ initialSortDirection, sortDirection, sortBy, onRequestSort, headers }: IProps) {
+function C180TableHeader({ initialSortDirection, sortDirection, sortBy, onRequestSort, headers }: IProps) {
   return (
     <TableHead>
       <TableRow>
@@ -21,8 +21,6 @@ function TableHeader({ initialSortDirection, sortDirection, sortBy, onRequestSor
             {header.sortable ?
               (
                 <TableCell
-                  sx={{ width: header.width }}
-                  scope="row"
                   align={header.align || "left"}
                   padding={header.disablePadding ? "none" : "normal"}
                   sortDirection={sortBy === header.key ? sortDirection : false}
@@ -41,8 +39,6 @@ function TableHeader({ initialSortDirection, sortDirection, sortBy, onRequestSor
                 <TableCell
                   align={header.align || "left"}
                   padding={header.disablePadding ? "none" : "normal"}
-                  scope="row"
-                  width={header.width}
                 >
                   <Box whiteSpace="nowrap">{header.text}</Box>
                 </TableCell>
@@ -57,4 +53,4 @@ function TableHeader({ initialSortDirection, sortDirection, sortBy, onRequestSor
 
 
 
-export default TableHeader;
+export default C180TableHeader;

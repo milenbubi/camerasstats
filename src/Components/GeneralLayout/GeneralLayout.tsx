@@ -1,14 +1,13 @@
-import { Box } from "@mui/joy";
 import { Outlet } from "react-router-dom";
+import { Box, GlobalStyles } from "@mui/joy";
 import { useCallback, useState } from "react";
 
 import Header from "./header/Header";
 import Sidebar from "./sidebar/Sidebar";
 import { layoutConfig } from "./utilities/layoutConfig";
 import { useAdminScrollbar } from "../../Utils/muiHooks";
-import SidebarRouteWatcher from "./sidebar/utils/SidebarRouteWatcher";
 import { BusEventPayloads, useChan180EventListener } from "../../Contexts/eventBus";
-import { GeneralLayoutWrapperElementId, getGeneralLayoutWrapperELement } from "../../Utils/htmlUtils";
+import { cssVars, GeneralLayoutWrapperElementId, getGeneralLayoutWrapperELement } from "../../Utils/htmlUtils";
 
 
 
@@ -36,19 +35,45 @@ function GeneralLayout() {
   return (
     <Box
       id={GeneralLayoutWrapperElementId}
+      className={adminscrollbar}
       sx={{
         display: "flex",
-        height: 1,
-        overflowY: "auto"
+        height: "100vh",
+        overflow: "hidden"
       }}
-      className={adminscrollbar}
     >
-      <SidebarRouteWatcher />
+
       <Header />
       <Sidebar />
 
-      <Box sx={{ flex: 1, height: 1, pt: { xs: layoutConfig.HeaderHeight, md: 0 } }}>
-        <Box component="main" sx={{ height: 1 }}>
+      <Box
+        className={adminscrollbar}
+        sx={{
+          flexGrow: 1,
+          marginLeft: `var(${cssVars.contentAreaMarginLeft})`,
+          display: "flex",
+          flexDirection: "column",
+          height: "100vh",
+          overflowY: "hidden",
+          overflowX: "hidden",
+          pt: { xs: layoutConfig.HeaderHeight, md: 0 }
+        }}
+      >
+        <GlobalStyles
+          styles={theme => ({
+            ":root": {
+              [cssVars.contentAreaMarginLeft]: layoutConfig.Sidebar.big,
+              [theme.breakpoints.down("md")]: {
+                [cssVars.contentAreaMarginLeft]: 0
+              }
+            }
+          })}
+        />
+        <Box
+          component="main"
+          className={adminscrollbar}
+          sx={{ flexGrow: 1, overflowY: "auto", p: { xs: 1, sm: 2 } }}
+        >
           <OutletWithRefresh />
         </Box>
       </Box>

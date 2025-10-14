@@ -10,7 +10,7 @@ function Dashboard() {
 
 
   return (
-    <Stack sx={{ gap: 4, py: 2, alignItems: "center", px: { xs: 1, sm: 2 } }}>
+    <Stack sx={{ gap: 4, alignItems: "center" }}>
 
       <Typography variant="h1" align="center">
         {"Cameras Stats"}
@@ -19,8 +19,8 @@ function Dashboard() {
         {`Текуща тема: ${themeMode}`}
       </Typography>
 
-      <Paper variant="outlined" sx={{ p: 7 }}>
-        <Sheet variant="outlined" sx={{ p: 4, }}>
+      <Paper sx={{ p: 7 }}>
+        <Sheet variant="outlined" sx={{ p: 4 }}>
           <Centered gap={3}>
             <Button variant="solid" onClick={toggleThemeMode}>
               {"Смени тема"}
@@ -140,6 +140,7 @@ function Dashboard() {
               {"Смени тема"}
             </MUIButton>
           </Centered>
+
           <Centered gap={3}>
             <Button variant="solid" onClick={toggleThemeMode}>
               {"Смени тема"}

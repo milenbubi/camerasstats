@@ -22,7 +22,7 @@ function Sidebar() {
   return (
     <Sheet
       sx={{
-        position: { xs: "fixed", md: "sticky" },
+        position: "fixed",
         transform: {
           xs: `translateX(calc(100% * (var(${cssVars.sidebarSlideIn}, 0) - 1)))`,
           md: "none"

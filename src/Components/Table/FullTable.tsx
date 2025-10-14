@@ -1,9 +1,10 @@
 import { Sheet } from "@mui/joy";
+import { Table, TableBody, TableContainer } from "@mui/material";
 import { ReactNode, Ref, forwardRef, useImperativeHandle, useRef, useState } from "react";
-import { SxProps, Table, TableBody, TableContainer, TableFooter, Theme } from "@mui/material";
 
-import TableHeader from "./TableHeader";
-import TrinityTablePagination from "./TrinityTablePagination";
+import C180TableHeader from "./C180TableHeader";
+import C180TablePagination from "./C180TablePagination";
+import { useAdminScrollbar } from "../../Utils/muiHooks";
 import C180NoTableRecordsLabel from "./C180NoTableRecordsLabel";
 import { useDidUpdateEffect, useMergedState } from "../../Utils/reactHooks";
 import { ITableDataQuery, ITableHeader, ITablePage, ITableSort, SortDirection, buildPaginationOptions } from "./tableUtils";
@@ -15,9 +16,7 @@ interface IProps {
   totalCount: number;
   initialSortColumn?: string;
   queryData: (props: ITableDataQuery) => void;
-  pagination?: boolean;
   rowsPerPageOptions?: number[];
-  sx?: SxProps<Theme>;
 }
 
 export interface TableRefresh {
@@ -28,6 +27,7 @@ export interface TableRefresh {
 
 
 function FullTable({ initialSortColumn = "", initialSortDirection = "desc", ...props }: IProps, ref: Ref<TableRefresh>) {
+  const admScrlBarClass = useAdminScrollbar();
   useImperativeHandle(ref, () => ({ refresh, refreshWithSameSettings: triggerFetch }));
   const mayUpdate = useRef(true); // Avoid updating, when new page rows count is bigger than records
 
@@ -103,37 +103,32 @@ function FullTable({ initialSortColumn = "", initialSortDirection = "desc", ...p
 
 
   return (
-    <TableContainer
-      component={Sheet}
-      variant="outlined"
-      sx={{ borderRadius: "6px", ...props.sx }}
-    >
-      <Table size="small">
-        <TableHeader
-          sortDirection={sort.direction}
-          sortBy={sort.by}
-          onRequestSort={handleRequestSort}
-          headers={props.headers}
-          initialSortDirection={initialSortDirection}
-        />
-        <TableBody>
-          {props.totalCount > 0 ? props.itemsRenderer : <C180NoTableRecordsLabel colSpan={props.headers.length} />}
-        </TableBody>
+    <Sheet variant="outlined" sx={{ borderRadius: "6px" }}>
 
-        {props.pagination && (
-          <TableFooter>
-            <TrinityTablePagination
-              rowsPerPageOptions={props.rowsPerPageOptions}
-              totalCount={props.totalCount}
-              page={page}
-              onChangePage={handleChangePage}
-              onChangeRowsPerPage={handleChangeRowsPerPage}
-            />
-          </TableFooter>
-        )}
+      <TableContainer className={admScrlBarClass} sx={{ borderRadius: "6px" }}>
+        <Table size="small" sx={{ width: 1, overflowX: "auto" }}>
+          <C180TableHeader
+            sortDirection={sort.direction}
+            sortBy={sort.by}
+            onRequestSort={handleRequestSort}
+            headers={props.headers}
+            initialSortDirection={initialSortDirection}
+          />
+          <TableBody>
+            {props.totalCount > 0 ? props.itemsRenderer : <C180NoTableRecordsLabel colSpan={props.headers.length} />}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-      </Table>
-    </TableContainer>
+      <C180TablePagination
+        rowsPerPageOptions={props.rowsPerPageOptions}
+        totalCount={props.totalCount}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+      />
+
+    </Sheet>
   );
 }
 

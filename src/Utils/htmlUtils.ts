@@ -16,5 +16,6 @@ export const cssVars = {
   listNestedInset: "--List-nestedInsetStart",
   listItemRadius: "--ListItem-radius",
   listItemMinHeight: "--ListItem-minHeight",
-  joyPaletteBackdrop: "--joy-palette-background-backdrop"
+  joyPaletteBackdrop: "--joy-palette-background-backdrop",
+  contentAreaMarginLeft: "--Content-area-nargin-left"
 } as const;
