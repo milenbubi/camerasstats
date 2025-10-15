@@ -3,7 +3,7 @@ import { TableCell, TableRow } from "@mui/material";
 import { IVisit } from "../../Utils/models";
 import VisitDeviceLabel from "./VisitDeviceLabel";
 import { ITableHeader } from "../../Components/Table/tableUtils";
-import { formatUTCDateToLocalDateString } from "../../Utils/AdminPanelUtilities";
+import { formatUTCDateToLocalDateString } from "../../Utils/TimeUtilities";
 
 interface IProps {
   data: IVisit[];

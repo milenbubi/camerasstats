@@ -2,6 +2,7 @@ import { createRef, useEffect, useRef } from "react";
 import { Container, Paper, Stack } from "@mui/material";
 import { useAPIRequest } from "../../Network/apiHooks";
 import { useMergedState } from "../../Utils/reactHooks";
+import { getLocalToUTCString } from "../../Utils/TimeUtilities";
 import { useContextSnack } from "../../Contexts/SnackbarContext";
 import { IVisit, IVisitStatsResponse } from "../../Utils/models";
 import { ITableDataQuery } from "../../Components/Table/tableUtils";
@@ -9,7 +10,7 @@ import { urlQueryStringFromObject } from "../../Utils/DocumentUtils";
 import DateTimeFilter from "../../Components/DateTime/DateTimeFilter";
 import FullTable, { TableRefresh } from "../../Components/Table/FullTable";
 import VisitsTableItems, { useVisitsTableHeaders } from "./VisitsTableItems";
-import { getFormattedDateString, IPeriodBoundaries } from "../../Components/DateTime/dtUtilities";
+import { IPeriodBoundaries } from "../../Components/DateTime/dtPeriodParser";
 
 interface IState {
   visits: IVisit[];
@@ -42,8 +43,8 @@ function VisitsStatsPage() {
   const loadVisits = async (tableData: ITableDataQuery) => {
     const urlParams = urlQueryStringFromObject({
       ...tableData,
-      _visitTimeFrom: getFormattedDateString(period.current.start),
-      _visitTimeTo: getFormattedDateString(period.current.end)
+      _visitTimeFrom: getLocalToUTCString(period.current.start),
+      _visitTimeTo: getLocalToUTCString(period.current.end)
     });
 
 

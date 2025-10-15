@@ -1,37 +1,9 @@
-import { PeriodLengthInDays } from "./dtFilterUtils";
+import { PeriodLengthInDays } from "./dtPeriods";
 
 
 export interface IPeriodBoundaries {
   start: number;
   end: number;
-}
-
-
-/**
- * Returns a formatted ISO 8601 (JSON) date string for the given input.
- *
- * @param {Date | number | null} localDate  A Date object, a Unix timestamp, or null.
- *                                          If null is provided, an empty string is returned.
- * @returns {string}  The formatted date string (e.g. "2021-01-18T10:57:30.268Z").
- *
- * Converts the input into an ISO 8601 string using `toJSON()`, preserving the exact
- * timestamp without applying timezone conversion.
- */
-export function getFormattedDateString(localDate: Date | null | number): string {
-  if (localDate === null) {
-    return "";
-  }
-
-  /* Convert the current date to JSON format while preserving the local time */
-  // var date = new Date();
-  // let currentTimeJson = new Date(date.getTime() - (date.getTimezoneOffset() * 60*1000)).toJSON();
-
-  if (typeof localDate === "number") {
-    return new Date(localDate).toJSON();
-  }
-  else {
-    return localDate.toJSON();
-  }
 }
 
 

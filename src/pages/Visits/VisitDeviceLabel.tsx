@@ -2,7 +2,7 @@ import { Box, Tooltip, Typography, Chip } from "@mui/joy";
 import Iconify from "../../Components/Iconify";
 import { IVisit } from "../../Utils/models";
 import { useChan180Colors } from "../../Utils/colorUtils";
-import { formatUTCDateToLocalDateString } from "../../Utils/AdminPanelUtilities";
+import { formatUTCDateToLocalDateString } from "../../Utils/TimeUtilities";
 
 interface IProps {
   visit: IVisit;

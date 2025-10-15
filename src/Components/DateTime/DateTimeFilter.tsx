@@ -5,10 +5,10 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { forwardRef, Ref, useEffect, useImperativeHandle } from "react";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 
-import { dtSlotProps } from "./utils";
 import { useMergedState } from "../../Utils/reactHooks";
-import { PeriodLengthInDays, usePeriodOptions } from "./dtFilterUtils";
-import { IPeriodBoundaries, calculatePeriodBoundaries } from "./dtUtilities";
+import { dtPickerSlotProps, dtSelectSlotProps } from "./slotProps";
+import { PeriodLengthInDays, usePeriodOptions } from "./dtPeriods";
+import { IPeriodBoundaries, calculatePeriodBoundaries } from "./dtPeriodParser";
 
 interface IProps {
   initialFilterPeriod: PeriodLengthInDays;
@@ -178,7 +178,7 @@ function DateTimeFilter(props: IProps, ref: Ref<DTFilterRefresh>) {
             minDateTime={props.last3MonthsInPicker ? ago3Months : allTime}
             maxDateTime={dayjs(state.endDate || now)}
             label="From"
-            slotProps={dtSlotProps}
+            slotProps={dtPickerSlotProps}
           />
         </Grid>
 
@@ -192,7 +192,7 @@ function DateTimeFilter(props: IProps, ref: Ref<DTFilterRefresh>) {
             minDateTime={dayjs(state.startDate || (props.last3MonthsInPicker ? ago3Months : allTime))}
             disableFuture
             label="To"
-            slotProps={dtSlotProps}
+            slotProps={dtPickerSlotProps}
           />
         </Grid>
 
@@ -202,14 +202,7 @@ function DateTimeFilter(props: IProps, ref: Ref<DTFilterRefresh>) {
             value={state.dropdownValue}
             sx={{ mr: 3, minWidth: 170, height: 40 }}
             onChange={(_, newValue) => onPeriodPickerChange(newValue)}
-            slotProps={{
-              listbox: {
-                sx: {
-                  border: t => `1px solid ${t.palette.text.tertiary}`,
-                  borderRadius: "4px"
-                }
-              }
-            }}
+            slotProps={dtSelectSlotProps}
           >
             {periodOptions.map((option, index) => (
               <Option key={index} value={option.value}>

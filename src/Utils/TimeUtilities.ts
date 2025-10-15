@@ -1,9 +1,6 @@
-export type IsNumericOptions = {
-  notNegative?: boolean;
-  isInteger?: boolean;
-  allowEmpty?: boolean;
-  realNumber?: boolean;
-};
+type DateSource = Date | string | number | null;
+type DateFormatUnit = "fullDateTime" | "date" | "year" | "yearMonth" | "monthDay" | "hoursMinutesSeconds";
+
 
 
 /**
@@ -12,7 +9,7 @@ export type IsNumericOptions = {
  * @param value - The value to check. Can be a Date object, a number (milliseconds since Epoch), or a string.
  * @returns A Date object if the value is valid, otherwise null.
  */
-function parseValidDate(value: DateSource): Date | null {
+export function parseValidDate(value: DateSource): Date | null {
   let date: Date;
 
   if (value instanceof Date) {
@@ -33,9 +30,6 @@ function parseValidDate(value: DateSource): Date | null {
 
 
 
-type DateFormatUnit = "fullDateTime" | "date" | "year" | "yearMonth" | "monthDay" | "hoursMinutesSeconds";
-type DateSource = Date | string | number | null;
-
 /**
  * Formats a UTC date value into a localized date/time string.
  *
@@ -53,7 +47,9 @@ type DateSource = Date | string | number | null;
  */
 export function formatUTCDateToLocalDateString(source: DateSource, unit: DateFormatUnit, locale: string, noSeconds?: boolean): string {
   const date = parseValidDate(source);
-  if (!date) return "N/A";
+  if (!date) {
+    return "N/A";
+  }
 
   let dateLocaleOptions: Intl.DateTimeFormatOptions;
 
@@ -65,7 +61,7 @@ export function formatUTCDateToLocalDateString(source: DateSource, unit: DateFor
         day: "numeric",
         hour12: false,
         hour: "2-digit",
-        minute: "numeric",
+        minute: "2-digit",
         second: noSeconds ? undefined : "2-digit"
       };
       break;
@@ -90,7 +86,7 @@ export function formatUTCDateToLocalDateString(source: DateSource, unit: DateFor
       dateLocaleOptions = {
         hour12: false,
         hour: "2-digit",
-        minute: "numeric",
+        minute: "2-digit",
         second: noSeconds ? undefined : "2-digit"
       };
       break;
@@ -106,72 +102,66 @@ export function formatUTCDateToLocalDateString(source: DateSource, unit: DateFor
 
 
 /**
- * Convert Date object to UTC string pointing to 00:00 at same day.
- * @param date   Date object or null.
+ * Converts a Date object (or date-like source) to a UTC ISO string
+ * with the time normalized to 00:00 of the same day, based on the local date of the user.
+ *
+ * Useful for storing or comparing dates in UTC without caring about the local time of day.
+ *
+ * @param {DateSource} source - A Date object, timestamp, or other parseable date input.
+ * @returns {string | undefined} UTC ISO string with time set to 00:00, or undefined if input is invalid.
+ *
+ * @example
+ * getUTCZeroTime(new Date("2025-10-15T14:30:00")); 
+ * // "2025-10-15T00:00:00.000Z"
+ *
+ * @example
+ * // User in New York enters 2025-10-14T23:01 local time
+ * getUTCZeroTime(new Date("2025-10-14T23:01:00")); 
+ * // "2025-10-14T00:00:00.000Z"
  */
-export function getUTCZeroTime(date: Date | null) {
-  if (!date) {
-    return;
+export function getUTCZeroTime(source: DateSource): string | undefined {
+  const date = parseValidDate(source);
+
+  if (date) {
+    const utcDate = new Date(Date.UTC(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    ));
+
+    return utcDate.toISOString();
   }
-
-  const newBirthDate = new Date(date);
-  const offset = newBirthDate.getTimezoneOffset();
-
-  newBirthDate.setMinutes(offset * -1); //
-
-  if (offset > 0) {
-    newBirthDate.setTime(newBirthDate.getTime() - 24 * 60 * 60 * 1000);
-  }
-
-  return newBirthDate.toISOString();
 }
 
 
 
 /**
- * @param value  String to check.
- * @param options  An object that contains properties specifying number type.
- * @returns  true if specified , otherwise false.
+ * Returns a formatted ISO 8601 (JSON) date string for the given input.
+ *
+ * @param {DateSource} source - A Date object, a Unix timestamp, or other parseable date input.
+ *                              If the input is invalid, `undefined` is returned.
+ * @returns {string | undefined} The formatted ISO 8601 date string (e.g. "2021-01-18T10:57:30.268Z"),
+ *                               or `undefined` if the input could not be parsed.
+ *
+ * Converts the input into an ISO 8601 string using `toJSON()`, preserving the exact
+ * timestamp without modifying the time or applying any timezone conversions.
+ *
+ * @example
+ * getLocalToUTCString(new Date("2025-10-15T14:30:00"));
+ * // "2025-10-15T14:30:00.000Z"
+ *
+ * @example
+ * getLocalToUTCString(null);
+ * // undefined
+ *
+ * @example
+ * getLocalToUTCString(1697367000000); // timestamp
+ * // "2023-10-15T14:30:00.000Z"
  */
-export function isNumeric(value: string | number, options: IsNumericOptions = {}) {
-  if (!["number", "string"].includes(typeof value)) {
-    // only string or number format
-    return false;
+export function getLocalToUTCString(source: DateSource): string | undefined {
+  const localDate = parseValidDate(source);
+
+  if (localDate) {
+    return localDate.toJSON();
   }
-
-  if (value === "-.") {
-    // value "-." is not allowed
-    return false;
-  }
-
-  const { notNegative, isInteger, allowEmpty, realNumber } = options;
-
-  if (value === "") {
-    return !!allowEmpty;
-  }
-
-  if (realNumber) {
-    const notNumber = ["-", "."].some((v) => v === value);
-
-    if (notNumber) {
-      return false;
-    }
-  }
-
-  let numberMatch: RegExp = /^-?\d*\.?\d*$/g;
-
-  if (notNegative) {
-    numberMatch = /^\d*\.?\d*$/g;
-  }
-
-  if (isInteger) {
-    numberMatch = /^-?\d*$/g;
-  }
-
-  if (isInteger && notNegative) {
-    numberMatch = /^\d*$/g;
-  }
-
-  return numberMatch.test(value.toString());
-  // ^(?!0*\.?0*$)^\d*\.?\d*$   -    For not Zero
 }
