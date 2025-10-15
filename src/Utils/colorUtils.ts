@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { colors } from "@mui/material";
+import { grey } from "@mui/material/colors";
 import { useContextTheme } from "../Contexts/theme";
 
 const _hexRegex = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i;
@@ -34,6 +35,7 @@ type IChan180Colors = {
   isDark: boolean;
   blueC: string;
   labelC: string;
+  borderC: string;
 };
 
 
@@ -47,7 +49,9 @@ export function useChan180Colors() {
       yellowC: colors.yellow[isThemeDark ? 300 : 900],
       blueC: isThemeDark ? "#68CDF9" : "#078DEE",
       isDark: isThemeDark,
-      labelC: isThemeDark ? "#f3fb97" : "#335a53"
+      labelC: isThemeDark ? "#f3fb97" : "#335a53",
+      borderC: isThemeDark ? grey[500] : grey[500]
+
     }), [isThemeDark]
   );
 

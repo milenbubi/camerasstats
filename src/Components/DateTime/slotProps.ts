@@ -1,3 +1,4 @@
+import { grey } from "@mui/material/colors";
 import type { SelectProps } from "@mui/joy/Select";
 import { DateTimePickerSlotProps } from "@mui/x-date-pickers";
 import { PeriodLengthInDays } from "./dtPeriods";
@@ -8,8 +9,8 @@ type DateTimeFilterSlotProps = SelectProps<PeriodLengthInDays, false>["slotProps
 export const dtSelectSlotProps: DateTimeFilterSlotProps = {
   listbox: {
     sx: {
-      border: t => `1px solid ${t.palette.neutral[500]}`,
-      borderRadius: "8px"
+      borderColor: grey[500],
+      borderRadius: "6px"
     }
   }
 };
