@@ -4,7 +4,7 @@ import { useListener } from "react-bus";
 import { __useInternalBus } from "./EventBusProvider";
 
 type BusEventPayloads = {
-  navPathRefresh: { key: number; };
+  softRefresh: { key: number; };
 };
 
 type EventEmitterKeys = keyof BusEventPayloads;
@@ -15,7 +15,7 @@ type EventEmitterKeys = keyof BusEventPayloads;
  *
  * @example
  * const { emitEvent } = useChan180EventEmitter();
- * emitEvent("navPathRefresh", { key: Date.now() });
+ * emitEvent("softRefresh", { key: Date.now() });
  *
  * Notes:
  * - The payload `data` must match the type defined in BusEventPayloads for the given key.
@@ -39,7 +39,7 @@ function useChan180EventEmitter() {
  * @param fn  - Callback that receives the payload corresponding to the event key
  *
  * @example
- * useChan180EventListener("navPathRefresh", (data) => {
+ * useChan180EventListener("softRefresh", (data) => {
  *   console.log(data?.key);
  * });
  *

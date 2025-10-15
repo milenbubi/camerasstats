@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 import { Box, Divider, Typography } from "@mui/joy";
 import { routes } from "../../../../Network/routes";
 import ChangeThemeButton from "../../../../Theme/ChangeThemeButton";
-import { useNavRefreshNavigator } from "../../../../Contexts/eventBus/useNavRefreshNavigator";
+import { useContextSoftRefresh } from "../../../../Contexts/eventBus";
 
 
 
 function SidebarTop() {
-  const { handleNavClick } = useNavRefreshNavigator();
+  const { triggerSoftRefresh } = useContextSoftRefresh();
 
 
   return (
@@ -31,7 +31,7 @@ function SidebarTop() {
               }
             }
           }}
-          onClick={() => handleNavClick({ path: routes.dashboard.path })}
+          onClick={() => triggerSoftRefresh(routes.dashboard.path)}
         >
           {"Chan 180 stats"}
         </Typography>

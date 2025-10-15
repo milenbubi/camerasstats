@@ -7,19 +7,22 @@ import Sidebar from "./sidebar/Sidebar";
 import { layoutConfig } from "./utilities/layoutConfig";
 import { useAdminScrollbar } from "../../Utils/muiHooks";
 import { BusEventPayloads, useChan180EventListener } from "../../Contexts/eventBus";
-import { cssVars, GeneralLayoutWrapperElementId, getGeneralLayoutWrapperELement } from "../../Utils/htmlUtils";
+import { cssVars, ContentWrapperElementId, getGeneralLayoutWrapperELement } from "../../Utils/htmlUtils";
 
 
 
 function OutletWithRefresh() {
   const [outletKey, setOutletKey] = useState<number>();
 
-  const handleNavPathRefresh = useCallback((data?: BusEventPayloads["navPathRefresh"]) => {
+
+  const handleSoftRefresh = useCallback((data?: BusEventPayloads["softRefresh"]) => {
     setOutletKey(data?.key);
     getGeneralLayoutWrapperELement()?.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  useChan180EventListener("navPathRefresh", handleNavPathRefresh);
+
+  useChan180EventListener("softRefresh", handleSoftRefresh);
+
 
   return (
     <Outlet key={outletKey} />
@@ -34,8 +37,6 @@ function GeneralLayout() {
 
   return (
     <Box
-      id={GeneralLayoutWrapperElementId}
-      className={adminscrollbar}
       sx={{
         display: "flex",
         height: "100vh",
@@ -47,7 +48,6 @@ function GeneralLayout() {
       <Sidebar />
 
       <Box
-        className={adminscrollbar}
         sx={{
           flexGrow: 1,
           marginLeft: `var(${cssVars.contentAreaMarginLeft})`,
@@ -72,6 +72,7 @@ function GeneralLayout() {
         <Box
           component="main"
           className={adminscrollbar}
+          id={ContentWrapperElementId}
           sx={{ flexGrow: 1, overflowY: "auto", p: { xs: 1, sm: 2 } }}
         >
           <OutletWithRefresh />

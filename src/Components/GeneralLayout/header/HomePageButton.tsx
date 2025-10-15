@@ -2,19 +2,19 @@ import { Box } from "@mui/joy";
 import { Link } from "react-router-dom";
 import { CardMedia } from "@mui/material";
 import { routes } from "../../../Network/routes";
-import { useNavRefreshNavigator } from "../../../Contexts/eventBus/useNavRefreshNavigator";
+import { useContextSoftRefresh } from "../../../Contexts/eventBus";
 
 
 
 function HomePageButton() {
-  const { handleNavClick } = useNavRefreshNavigator();
+  const { triggerSoftRefresh } = useContextSoftRefresh();
 
 
   return (
     <Box
       component={Link}
       to={routes.dashboard.path}
-      onClick={() => handleNavClick({ path: routes.dashboard.path })}
+      onClick={() => triggerSoftRefresh(routes.dashboard.path)}
     >
       <CardMedia
         component="img"

@@ -1,5 +1,5 @@
 /**
- * @file __NavPathRefreshProvider.tsx
+ * @file __SoftPathRefreshProvider.tsx
  *
  * This provider handles same-path “soft refreshes” in the app.
  * -------------------------------------------------------------
@@ -11,31 +11,26 @@
  * affected components (like <OutletWithRefresh />).
  *
  * Components can access the refresh trigger via:
- *   const { triggerNavRefresh } = useContextNavPathRefresh();
+ *   const { triggerSoftRefresh } = useContextSoftRefresh();
  */
 import { useLocation } from "react-router-dom";
 import { createContext, PropsWithChildren, useCallback, useContext, useEffect, useRef } from "react";
 import { useChan180EventEmitter } from "./busEvents";
+import { closeSidebar } from "../../Components/GeneralLayout/utilities/toggleSidebar";
 
-type NavPathRefreshContextType = {
-  triggerNavRefresh: (path: string) => void;
+type SoftRefreshContextType = {
+  triggerSoftRefresh: (path: string) => void;
 };
 
-const NavPathRefreshContext = createContext<NavPathRefreshContextType>({} as NavPathRefreshContextType);
+const SoftRefreshContext = createContext<SoftRefreshContextType>({} as SoftRefreshContextType);
 
-/**
- * Context shape: exposes only the `triggerNavRefresh` method.
- */
-interface IProps {
-  onLocationChange: (newPath: string) => void;
-}
 
 
 /**
  * Invisible component that monitors the current location via react-router.
  * Calls `onLocationChange` whenever `location.pathname` changes.
  */
-function NavLocationConfigurator({ onLocationChange }: IProps) {
+function LocationConfigurator({ onLocationChange }: { onLocationChange: (newPath: string) => void; }) {
   const location = useLocation();
 
   useEffect(() => {
@@ -48,47 +43,51 @@ function NavLocationConfigurator({ onLocationChange }: IProps) {
 
 /**
  * Internal provider (double underscore signals internal use)
- * Wraps children with the NavPathRefreshContext and listens for
- * same-path refresh requests.
+ * Wraps children with the SoftRefreshContext and listens for
+ * refresh requests.
  */
-function __NavPathRefreshProvider({ children }: PropsWithChildren) {
+function __SoftRefreshProvider({ children }: PropsWithChildren) {
   // Keep track of the last known path
   const locationPath = useRef("");
   const { emitEvent } = useChan180EventEmitter();
 
+
   /**
-   * Updates the internal ref whenever the location changes
+   * Updates the internal locationPath ref whenever the location changes
    */
   const onLocationChange = useCallback((newPath: string) => {
     locationPath.current = newPath;
   }, []);
 
+
   /**
    * Trigger a “soft refresh” if the requested path matches the current path
    */
-  const triggerNavRefresh = useCallback((path: string) => {
+  const triggerSoftRefresh = useCallback((path: string) => {
+    closeSidebar();
+
     if (path === locationPath.current) {
-      emitEvent("navPathRefresh", { key: Date.now() })
+      emitEvent("softRefresh", { key: Date.now() })
     }
   }, []);
 
 
   return (
-    <NavPathRefreshContext.Provider value={{ triggerNavRefresh }}>
-      <NavLocationConfigurator onLocationChange={onLocationChange} />
+    <SoftRefreshContext.Provider value={{ triggerSoftRefresh }}>
+      <LocationConfigurator onLocationChange={onLocationChange} />
       {children}
-    </NavPathRefreshContext.Provider>
+    </SoftRefreshContext.Provider>
   );
 }
 
 
 /**
- * Hook to access NavPathRefreshContext
+ * Hook to access SoftRefreshContext
  */
-function useContextNavPathRefresh() {
-  return useContext(NavPathRefreshContext);
+function useContextSoftRefresh() {
+  return useContext(SoftRefreshContext);
 }
 
 
-export default __NavPathRefreshProvider;
-export { useContextNavPathRefresh };
+export default __SoftRefreshProvider;
+export { useContextSoftRefresh };
