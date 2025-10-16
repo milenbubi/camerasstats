@@ -1,5 +1,5 @@
 /**
- * @file __SoftPathRefreshProvider.tsx
+ * @file SoftPathRefreshProvider.tsx
  *
  * This provider handles same-path “soft refreshes” in the app.
  * -------------------------------------------------------------
@@ -7,15 +7,15 @@
  * usually does nothing because the route hasn’t changed.
  * 
  * This context + provider system allows components to trigger a
- * “soft refresh” event on the current route, which rerenders
+ * “soft refresh” event on the current route, which re-renders
  * affected components (like <OutletWithRefresh />).
  *
- * Components can access the refresh trigger via:
+ * Components can access the soft refresh trigger function via:
  *   const { triggerSoftRefresh } = useContextSoftRefresh();
  */
 import { useLocation } from "react-router-dom";
 import { createContext, PropsWithChildren, useCallback, useContext, useEffect, useRef } from "react";
-import { useChan180EventEmitter } from "./busEvents";
+import { useChan180EventEmitter } from "../eventBus/busEvents";
 import { closeSidebar } from "../../Components/GeneralLayout/utilities/toggleSidebar";
 
 type SoftRefreshContextType = {
@@ -27,10 +27,10 @@ const SoftRefreshContext = createContext<SoftRefreshContextType>({} as SoftRefre
 
 
 /**
- * Invisible component that monitors the current location via react-router.
+ * Internal component that monitors the current location via react-router-dom.
  * Calls `onLocationChange` whenever `location.pathname` changes.
  */
-function LocationConfigurator({ onLocationChange }: { onLocationChange: (newPath: string) => void; }) {
+function __LocationConfigurator({ onLocationChange }: { onLocationChange: (newPath: string) => void; }) {
   const location = useLocation();
 
   useEffect(() => {
@@ -42,11 +42,11 @@ function LocationConfigurator({ onLocationChange }: { onLocationChange: (newPath
 
 
 /**
- * Internal provider (double underscore signals internal use)
  * Wraps children with the SoftRefreshContext and listens for
- * refresh requests.
+ * navigation refresh triggers (same-path soft refreshes) and
+ * propagates them to subscribed listeners such as `<OutletWithRefresh />`.
  */
-function __SoftRefreshProvider({ children }: PropsWithChildren) {
+function SoftRefreshProvider({ children }: PropsWithChildren) {
   // Keep track of the last known path
   const locationPath = useRef("");
   const { emitEvent } = useChan180EventEmitter();
@@ -74,7 +74,7 @@ function __SoftRefreshProvider({ children }: PropsWithChildren) {
 
   return (
     <SoftRefreshContext.Provider value={{ triggerSoftRefresh }}>
-      <LocationConfigurator onLocationChange={onLocationChange} />
+      <__LocationConfigurator onLocationChange={onLocationChange} />
       {children}
     </SoftRefreshContext.Provider>
   );
@@ -89,5 +89,5 @@ function useContextSoftRefresh() {
 }
 
 
-export default __SoftRefreshProvider;
+export default SoftRefreshProvider;
 export { useContextSoftRefresh };

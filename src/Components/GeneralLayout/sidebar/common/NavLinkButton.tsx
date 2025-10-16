@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import ListItemButton from "@mui/joy/ListItemButton";
 import { Chip, ListItem, ListItemContent, Typography } from "@mui/joy";
 import { NavItemWithPath } from "../utils/navItem";
-import { useContextSoftRefresh } from "../../../../Contexts/eventBus";
+import { useContextSoftRefresh } from "../../../../Contexts/softRefresh/SoftRefreshProvider";
 
 
 

@@ -9,10 +9,6 @@
  * This allows isolated modules and components to communicate via
  * lightweight pub/sub events without prop drilling or Redux overhead.
  *
- * The provider also includes `__SoftRefreshProvider`, which listens
- * for navigation refresh triggers (same-path soft refreshes) and
- * propagates them to subscribed listeners such as `<OutletWithRefresh />`.
- *
  * Components can safely use hooks like `useChan180EventEmitter()` and
  * `useChan180EventListener()` to emit or listen for events defined in
  * `BusEventPayloads`, with full TypeScript safety.
@@ -20,7 +16,7 @@
 import { Emitter } from "mitt";
 import { Provider as BusProvider, useBus } from "react-bus";
 import { createContext, PropsWithChildren, useContext } from "react";
-import __SoftRefreshProvider from "./__SoftRefreshProvider";
+
 
 /**
  * Internal React Context that exposes the shared event bus instance.
@@ -34,7 +30,6 @@ const EventBusContext = createContext<Emitter>({} as Emitter);
  * Top-level provider that wraps the app with both:
  * - The `react-bus` <BusProvider>
  * - Our custom BusWrapper, which exposes the emitter via Context
- *   and integrates the Soft refresh subsystem.
  */
 function EventBusProvider({ children }: PropsWithChildren) {
   return (
@@ -52,17 +47,14 @@ function EventBusProvider({ children }: PropsWithChildren) {
  * via the `useBus()` hook (available only inside <BusProvider>).
  *
  * It then provides the bus to the entire React tree through
- * our `EventBusContext`, and nests the `__SoftRefreshProvider`
- * which handles same-path navigation refresh events.
+ * our `EventBusContext`.
  */
 function BusWrapper({ children }: PropsWithChildren) {
   const bus = useBus();
 
   return (
     <EventBusContext.Provider value={bus}>
-      <__SoftRefreshProvider>
-        {children}
-      </__SoftRefreshProvider>
+      {children}
     </EventBusContext.Provider>
   );
 }

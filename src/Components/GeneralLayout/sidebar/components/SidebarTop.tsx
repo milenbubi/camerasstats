@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Box, Divider, Typography } from "@mui/joy";
 import { routes } from "../../../../Network/routes";
 import ChangeThemeButton from "../../../../Theme/ChangeThemeButton";
-import { useContextSoftRefresh } from "../../../../Contexts/eventBus";
+import { useContextSoftRefresh } from "../../../../Contexts/softRefresh/SoftRefreshProvider";
 
 
 

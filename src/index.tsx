@@ -7,6 +7,7 @@ import globalStyles from "./Styles/StylesGlobal";
 import { ThemeProvider } from "./Contexts/theme";
 import { EventBusProvider } from "./Contexts/eventBus";
 import SnackbarProvider from "./Contexts/SnackbarContext";
+import SoftRefreshProvider from "./Contexts/softRefresh/SoftRefreshProvider";
 
 
 
@@ -19,9 +20,11 @@ function CamerasStatsApp() {
         <GlobalStyles styles={globalStyles} />
 
         <EventBusProvider>
-          <SnackbarProvider>
-            <AppEntry />
-          </SnackbarProvider>
+          <SoftRefreshProvider>
+            <SnackbarProvider>
+              <AppEntry />
+            </SnackbarProvider>
+          </SoftRefreshProvider>
         </EventBusProvider>
 
       </ThemeProvider>

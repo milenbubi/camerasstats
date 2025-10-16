@@ -2,7 +2,7 @@ import { Box } from "@mui/joy";
 import { Link } from "react-router-dom";
 import { CardMedia } from "@mui/material";
 import { routes } from "../../../Network/routes";
-import { useContextSoftRefresh } from "../../../Contexts/eventBus";
+import { useContextSoftRefresh } from "../../../Contexts/softRefresh/SoftRefreshProvider";
 
 
 

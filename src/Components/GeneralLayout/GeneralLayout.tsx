@@ -15,8 +15,8 @@ function OutletWithRefresh() {
   const [outletKey, setOutletKey] = useState<number>();
 
 
-  const handleSoftRefresh = useCallback((data?: BusEventPayloads["softRefresh"]) => {
-    setOutletKey(data?.key);
+  const handleSoftRefresh = useCallback((data: BusEventPayloads["softRefresh"]) => {
+    setOutletKey(data.key);
     getGeneralLayoutWrapperELement()?.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
