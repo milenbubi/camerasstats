@@ -7,7 +7,7 @@ import { BusEventPayloads, useChan180EventListener } from "../../../Contexts/eve
 
 
 function __OutletWithRefresh() {
-  const [outletKey, setOutletKey] = useState<number>(-1);
+  const [outletKey, setOutletKey] = useState(-1);
 
 
   const handleSoftRefresh = useCallback((data: BusEventPayloads["softRefresh"]) => {
