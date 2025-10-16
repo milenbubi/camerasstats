@@ -1,5 +1,6 @@
 import { createRef, useEffect, useRef } from "react";
 import { Container, Paper, Stack } from "@mui/material";
+import VistiFilters from "./VisitFilter";
 import { useAPIRequest } from "../../Network/apiHooks";
 import { useMergedState } from "../../Utils/reactHooks";
 import { getLocalToUTCString } from "../../Utils/TimeUtilities";
@@ -60,7 +61,7 @@ function VisitsStatsPage() {
   return (
     <Container maxWidth="lg" disableGutters>
       <Paper sx={{ p: { xs: 1, sm: 2 } }}>
-        <Stack sx={{ gap: 3, pt: 2 }}>
+        <Stack sx={{ gap: { xs: 3, sm: 4 }, pt: 2 }}>
 
           <DateTimeFilter
             onFilterClicked={p => {
@@ -72,6 +73,8 @@ function VisitsStatsPage() {
             }}
             initialFilterPeriod={7}
           />
+
+          <VistiFilters />
 
           <FullTable
             ref={table}

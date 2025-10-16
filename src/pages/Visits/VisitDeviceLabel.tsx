@@ -16,7 +16,7 @@ interface IProps {
 
 
 
-function VisitDeviceLabel({ visit,blueC,greenC }: IProps) {
+function VisitDeviceLabel({ visit, blueC, greenC }: IProps) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
 
@@ -39,7 +39,7 @@ function VisitDeviceLabel({ visit,blueC,greenC }: IProps) {
           }
         }}
         onClick={handleClick}
-        children="Parse UA"
+        children={visit.device}
       />
 
       <Backdrop
