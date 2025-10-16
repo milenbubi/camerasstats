@@ -1,7 +1,7 @@
 export const ContentWrapperElementId = "cnt-wrapper";
 
 
-export function getGeneralLayoutWrapperELement() {
+export function getGeneralLayoutWrapperElement() {
   return document.getElementById(ContentWrapperElementId);
 }
 
