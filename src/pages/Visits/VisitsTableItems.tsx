@@ -44,7 +44,7 @@ function ItemsRenderer({ data }: IProps) {
           </TableCell>
 
           <TableCell>
-            <VisitDeviceLabel visit={visit} blueC={blueC} greenC={greenC} />
+            <VisitDeviceLabel visit={visit} blueC={blueC} greenC={greenC} isDark={isDark} />
           </TableCell>
 
           <TableCell>{visit.ipAddress}</TableCell>

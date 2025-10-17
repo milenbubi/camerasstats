@@ -2,6 +2,7 @@ import { GlobalStyles, Box, List } from "@mui/joy";
 import { Sheet, listItemButtonClasses } from "@mui/joy";
 
 import SidebarTop from "./components/SidebarTop";
+import { C180ZIndex } from "../../../Theme/utils";
 import SidebarCard from "./components/SidebarCard";
 import { cssVars } from "../../../Utils/htmlUtils";
 import NavLinkButton from "./common/NavLinkButton";
@@ -28,7 +29,7 @@ function Sidebar() {
           md: "none"
         },
         transition: "transform 0.4s, width 0.4s",
-        zIndex: 10000,
+        zIndex: C180ZIndex.sidebar,
         height: "100dvh",
         width: `var(${cssVars.sidebarWidth})`,
         top: 0,

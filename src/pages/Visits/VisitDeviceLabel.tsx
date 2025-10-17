@@ -4,6 +4,7 @@ import { Backdrop, ClickAwayListener, Fade, Popper } from "@mui/material";
 
 import { IVisit } from "../../Utils/models";
 import Iconify from "../../Components/Iconify";
+import { C180ZIndex } from "../../Theme/utils";
 import ClipboardCopy from "../../Components/ClipboardCopy";
 import { UserAgentParserUrl } from "../../Utils/constants";
 import { formatUTCDateToLocalDateString } from "../../Utils/TimeUtilities";
@@ -12,11 +13,12 @@ interface IProps {
   visit: IVisit;
   blueC: string;
   greenC: string;
+  isDark: boolean;
 }
 
 
 
-function VisitDeviceLabel({ visit, blueC, greenC }: IProps) {
+function VisitDeviceLabel({ visit, blueC, greenC, isDark }: IProps) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
 
@@ -45,14 +47,14 @@ function VisitDeviceLabel({ visit, blueC, greenC }: IProps) {
       <Backdrop
         open={Boolean(anchorEl)}
         sx={{
-          zIndex: t => t.zIndex.drawer - 1,
-          backgroundColor: "rgba(0, 0, 0, 0.3)",
+          zIndex: C180ZIndex.backdrop,
+          backgroundColor: `rgba(0, 0, 0, ${isDark ? 0.5 : 0.2})`,
           pointerEvents: "none"
         }}
       />
 
       <Popper
-        sx={{ zIndex: t => t.zIndex.drawer + 1 }}
+        sx={{ zIndex: t => C180ZIndex.popper }}
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
         placement="bottom-end"

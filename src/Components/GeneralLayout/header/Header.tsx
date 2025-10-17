@@ -1,6 +1,7 @@
 import { Sheet, GlobalStyles } from "@mui/joy";
 import HamburgerMenu from "./HamburgerMenu";
 import HomePageButton from "./HomePageButton";
+import { C180ZIndex } from "../../../Theme/utils";
 import { cssVars } from "../../../Utils/htmlUtils";
 import { layoutConfig } from "../utilities/layoutConfig";
 
@@ -18,7 +19,7 @@ function Header() {
         top: 0,
         width: "100vw",
         height: `var(${cssVars.headerHeight})`,
-        zIndex: 9995,
+        zIndex: C180ZIndex.header,
         p: 2,
         gap: 1,
         borderBottom: "2px solid",
