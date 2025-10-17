@@ -52,7 +52,7 @@ function VisitDeviceLabel({ visit, blueC, greenC }: IProps) {
       />
 
       <Popper
-        sx={{ zIndex: 1200 }}
+        sx={{ zIndex: t => t.zIndex.drawer + 1 }}
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
         placement="bottom-end"

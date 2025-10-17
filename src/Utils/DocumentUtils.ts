@@ -2,14 +2,13 @@ import { useCallback } from "react";
 import { isPlainObject } from "./types";
 import { useContextSnack } from "../Contexts/SnackbarContext";
 
-
 /**
  * Downloads a file from a given URL and triggers a browser download.
  * @param fileUrl URL of the file to download.
  * @param fileName Name for the downloaded file.
  * @param errMessage Optional error message shown to the user if download fails (default: "File is not downloaded").
  */
-function useDownloadFile() {
+export function useDownloadFile() {
   const { showSnack } = useContextSnack();
 
   const downloadFile = useCallback((fileUrl: string, fileName: string, errMessage = "File is not downloaded") => {
@@ -38,39 +37,90 @@ function useDownloadFile() {
 
 
 /**
- * Compose url query string from  object.
- * Object keys and values should be strings.
- * @param obj  Plain javascript object.
+ * Converts a nested JavaScript object into a PHP-style query string.
+ *
+ * Supported types:
+ * - primitives (string, number, boolean)
+ * - Date (serialized via toISOString)
+ * - arrays (including arrays of objects)
+ * - plain nested objects
+ *
+ * Skips:
+ * - null / undefined
+ * - functions, symbols
+ * - NaN / Infinity
+ *
+ * Example:
+ * ```ts
+ * urlQueryStringFromObject({
+ *   page: 1,
+ *   filters: { active: true, tags: ["a", "b"] },
+ *   countries: [ { active: "USA" }, {currentt: "Russia"}],
+ *   date: new Date()
+ * });
+ * // ?page=1&filters[active]=true&filters[tags][]=a&filters[tags][]=b&countries[][active]=USA&countries[][currentt]=Russia&date=2025-10-17T12%3A30%3A34.081Z
+ * ```
+ *
+ * @param {Record<string, any>} obj - The object to serialize.
+ * @returns {string} A valid query string starting with '?' or an empty string.
  */
-function urlQueryStringFromObject(obj: Record<string, any>) {
-  if (!isPlainObject(obj)) {
-    return "";
-  }
+export const urlQueryStringFromObject = (() => {
+  /** Recursive helper — defined once, not recreated on each call */
+  const buildQuery = (parts: string[], keyPrefix: string, value: any) => {
+    if (value === null || value === undefined) return;
 
-  if (Object.keys(obj).length === 0) {
-    return "";
-  }
+    // Skip non-serializable types
+    if (typeof value === "function" || typeof value === "symbol") return;
+    if (Number.isNaN(value) || value === Infinity || value === -Infinity) return;
 
-  const queryString = Object.entries(obj)
-    .map(([k, v]) => `${k}=${encodeURIComponent(v?.toString() || "")}`)
-    .join("&");
+    // Array
+    if (Array.isArray(value)) {
+      value.forEach(v => {
+        if (isPlainObject(v)) {
+          Object.entries(v).forEach(([k, val]) =>
+            buildQuery(parts, `${keyPrefix}[][${k}]`, val)
+          );
+        }
+        else {
+          buildQuery(parts, `${keyPrefix}[]`, v);
+        }
+      });
+      return;
+    }
 
-  // const queryString1 = new URLSearchParams(obj).toString();
-  return "?" + queryString;
-}
+    // Date
+    if (value instanceof Date) {
+      parts.push(`${keyPrefix}=${encodeURIComponent(value.toISOString())}`);
+      return;
+    }
+
+    // Plain Object
+    if (isPlainObject(value)) {
+      Object.entries(value).forEach(([subKey, subValue]) => {
+        buildQuery(parts, `${keyPrefix}[${subKey}]`, subValue);
+      });
+      return;
+    }
+
+    // Primitive values
+    parts.push(`${keyPrefix}=${encodeURIComponent(String(value))}`);
+  };
 
 
+  // The main exported function
+  return function urlQueryStringFromObject(obj: Record<string, any>): string {
+    if (!isPlainObject(obj) || Object.keys(obj).length === 0) {
+      return "";
+    }
 
-/**
- ** Create pause before next code execution.
- ** You need to use the 'await' keyword when call this function.
- * @param delay  time in milliseconds.
- */
-function sleep(delay: number) {
-  return new Promise(resolve => {
-    return setTimeout(resolve, delay);
-  });
-}
+    const parts: string[] = [];
+
+
+    Object.entries(obj).forEach(([key, value]) => buildQuery(parts, key, value));
+
+    return parts.length ? "?" + parts.join("&") : "";
+  };
+})();
 
 
 
@@ -78,7 +128,7 @@ function sleep(delay: number) {
  ** Enter/exit fullscreen mode.
  * @param htmlElementId  HTML element id.
  */
-function goFullScreen(htmlElementId: string) {
+export function goFullScreen(htmlElementId: string) {
   if (!document.fullscreenEnabled) {
     return;
   }
@@ -94,12 +144,3 @@ function goFullScreen(htmlElementId: string) {
       .catch(() => { });
   }
 }
-
-
-
-export {
-  useDownloadFile,
-  urlQueryStringFromObject,
-  sleep,
-  goFullScreen
-};

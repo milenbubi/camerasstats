@@ -1,8 +1,3 @@
-export interface IAPIErrorResponse {
-  error: any;
-}
-
-
 export type RequestMethod = "GET" | "POST" | "PATCH" | "DELETE";
 
 

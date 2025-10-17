@@ -1,6 +1,8 @@
 import { createRef, useEffect, useRef } from "react";
 import { Container, Paper, Stack } from "@mui/material";
-import VistiFilters from "./VisitFilter";
+import { normalizeDeviceNames } from "./utils";
+import { DeviceName } from "../../Utils/statsUtils";
+import VisitDeviceFilter from "./VisitDeviceFilter";
 import { useAPIRequest } from "../../Network/apiHooks";
 import { useMergedState } from "../../Utils/reactHooks";
 import { getLocalToUTCString } from "../../Utils/TimeUtilities";
@@ -24,6 +26,7 @@ interface IState {
 function VisitsStatsPage() {
   const table = createRef<TableRefresh>();
   const { showSnack } = useContextSnack();
+  const devices = useRef<DeviceName[]>([]);
   const { RequestToApi } = useAPIRequest();
   const tableHeaders = useVisitsTableHeaders();
   const period = useRef<IPeriodBoundaries>({ start: 0, end: 0 });
@@ -45,9 +48,9 @@ function VisitsStatsPage() {
     const urlParams = urlQueryStringFromObject({
       ...tableData,
       _visitTimeFrom: getLocalToUTCString(period.current.start),
-      _visitTimeTo: getLocalToUTCString(period.current.end)
+      _visitTimeTo: getLocalToUTCString(period.current.end),
+      _devices: normalizeDeviceNames(devices.current)
     });
-
 
     const { Data } = await RequestToApi<IVisitStatsResponse>("/statistics.php" + urlParams, "GET");
 
@@ -74,7 +77,15 @@ function VisitsStatsPage() {
             initialFilterPeriod={7}
           />
 
-          <VistiFilters />
+          <VisitDeviceFilter
+            onFilterChanged={f => {
+              devices.current = f;
+              table.current?.refresh();
+            }}
+            setInitialFilters={f => {
+              devices.current = f;
+            }}
+          />
 
           <FullTable
             ref={table}
@@ -84,7 +95,7 @@ function VisitsStatsPage() {
             totalCount={state.totalCount}
             initialSortColumn="visit_time"
             queryData={loadVisits}
-            rowsPerPageOptions={[10, 20, 50, 100]}
+            rowsPerPageOptions={[20, 50, 100]}
           />
 
         </Stack>
