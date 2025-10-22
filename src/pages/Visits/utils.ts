@@ -1,4 +1,6 @@
+import { IVisit } from "../../Utils/models";
 import { ALL_DEVICE_NAME, DeviceName } from "../../Utils/statsUtils";
+
 
 
 /**
@@ -27,3 +29,18 @@ export function normalizeDeviceNames(selected: DeviceName[]): DeviceName[] | nul
   if (selected.includes(ALL_DEVICE_NAME)) return [ALL_DEVICE_NAME];
   return selected;
 }
+
+
+
+interface IVisitsTableState {
+  visits: IVisit[];
+  totalCount: number;
+  loading: boolean;
+}
+
+
+export const DEFAULT_VISITS_TABLE_STATE: IVisitsTableState = {
+  visits: [],
+  totalCount: 0,
+  loading: false
+};

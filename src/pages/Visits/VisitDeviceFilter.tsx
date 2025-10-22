@@ -77,7 +77,7 @@ function VisitDeviceFilter({ initialDevices, onFilterChanged, setInitialFilters 
           {"Devices"}
         </Typography>
 
-        <Box sx={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 2 }}>
+        <Box sx={{ display: "flex", justifyContent: "center", flexWrap: "wrap", columnGap: { xs: 1.5, sm: 2 } }} rowGap={2}>
           {ALL_DEVICES.map((device, index) => {
             const { icon, name } = device;
             const checked = selected.includes(name);
@@ -89,12 +89,12 @@ function VisitDeviceFilter({ initialDevices, onFilterChanged, setInitialFilters 
                 color={checked ? (isDark ? "warning" : "success") : "neutral"}
                 variant={checked ? "solid" : "outlined"}
                 slotProps={{ action: { "data-name": name } }}
-                sx={{ overflow: "hidden", px: { xs: 1.5, sm: 2.2 }, py: "6px" }}
+                sx={{ overflow: "hidden", px: { xs: 1, md: 2.2 }, py: "6px" }}
                 startDecorator={<Iconify icon={icon} sx={{ opacity: checked ? 1 : 0.68 }} />}
               >
                 <Typography
                   level="title-sm"
-                  sx={{ fontWeight: 600, ml: 1, color: "inherit" }}
+                  sx={{ fontWeight: 600, ml: { xs: 0.5, md: 1 }, color: "inherit" }}
                   children={name}
                 />
               </Chip>

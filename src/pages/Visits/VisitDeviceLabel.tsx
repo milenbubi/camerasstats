@@ -65,7 +65,7 @@ function VisitDeviceLabel({ visit, blueC, greenC, isDark }: IProps) {
             <Fade {...TransitionProps} timeout={350}>
               <Sheet
                 variant="outlined"
-                sx={{ maxWidth: 360, p: "12px 14px", background: t => t.palette.background.popup, borderRadius: "8px" }}
+                sx={{ maxWidth: { xs: 375, sm: 500 }, p: "14px 18px", background: t => t.palette.background.popup, borderRadius: "8px" }}
               >
 
                 <Typography level="title-lg" sx={{ fontSize: "sm" }}>
@@ -77,7 +77,7 @@ function VisitDeviceLabel({ visit, blueC, greenC, isDark }: IProps) {
                   />
                 </Typography>
 
-                <Box sx={{ pt: 1 }}>
+                <Box sx={{ pt: 1, mb: 2 }}>
                   <Typography
                     startDecorator={<Iconify color={greenC} icon="ic:baseline-adjust" width={12} />}
                     sx={{ fontWeight: "lg", fontSize: "sm", mb: "2px" }}
@@ -85,7 +85,7 @@ function VisitDeviceLabel({ visit, blueC, greenC, isDark }: IProps) {
                   />
                   <Typography
                     textColor="text.secondary"
-                    sx={{ fontSize: "sm", mb: 1 }}
+                    sx={{ fontSize: "sm" }}
                     children={visit.userAgent}
                   />
                 </Box>
@@ -110,7 +110,6 @@ function VisitDeviceLabel({ visit, blueC, greenC, isDark }: IProps) {
                   >
                     <Box sx={{ display: "flex", height: 1, alignItems: "center" }}>
                       <Box sx={{ fontSize: 14, lineHeight: "14px", position: "relative", whiteSpace: "pre" }}>
-                        {/* {"Parse UA    "} */}
                         {"Analyze (paste manually)    "}
                         <Iconify icon="bx:link-external" width={11} sx={{ position: "absolute", right: 0, top: -2 }} />
                       </Box>

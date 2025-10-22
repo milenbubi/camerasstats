@@ -4,12 +4,13 @@ export type Place = "News" | "Bulgaria" | "Horgos" | "Djala" | "Kelebia" | "Turk
 export const ALL_DEVICE_NAME = "ALL";
 
 export const ALL_DEVICES = [
-  { name: ALL_DEVICE_NAME, icon: "fluent:select-all-on-24-regular" },
+  { name: ALL_DEVICE_NAME, icon: "ix:tasks-all" },
   { name: "Mobile", icon: "fa:mobile" },
-  { name: "Desktop", icon: "streamline-plump:web-remix" },
+  { name: "Desktop", icon: "fontisto:world-o" },
   { name: "Bot", icon: "icon-park-outline:google-ads" },
   { name: "API Client", icon: "ic:baseline-api" },
-  { name: "TV", icon: "ic:baseline-live-tv" }
+  { name: "TV", icon: "ic:baseline-live-tv" },
+  { name: "Unknown", icon: "fluent-mdl2:unknown-solid" }
 ] as const;
 
 
