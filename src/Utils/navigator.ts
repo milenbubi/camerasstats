@@ -1,45 +1,67 @@
 /**
- * Detects whether the current device is a mobile device or tablet.
+ * Detects whether the current device should be treated as "mobile" in terms of UX.
  *
- * Handles classic mobile user agents (Android, iPhone, etc.),
- * common tablets (Nexus, Kindle, etc.), and modern iPads
- * that identify as desktop (e.g., iPadOS Safari).
- *
- * @returns {boolean} True if the device is mobile or tablet; False otherwise.
+ * It combines userAgent checks (for legacy compatibility) with modern pointer APIs
+ * so that hybrid devices (e.g. Surface) are NOT considered mobile.
  */
 export function isMobile(): boolean {
   const ua = navigator.userAgent;
 
+  // Modern input detection
+  const hasTouch = navigator.maxTouchPoints > 0;
+  const hasHover = window.matchMedia?.("(any-hover: hover)").matches;
+  const hasFinePointer = window.matchMedia?.("(any-pointer: fine)").matches;
+
+  /*  UA-based fallback (legacy)  */
   // Mobile platforms and common mobile device identifiers
-  const classicMobileRegex = /Android|webOS|iPhone|Nexus|iPod|BlackBerry|BB10|IEMobile|Opera\s?Mini|Mobile\s?Safari|Windows\s?Phone|MeeGo|SymbianOS|PlayBook/i;
-
+  const classicMobileRegex = /Android|webOS|iPhone|Nexus|iPod|BlackBerry|BB10|IEMobile|Opera\s?Mini|Mobile\s?Safari|Windows\s?Phone|MeeGo|SymbianOS|PlayBook|Huawei|Xiaomi|Mi\s?Phone/i;
   // Tablet platforms and popular tablet device identifiers
-  const tabletRegex = /Tablet|Kindle|Silk|Tab|Xoom|SCH-I800|GT-P1000/i;
+  const tabletRegex = /Tablet|Kindle|Silk|Tab(?!let)|Xoom|SCH-I800|GT-P1000|Pixel\s?Tablet|iPad/i;
 
-  // Special detection for iPads with desktop userAgent
-  const isIpad = (ua.includes("iPad") ||
-    (ua.includes("Macintosh") && navigator.maxTouchPoints > 1)) &&
+  const isIpad =
+    (ua.includes("iPad") ||
+      (ua.includes("Macintosh") && hasTouch)) &&
     !ua.includes("EdgiOS") && !ua.includes("FxiOS");
 
-  return classicMobileRegex.test(ua) || tabletRegex.test(ua) || isIpad;
+  const uaMobile = classicMobileRegex.test(ua) || tabletRegex.test(ua) || isIpad;
+
+  // Treat as mobile only if:
+  // - it looks like mobile/tablet by UA, AND
+  // - it doesn't have a real mouse/hover (hybrids excluded)
+  return uaMobile && hasTouch && !hasHover && !hasFinePointer;
 }
 
 
 
 /**
- * Detects whether the browser is Mobile Safari (iOS or iPadOS),
- * including modern iPads that pretend to be desktop.
+ * Detects whether the current browser is genuine Safari
+ * (on macOS, iOS, or iPadOS), including modern iPads that
+ * identify as "Macintosh" in their user agent string.
  *
- * @returns {boolean} True if the browser is Mobile Safari.
+ * This excludes browsers that embed "Safari" in their UA
+ * but are actually Chrome, Edge, or Firefox (e.g., CriOS, FxiOS, EdgiOS).
+ *
+ * @returns {boolean} True if the browser is real Safari; false otherwise.
  */
 export const isSafari = (() => {
   const ua = navigator.userAgent;
-  const isSafari = /^((?!chrome|android).)*safari/i.test(ua);
+
+  // This line detects real Safari signatures like "Version/17.0 Safari/605.1.15"
+  const isRealSafari = /\bVersion\/[\d.]+.*Safari\//i.test(ua);
+
   const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(ua));
   const isMac = /Macintosh/.test(ua);
 
-  const isSafariDesktop = isMac && isSafari;
-  const isSafariIOS = isIOS && !ua.includes("CriOS") && !ua.includes("FxiOS") && !ua.includes("EdgiOS");
+  // Exclude fake iOS Safari variants (Edge, Chrome, Firefox)
+  const isSafariIOS =
+    isIOS &&
+    isRealSafari &&
+    !ua.includes("CriOS") &&
+    !ua.includes("FxiOS") &&
+    !ua.includes("EdgiOS");
+
+  // Desktop Safari detection
+  const isSafariDesktop = isMac && isRealSafari;
 
   return isSafariDesktop || isSafariIOS;
 })();

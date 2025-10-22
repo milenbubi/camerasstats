@@ -54,7 +54,7 @@ function VisitDeviceLabel({ visit, blueC, greenC, isDark }: IProps) {
       />
 
       <Popper
-        sx={{ zIndex: t => C180ZIndex.popper }}
+        sx={{ zIndex: C180ZIndex.popper }}
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
         placement="bottom-end"
@@ -65,8 +65,9 @@ function VisitDeviceLabel({ visit, blueC, greenC, isDark }: IProps) {
             <Fade {...TransitionProps} timeout={350}>
               <Sheet
                 variant="outlined"
-                sx={{ maxWidth: 320, p: "12px 14px 10px 14px", background: t => t.palette.background.popup, borderRadius: "8px" }}
+                sx={{ maxWidth: 360, p: "12px 14px", background: t => t.palette.background.popup, borderRadius: "8px" }}
               >
+
                 <Typography level="title-lg" sx={{ fontSize: "sm" }}>
                   {visit.device}
                   <Typography
@@ -87,24 +88,37 @@ function VisitDeviceLabel({ visit, blueC, greenC, isDark }: IProps) {
                     sx={{ fontSize: "sm", mb: 1 }}
                     children={visit.userAgent}
                   />
-
                 </Box>
 
-                <Box sx={{ pl: 1 }}>
-                  <ClipboardCopy text={visit.userAgent} variant="solid" />
+                <Box sx={{ display: "flex", justifyContent: "center", gap: 4 }}>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 0 }}>
+                    <ClipboardCopy defaultTitle="Copy user agent" textToCopy={visit.userAgent} />
+
+                    <Typography level="body-xs" sx={{ fontStyle: "italic", color: "text.secondary" }}>
+                      {"Copy"}
+                    </Typography>
+                  </Box>
+
                   <Chip
-                    size="lg" color="danger" sx={{ ml: 2 }}
-                    endDecorator={<Iconify icon="bx:link-external" />}
+                    title="Opens a website where you can paste the copied user agent for analysis"
+                    size="lg" color="danger"
+                    component={Link}
+                    href={UserAgentParserUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    sx={{ ml: 2, fontWeight: "lg", color: t => t.palette.text.secondary, alignItems: "unset" }}
                   >
-                    <Link
-                      href={UserAgentParserUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      sx={{ fontSize: 14, fontWeight: "lg", color: t => t.palette.text.secondary }}
-                      children="Parse UA"
-                    />
+                    <Box sx={{ display: "flex", height: 1, alignItems: "center" }}>
+                      <Box sx={{ fontSize: 14, lineHeight: "14px", position: "relative", whiteSpace: "pre" }}>
+                        {/* {"Parse UA    "} */}
+                        {"Analyze (paste manually)    "}
+                        <Iconify icon="bx:link-external" width={11} sx={{ position: "absolute", right: 0, top: -2 }} />
+                      </Box>
+                    </Box>
                   </Chip>
+
                 </Box>
+
               </Sheet>
             </Fade>
           </ClickAwayListener>

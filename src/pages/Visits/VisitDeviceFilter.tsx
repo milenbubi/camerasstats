@@ -1,6 +1,7 @@
 import { Box, Chip, Typography } from "@mui/joy";
 import { MouseEvent, useCallback, useEffect, useState } from "react";
 import Iconify from "../../Components/Iconify";
+import { useChan180Colors } from "../../Utils/colorUtils";
 import { useDidUpdateEffect } from "../../Utils/reactHooks";
 import { ALL_DEVICES, DEVICE_NAMES, isDeviceName, ALL_DEVICE_NAME, DEVICE_NAMES_EXCEPT_ALL, DeviceName } from "../../Utils/statsUtils";
 
@@ -16,6 +17,7 @@ interface IProps {
 
 
 function VisitDeviceFilter({ initialDevices, onFilterChanged, setInitialFilters }: IProps) {
+  const { isDark } = useChan180Colors();
   const [selected, setSelected] = useState(initialDevices || [...DEVICE_NAMES]);
 
 
@@ -25,8 +27,6 @@ function VisitDeviceFilter({ initialDevices, onFilterChanged, setInitialFilters 
 
 
   useDidUpdateEffect(() => {
-    console.log(34534);
-
     onFilterChanged(selected);
   }, [selected]);
 
@@ -86,7 +86,7 @@ function VisitDeviceFilter({ initialDevices, onFilterChanged, setInitialFilters 
               <Chip
                 key={index}
                 onClick={handleChipClick}
-                color={checked ? "success" : "neutral"}
+                color={checked ? (isDark ? "warning" : "success") : "neutral"}
                 variant={checked ? "solid" : "outlined"}
                 slotProps={{ action: { "data-name": name } }}
                 sx={{ overflow: "hidden", px: { xs: 1.5, sm: 2.2 }, py: "6px" }}
