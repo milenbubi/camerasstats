@@ -8,7 +8,7 @@ import { useContextSnack } from "../Contexts/SnackbarContext";
  * @param fileName Name for the downloaded file.
  * @param errMessage Optional error message shown to the user if download fails (default: "File is not downloaded").
  */
-export function useDownloadFile() {
+function useDownloadFile() {
   const { showSnack } = useContextSnack();
 
   const downloadFile = useCallback((fileUrl: string, fileName: string, errMessage = "File is not downloaded") => {
@@ -64,7 +64,7 @@ export function useDownloadFile() {
  * @param {Record<string, any>} obj - The object to serialize.
  * @returns {string} A valid query string starting with '?' or an empty string.
  */
-export const urlQueryStringFromObject = (() => {
+const urlQueryStringFromObject = (() => {
   /** Recursive helper — defined once, not recreated on each call */
   const buildQuery = (parts: string[], keyPrefix: string, value: any) => {
     if (value === null || value === undefined) return;
@@ -124,23 +124,4 @@ export const urlQueryStringFromObject = (() => {
 
 
 
-/**
- ** Enter/exit fullscreen mode.
- * @param htmlElementId  HTML element id.
- */
-export function goFullScreen(htmlElementId: string) {
-  if (!document.fullscreenEnabled) {
-    return;
-  }
-
-  if (document.fullscreenElement) {  // Exit fullscreen mode
-    document.exitFullscreen()
-      .catch(() => { });
-  }
-  else {  // Enter fullscreen mode
-    const fsElement = document.getElementById(htmlElementId);
-
-    fsElement?.requestFullscreen()
-      .catch(() => { });
-  }
-}
+export { useDownloadFile, urlQueryStringFromObject };

@@ -7,17 +7,23 @@
 export function isMobile(): boolean {
   const ua = navigator.userAgent;
 
-  // Modern input detection
+  /*  Modern input detection (feature-based) */
   const hasTouch = navigator.maxTouchPoints > 0;
   const hasHover = window.matchMedia?.("(any-hover: hover)").matches;
   const hasFinePointer = window.matchMedia?.("(any-pointer: fine)").matches;
 
-  /*  UA-based fallback (legacy)  */
+  /* UA-based fallback (legacy) */
   // Mobile platforms and common mobile device identifiers
   const classicMobileRegex = /Android|webOS|iPhone|Nexus|iPod|BlackBerry|BB10|IEMobile|Opera\s?Mini|Mobile\s?Safari|Windows\s?Phone|MeeGo|SymbianOS|PlayBook|Huawei|Xiaomi|Mi\s?Phone/i;
   // Tablet platforms and popular tablet device identifiers
   const tabletRegex = /Tablet|Kindle|Silk|Tab(?!let)|Xoom|SCH-I800|GT-P1000|Pixel\s?Tablet|iPad/i;
 
+  /*
+    Detect iPad devices, including iPadOS 13+ which report as "Macintosh" in the user agent.
+    Starting with iPadOS 13, Safari uses a desktop UA string ("Macintosh"),
+    so we rely on touch capability (hasTouch) to correctly identify real iPads.
+    Excludes iOS versions of Edge (EdgiOS) and Firefox (FxiOS) to prevent false positives.
+  */
   const isIpad =
     (ua.includes("iPad") ||
       (ua.includes("Macintosh") && hasTouch)) &&
@@ -64,4 +70,21 @@ export const isSafari = (() => {
   const isSafariDesktop = isMac && isRealSafari;
 
   return isSafariDesktop || isSafariIOS;
+})();
+
+
+
+
+/**
+ * Detects if the current device is running iOS or iPadOS.
+ * Cached at module load time since the OS cannot change during the app lifetime.
+ * 
+ * @returns {boolean} True if the device is running iOS or iPadOS; false otherwise.
+ */
+export const isIOS = (() => {
+  const ua = navigator.userAgent;
+
+  // iPhone, iPad, iPod or iPadOS (which identifies itself as "Macintosh" with touch support)
+  return /iPhone|iPad|iPod/i.test(ua) ||
+    (ua.includes("Macintosh") && navigator.maxTouchPoints > 1);
 })();

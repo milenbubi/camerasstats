@@ -10,7 +10,7 @@ import { IVisitStatsResponse } from "../../Utils/models";
 import { getLocalToUTCString } from "../../Utils/TimeUtilities";
 import { useContextSnack } from "../../Contexts/SnackbarContext";
 import { ITableDataQuery } from "../../Components/Table/tableUtils";
-import { urlQueryStringFromObject } from "../../Utils/DocumentUtils";
+import { urlQueryStringFromObject } from "../../Utils/documentUtils";
 import DateTimeFilter from "../../Components/DateTime/DateTimeFilter";
 import FullTable, { TableRefresh } from "../../Components/Table/FullTable";
 import { IPeriodBoundaries } from "../../Components/DateTime/dtPeriodParser";
