@@ -1,7 +1,7 @@
+import "@ffilip/chan180-utils/styles";
 import * as ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { CssBaseline, GlobalStyles } from "@mui/material";
-import "./Styles/Scrollbar.scss";
 import AppEntry from "./AppEntry";
 import globalStyles from "./Styles/StylesGlobal";
 import { ThemeProvider } from "./Contexts/theme";
