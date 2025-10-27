@@ -1,4 +1,3 @@
-import "@ffilip/chan180-utils/styles";
 import * as ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { CssBaseline, GlobalStyles } from "@mui/material";

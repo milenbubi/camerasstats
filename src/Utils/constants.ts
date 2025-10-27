@@ -5,3 +5,5 @@ export const AuthorName = "Филип К.";
 export const AuthorProfile = "https://www.facebook.com/milenbubi";
 
 export const UserAgentParserUrl = "https://useragents.io/parse";
+
+export const BackendUrl = "https://chan180.net/php";

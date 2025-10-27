@@ -1,3 +1,4 @@
+import { BackendUrl } from "../Utils/constants";
 import { IResponse, RequestMethod } from "./types";
 
 
@@ -9,7 +10,7 @@ class APIRequestor {
   private API_URL: string;
 
   private constructor() {
-    this.API_URL = "https://chan180.net/php";
+    this.API_URL = BackendUrl;
   }
 
   public static getInstance(): APIRequestor {
@@ -25,17 +26,16 @@ class APIRequestor {
     const url = this.API_URL + endpoint;
     const body = method !== "GET" ? JSON.stringify(data) : undefined;
     const options: RequestInit = { method, body, headers: {} };
+
     return this.requestServer<T>(url, options);
   }
 
 
   private requestServer<T>(url: string, options: RequestInit): Promise<IResponse<T>> {
     return new Promise<IResponse<T>>(resolve => {
-      // Send the fetch request
-      fetch(url, options)
+      fetch(url, options)  // Send the fetch request
         .then(res => {
-          // Check HTTP status
-          if (!res.ok) {
+          if (!res.ok) {  // Check HTTP status
             return resolve({
               Data: {} as T,
               Error: "The server is currently unavailable. Please try again later."
@@ -46,8 +46,7 @@ class APIRequestor {
           const contentType = res.headers.get("Content-Type") || "";
           const isApplJson = contentType.includes("application/json");
 
-          // Parse JSON
-          if (isApplJson) {
+          if (isApplJson) {  // Parse JSON
             res.json()
               .then(data => resolve({ Data: data as T }))
               .catch(() =>
@@ -57,8 +56,7 @@ class APIRequestor {
                 })
               );
           }
-          // Read as text
-          else {
+          else {  // Or read as text
             res.text()
               .then(data => resolve({ Data: data as T }))
               .catch(() =>
@@ -69,8 +67,7 @@ class APIRequestor {
               );
           }
         })
-        // Network / fetch error
-        .catch(() =>
+        .catch(() =>  // Network / fetch error
           resolve({
             Data: {} as T,
             Error: "Unable to retrieve the requested statistics. Please try again later."
