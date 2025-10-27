@@ -11,21 +11,34 @@
  * isPlainObject(null); // false
  * isPlainObject(new Date()); // false
  */
-export function isPlainObject(value: any): value is Record<string, any> {
-  return Object.prototype.toString.call(value) === "[object Object]";
+export function isPlainObject(value: unknown): value is Record<string, unknown> {
+  if (Object.prototype.toString.call(value) !== "[object Object]") {
+    return false;
+  }
+
+  const prototype = Object.getPrototypeOf(value);
+  return prototype === null || prototype === Object.prototype;
 }
+
 
 
 type NullOrUndefined = null | undefined;
 
 /**
- * Returns true if value is neither null nor undefined.
- * Useful for filtering arrays to remove empty values.
- * 
+ * Returns true if a value is neither null nor undefined.
+ * Useful for filtering arrays or validating data safely.
  * 66316669
- * @param value The value to check.
+ *
+ * @param value - The value to check.
  * @returns True if value is not null or undefined.
+ *
+ * @example
+ * const arr = [1, null, 2, undefined, 3].filter(NotEmpty);
+ * // -> [1, 2, 3]
  */
 export function NotEmpty<T>(value: T | NullOrUndefined): value is T {
-  return value !== null && value !== undefined;
+  // Intentionally using loose comparison (!=) because it returns false
+  // only when value is null or undefined. This way we cover both cases
+  // at once without writing (value !== null && value !== undefined).
+  return value != null;
 }

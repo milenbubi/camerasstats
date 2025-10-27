@@ -108,7 +108,7 @@ export function formatUTCDateToLocalDateString(source: DateSource, unit: DateFor
  * Useful for storing or comparing dates in UTC without caring about the local time of day.
  *
  * @param {DateSource} source - A Date object, timestamp, or other parseable date input.
- * @returns {string | undefined} UTC ISO string with time set to 00:00, or undefined if input is invalid.
+ * @returns {string | null} UTC ISO string with time set to 00:00, or null if input is invalid.
  *
  * @example
  * getUTCZeroTime(new Date("2025-10-15T14:30:00")); 
@@ -119,18 +119,20 @@ export function formatUTCDateToLocalDateString(source: DateSource, unit: DateFor
  * getUTCZeroTime(new Date("2025-10-14T23:01:00")); 
  * // "2025-10-14T00:00:00.000Z"
  */
-export function getUTCZeroTime(source: DateSource): string | undefined {
+export function getUTCZeroTime(source: DateSource): string | null {
   const date = parseValidDate(source);
 
-  if (date) {
-    const utcDate = new Date(Date.UTC(
-      date.getFullYear(),
-      date.getMonth(),
-      date.getDate()
-    ));
-
-    return utcDate.toISOString();
+  if (!date) {
+    return null;
   }
+
+  const utcDate = new Date(Date.UTC(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate()
+  ));
+
+  return utcDate.toISOString();
 }
 
 
@@ -139,29 +141,25 @@ export function getUTCZeroTime(source: DateSource): string | undefined {
  * Returns a formatted ISO 8601 (JSON) date string for the given input.
  *
  * @param {DateSource} source - A Date object, a Unix timestamp, or other parseable date input.
- *                              If the input is invalid, `undefined` is returned.
- * @returns {string | undefined} The formatted ISO 8601 date string (e.g. "2021-01-18T10:57:30.268Z"),
- *                               or `undefined` if the input could not be parsed.
+ *                              If the input is invalid, `null` is returned.
+ * @returns {string | null} The formatted ISO 8601 date string (e.g. "2021-01-18T10:57:30.268Z"),
+ *                               or `null` if the input could not be parsed.
  *
- * Converts the input into an ISO 8601 string using `toJSON()`, preserving the exact
- * timestamp without modifying the time or applying any timezone conversions.
- *
+ * Converts the input into an ISO 8601 string using `toJSON()`, which always outputs UTC time.
+ * 
  * @example
  * getLocalToUTCString(new Date("2025-10-15T14:30:00"));
- * // "2025-10-15T14:30:00.000Z"
+ * // "2025-10-15T12:30:00.000Z"
  *
  * @example
  * getLocalToUTCString(null);
- * // undefined
+ * // null
  *
  * @example
  * getLocalToUTCString(1697367000000); // timestamp
- * // "2023-10-15T14:30:00.000Z"
+ * // "2023-10-15T12:30:00.000Z"
  */
-export function getLocalToUTCString(source: DateSource): string | undefined {
+export function getLocalToUTCString(source: DateSource): string | null {
   const localDate = parseValidDate(source);
-
-  if (localDate) {
-    return localDate.toJSON();
-  }
+  return localDate?.toJSON() || null;
 }
