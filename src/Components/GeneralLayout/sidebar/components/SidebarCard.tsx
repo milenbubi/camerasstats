@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { IconButton } from "@mui/material";
+import { Iconify } from "@ffilip/mui-react-utils/components";
 import { Button, Card, LinearProgress, Typography, Stack, List, ListItem, Box } from "@mui/joy";
 
-import Iconify from "../../../Iconify";
 import { routes } from "../../../../Network/routes";
 import { cssVars } from "../../../../Utils/htmlUtils";
 

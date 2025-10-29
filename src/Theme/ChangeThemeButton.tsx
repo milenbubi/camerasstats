@@ -1,5 +1,5 @@
+import { Iconify } from "@ffilip/mui-react-utils/components";
 import IconButton, { IconButtonProps } from "@mui/joy/IconButton";
-import Iconify from "../Components/Iconify";
 import { useContextTheme } from "../Contexts/theme";
 
 

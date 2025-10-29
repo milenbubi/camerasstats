@@ -1,5 +1,5 @@
 import { IconButton } from "@mui/joy";
-import Iconify from "../../Iconify";
+import { Iconify } from "@ffilip/mui-react-utils/components";
 import { toggleSidebar } from "../utilities/toggleSidebar";
 
 

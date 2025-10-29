@@ -1,8 +1,7 @@
 import { IconButton, Input } from "@mui/joy";
 import { ChangeEvent, useRef, useState } from "react";
-import Iconify from "./Iconify";
+import { Iconify, Centered } from "@ffilip/mui-react-utils/components";
 import C180Form from "./C180Form";
-import { Centered } from "./Centered";
 
 interface IProps {
   onChange: (value: string) => void;

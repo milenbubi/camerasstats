@@ -1,9 +1,9 @@
 import { MouseEvent, useCallback, useState } from "react";
+import { Iconify } from "@ffilip/mui-react-utils/components";
 import { Box, Typography, Chip, Link, Sheet } from "@mui/joy";
 import { Backdrop, ClickAwayListener, Fade, Popper } from "@mui/material";
 
 import { IVisit } from "../../Utils/models";
-import Iconify from "../../Components/Iconify";
 import { C180ZIndex } from "../../Theme/utils";
 import ClipboardCopy from "../../Components/ClipboardCopy";
 import { UserAgentParserUrl } from "../../Utils/constants";

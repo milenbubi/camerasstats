@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { IconButton, SxProps, Theme } from "@mui/material";
+import { Iconify } from "@ffilip/mui-react-utils/components";
 import { Box, Tooltip, TooltipProps, VariantProp } from "@mui/joy";
-import Iconify from "./Iconify";
 import { C180ZIndex } from "../Theme/utils";
 import { isMobile } from "../Utils/navigator";
 
