@@ -18,7 +18,7 @@ interface IProps {
 
 function VisitDeviceFilter({ initialDevices, onFilterChanged, setInitialFilters }: IProps) {
   const { isDark } = useChan180Colors();
-  const [selected, setSelected] = useState(initialDevices || [...DEVICE_NAMES]);
+  const [selected, setSelected] = useState(initialDevices || []);
 
 
   useEffect(() => {
@@ -77,7 +77,7 @@ function VisitDeviceFilter({ initialDevices, onFilterChanged, setInitialFilters 
           {"Devices"}
         </Typography>
 
-        <Box sx={{ display: "flex", justifyContent: "center", flexWrap: "wrap", columnGap: { xs: 1.5, sm: 2 } }} rowGap={2}>
+        <Box sx={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 2 }}>
           {ALL_DEVICES.map((device, index) => {
             const { icon, name } = device;
             const checked = selected.includes(name);
@@ -89,8 +89,12 @@ function VisitDeviceFilter({ initialDevices, onFilterChanged, setInitialFilters 
                 color={checked ? (isDark ? "warning" : "success") : "neutral"}
                 variant={checked ? "solid" : "outlined"}
                 slotProps={{ action: { "data-name": name } }}
-                sx={{ overflow: "hidden", px: { xs: 1, md: 2.2 }, py: "6px" }}
-                startDecorator={<Iconify icon={icon} sx={{ opacity: checked ? 1 : 0.68 }} />}
+                sx={{ overflow: "hidden", px: { xs: 1.5, md: 2.2 }, py: "6px" }}
+                startDecorator={(
+                  <Box sx={{ width: 20, height: 20 }}>
+                    <Iconify icon={icon} width={20} sx={{ opacity: checked ? 1 : 0.68 }} />
+                  </Box>
+                )}
               >
                 <Typography
                   level="title-sm"

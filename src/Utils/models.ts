@@ -5,6 +5,7 @@ export interface IVisit {
   region: string;
   country: string;
   device: string;
+  os: string;
   visitTime: string;   // ISO8601 string, UTC
   ipAddress: string;
   userAgent: string;

@@ -9,7 +9,8 @@ export const ALL_DEVICES = [
   { name: "Desktop", icon: "fontisto:world-o" },
   { name: "Bot", icon: "icon-park-outline:google-ads" },
   { name: "API Client", icon: "ic:baseline-api" },
-  { name: "TV", icon: "ic:baseline-live-tv" },
+  { name: "TV", icon: "streamline-logos:youtube-tv-logo-solid" },
+  { name: "Car Media", icon: "fa-solid:car" },
   { name: "Unknown", icon: "fluent-mdl2:unknown-solid" }
 ] as const;
 

@@ -14,11 +14,14 @@ interface IProps {
   blueC: string;
   greenC: string;
   isDark: boolean;
+  yellowC: string;
 }
 
+const getPreposition = (device: string) => ["Bot", "API Client"].includes(device) ? "via" : "on";
 
 
-function VisitDeviceLabel({ visit, blueC, greenC, isDark }: IProps) {
+
+function VisitDeviceLabel({ visit, blueC, greenC, isDark, yellowC }: IProps) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
 
@@ -65,21 +68,32 @@ function VisitDeviceLabel({ visit, blueC, greenC, isDark }: IProps) {
             <Fade {...TransitionProps} timeout={350}>
               <Sheet
                 variant="outlined"
-                sx={{ maxWidth: { xs: 375, sm: 500 }, p: "14px 18px", background: t => t.palette.background.popup, borderRadius: "8px" }}
+                sx={{ maxWidth: { xs: 375, sm: 500 }, p: "14px 18px 16px", background: t => t.palette.background.popup, borderRadius: "8px" }}
               >
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                  <Typography level="title-lg" sx={{ fontSize: "sm" }}>
+                    <Typography
+                      sx={{ fontSize: "xs", mr: "5px", opacity: 0.8 }}
+                      children={getPreposition(visit.device)}
+                    />
+                    {visit.device}
+                    <Typography
+                      textColor="grey"
+                      sx={{ fontSize: "xs", fontStyle: "italic", ml: "5px" }}
+                      children={`, ${formatUTCDateToLocalDateString(visit.visitTime, "date", "en-GB")}`}
+                    />
+                  </Typography>
+                  <Box sx={{ display: "flex" }}>
+                    <Iconify width={18} icon="heroicons-solid:chip" sx={{ mr: "6px", color: greenC }} />
+                    <Typography level="title-lg" sx={{ fontSize: "sm", opacity: 0.8, fontStyle: "italic" }}>
+                      {visit.os}
+                    </Typography>
+                  </Box>
+                </Box>
 
-                <Typography level="title-lg" sx={{ fontSize: "sm" }}>
-                  {visit.device}
+                <Box sx={{ m: 2 }}>
                   <Typography
-                    textColor="grey"
-                    sx={{ fontSize: "xs", fontStyle: "italic", ml: "6px" }}
-                    children={`on ${formatUTCDateToLocalDateString(visit.visitTime, "date", "en")}`}
-                  />
-                </Typography>
-
-                <Box sx={{ pt: 1, mb: 2 }}>
-                  <Typography
-                    startDecorator={<Iconify color={greenC} icon="ic:baseline-adjust" width={12} />}
+                    startDecorator={<Iconify color={yellowC} icon="ic:baseline-adjust" width={18} />}
                     sx={{ fontWeight: "lg", fontSize: "sm", mb: "2px" }}
                     children={`Visited from ${visit.country}`}
                   />

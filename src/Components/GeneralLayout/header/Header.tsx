@@ -39,8 +39,8 @@ function Header() {
         })}
       />
 
-      <HamburgerMenu />
       <HomePageButton />
+      <HamburgerMenu />
 
     </Sheet>
   );

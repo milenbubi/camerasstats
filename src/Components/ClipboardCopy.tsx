@@ -4,6 +4,7 @@ import { Iconify } from "@ffilip/mui-react-utils/components";
 import { Box, Tooltip, TooltipProps, VariantProp } from "@mui/joy";
 import { C180ZIndex } from "../Theme/utils";
 import { isMobile } from "../Utils/navigator";
+import { useChan180Colors } from "@ffilip/mui-react-utils";
 
 interface IProps {
   defaultTitle: string;
@@ -17,8 +18,8 @@ const SuccessCopyTitle = "Copied";
 
 
 
-
-function ClipboardCopy({ defaultTitle, textToCopy, size = 20, sx, variant = "solid" }: IProps) {
+function ClipboardCopy({ defaultTitle, textToCopy, size = 18, sx, variant = "solid" }: IProps) {
+  const { blueC } = useChan180Colors();
   const [open, setOpen] = useState(false);
   const isDeviceMobile = useMemo(() => isMobile(), []);
   const [tooltip, setTooltip] = useState(defaultTitle);
@@ -68,12 +69,8 @@ function ClipboardCopy({ defaultTitle, textToCopy, size = 20, sx, variant = "sol
         title={<Box>{tooltip}</Box>}
         {...tooltipProps}
       >
-        <IconButton
-          onClick={handleCopy}
-          color="success"
-          sx={sx}
-        >
-          <Iconify icon="uiw:copy" width={size} />
+        <IconButton onClick={handleCopy} sx={sx}>
+          <Iconify icon="uiw:copy" width={size} sx={{ color: blueC }} />
         </IconButton>
       </Tooltip>
     )
