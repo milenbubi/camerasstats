@@ -1,13 +1,12 @@
-import { MouseEvent, useCallback, useState } from "react";
-import { Iconify } from "@ffilip/mui-react-utils/components";
+import { MouseEvent, useState } from "react";
+import { C180ZIndex } from "@ffilip/mui-react-utils/mui";
 import { Box, Typography, Chip, Link, Sheet } from "@mui/joy";
 import { Backdrop, ClickAwayListener, Fade, Popper } from "@mui/material";
+import { formatUTCDateToLocalDateString } from "@ffilip/chan180-utils/time";
+import { Iconify, ClipboardCopyButton } from "@ffilip/mui-react-utils/components";
 
 import { IVisit } from "../../Utils/models";
-import { C180ZIndex } from "../../Theme/utils";
-import ClipboardCopy from "../../Components/ClipboardCopy";
 import { UserAgentParserUrl } from "../../Utils/constants";
-import { formatUTCDateToLocalDateString } from "../../Utils/TimeUtilities";
 
 interface IProps {
   visit: IVisit;
@@ -25,9 +24,9 @@ function VisitDeviceLabel({ visit, blueC, greenC, isDark, yellowC }: IProps) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
 
-  const handleClick = useCallback((event: MouseEvent<HTMLElement>) => {
+  const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
-  }, []);
+  };
 
 
   return (
@@ -106,7 +105,7 @@ function VisitDeviceLabel({ visit, blueC, greenC, isDark, yellowC }: IProps) {
 
                 <Box sx={{ display: "flex", justifyContent: "center", gap: 4 }}>
                   <Box sx={{ display: "flex", alignItems: "center", gap: 0 }}>
-                    <ClipboardCopy defaultTitle="Copy user agent" textToCopy={visit.userAgent} />
+                    <ClipboardCopyButton defaultTitle="Copy user agent" textToCopy={visit.userAgent} />
 
                     <Typography level="body-xs" sx={{ fontStyle: "italic", color: "text.secondary" }}>
                       {"Copy"}

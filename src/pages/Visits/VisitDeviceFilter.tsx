@@ -1,8 +1,8 @@
 import { Box, Chip, Typography } from "@mui/joy";
 import { Iconify } from "@ffilip/mui-react-utils/components";
+import { useChan180Colors } from "@ffilip/mui-react-utils/mui";
+import { useDidUpdateEffect } from "@ffilip/mui-react-utils/react";
 import { MouseEvent, useCallback, useEffect, useState } from "react";
-import { useChan180Colors } from "../../Utils/colorUtils";
-import { useDidUpdateEffect } from "../../Utils/reactHooks";
 import { ALL_DEVICES, DEVICE_NAMES, isDeviceName, ALL_DEVICE_NAME, DEVICE_NAMES_EXCEPT_ALL, DeviceName } from "../../Utils/statsUtils";
 
 interface IProps {

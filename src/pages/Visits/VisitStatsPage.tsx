@@ -1,18 +1,19 @@
 import { createRef, useEffect, useRef } from "react";
 import { Container, Paper, Stack } from "@mui/material";
-import { DEFAULT_VISITS_TABLE_STATE, normalizeDeviceNames } from "./utils";
+import { getLocalToUTCString } from "@ffilip/chan180-utils/time";
+import { SearchField } from "@ffilip/mui-react-utils/components";
+import { urlQueryStringFromObject } from "@ffilip/chan180-utils/env";
+import { useLatestRequestGuard, useMergedState } from "@ffilip/mui-react-utils/react";
+
 import { DeviceName } from "../../Utils/statsUtils";
 import VisitDeviceFilter from "./VisitDeviceFilter";
-import SearchField from "../../Components/SearchField";
 import { useAPIRequest } from "../../Network/apiHooks";
-import { useMergedState } from "../../Utils/reactHooks";
 import { IVisitStatsResponse } from "../../Utils/models";
-import { getLocalToUTCString } from "../../Utils/TimeUtilities";
 import { useContextSnack } from "../../Contexts/SnackbarContext";
 import { ITableDataQuery } from "../../Components/Table/tableUtils";
-import { urlQueryStringFromObject } from "../../Utils/documentUtils";
 import DateTimeFilter from "../../Components/DateTime/DateTimeFilter";
 import FullTable, { TableRefresh } from "../../Components/Table/FullTable";
+import { DEFAULT_VISITS_TABLE_STATE, normalizeDeviceNames } from "./utils";
 import { IPeriodBoundaries } from "../../Components/DateTime/dtPeriodParser";
 import VisitsTableItems, { useVisitsTableHeaders } from "./VisitsTableItems";
 
@@ -25,6 +26,7 @@ function VisitsStatsPage() {
   const devices = useRef<DeviceName[]>([]);
   const { RequestToApi } = useAPIRequest();
   const tableHeaders = useVisitsTableHeaders();
+  const { register, isOutdated } = useLatestRequestGuard();
   const period = useRef<IPeriodBoundaries>({ start: 0, end: 0 });
   const [state, setState] = useMergedState({ ...DEFAULT_VISITS_TABLE_STATE });
 
@@ -35,6 +37,9 @@ function VisitsStatsPage() {
 
 
   const loadVisits = async (tableData: ITableDataQuery) => {
+    setState({ loading: true });
+    const requestId = register();
+
     const urlParams = urlQueryStringFromObject({
       ...tableData,
       _search: searchText.current,
@@ -44,6 +49,11 @@ function VisitsStatsPage() {
     });
 
     const { Data, Error } = await RequestToApi<IVisitStatsResponse>("/statistics.php" + urlParams, "GET");
+
+    if (isOutdated(requestId)) {  // Abort, if there is new request
+      setState({ loading: false });
+      return;
+    }
 
     if (Error) {
       showSnack(Error, "danger", "solid");
@@ -70,8 +80,11 @@ function VisitsStatsPage() {
             }}
             onSubmit={s => {
               searchText.current = s;
-              table.current?.refresh()
+              table.current?.refresh();
             }}
+            name="stats180-search"
+            placeholder="Search all fields..."
+            maxWidth={290}
           />
 
           <DateTimeFilter
@@ -103,6 +116,7 @@ function VisitsStatsPage() {
             totalCount={state.totalCount}
             initialSortColumn="visit_time"
             queryData={loadVisits}
+            loading={state.loading}
             rowsPerPageOptions={[20, 50, 100]}
           />
 

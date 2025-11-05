@@ -1,8 +1,10 @@
 import { Box, GlobalStyles } from "@mui/joy";
+import { useAdminScrollbar } from "@ffilip/mui-react-utils/mui";
+
 import Header from "./header/Header";
 import Sidebar from "./sidebar/Sidebar";
 import { layoutConfig } from "./utilities/layoutConfig";
-import { useAdminScrollbar } from "../../Utils/muiHooks";
+
 import __OutletWithRefresh from "./internals/__OutletWithRefresh";
 import __ScrollResetListener from "./internals/__ScrollResetListener";
 import { cssVars, ContentWrapperElementId } from "../../Utils/htmlUtils";

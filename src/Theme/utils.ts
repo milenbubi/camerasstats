@@ -19,13 +19,3 @@ export function getLsOrBrowserTheme(): PaletteMode {
   LS.set("themeMode", themeMode);
   return themeMode;
 }
-
-
-
-export const C180ZIndex = {
-  sidebar: 10000,
-  header: 9995,
-  backdrop: 10005,
-  popper: 10010,
-  copyButton: 10100
-}

@@ -1,19 +1,5 @@
-import { grey } from "@mui/material/colors";
-import type { SelectProps } from "@mui/joy/Select";
+import { SxProps, Theme } from "@mui/material";
 import { DateTimePickerSlotProps } from "@mui/x-date-pickers";
-import { PeriodLengthInDays } from "./dtPeriods";
-
-type DateTimeFilterSlotProps = SelectProps<PeriodLengthInDays, false>["slotProps"];
-
-
-export const dtSelectSlotProps: DateTimeFilterSlotProps = {
-  listbox: {
-    sx: {
-      borderColor: grey[500],
-      borderRadius: "6px"
-    }
-  }
-};
 
 
 export const dtPickerSlotProps: DateTimePickerSlotProps<false> = {
@@ -22,7 +8,8 @@ export const dtPickerSlotProps: DateTimePickerSlotProps<false> = {
     error: false,
     size: "small",
     sx: {
-      maxWidth: 250,
+      background: t => t.palette.mode === "dark" ? "#0b0d0e" : "#fbfcfe",
+      width: 250,
       "& .MuiPickersSectionList-root": {
         fontSize: 15
       },
@@ -34,4 +21,14 @@ export const dtPickerSlotProps: DateTimePickerSlotProps<false> = {
       }
     }
   }
+};
+
+
+
+export const dtSelecSx: SxProps<Theme> = {
+  mr: 3,
+  width: 160,
+  maxWidth: 160,
+  height: 40,
+  background: t => t.palette.mode === "dark" ? "#0b0d0e" : "#fbfcfe",
 };

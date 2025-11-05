@@ -1,4 +1,5 @@
-import "./Styles/Scrollbar.scss";
+// import "./Styles/Main.scss";
+import "@ffilip/mui-react-utils/styles.css"
 import * as ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { CssBaseline, GlobalStyles } from "@mui/material";

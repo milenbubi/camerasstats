@@ -1,10 +1,11 @@
 import { memo, useMemo } from "react";
 import { TableCell, TableRow } from "@mui/material";
+import { useChan180Colors } from "@ffilip/mui-react-utils/mui";
+import { formatUTCDateToLocalDateString } from "@ffilip/chan180-utils/time";
+
 import { IVisit } from "../../Utils/models";
 import VisitDeviceLabel from "./VisitDeviceLabel";
-import { useChan180Colors } from "../../Utils/colorUtils";
 import { ITableHeader } from "../../Components/Table/tableUtils";
-import { formatUTCDateToLocalDateString } from "../../Utils/TimeUtilities";
 
 interface IProps {
   data: IVisit[];

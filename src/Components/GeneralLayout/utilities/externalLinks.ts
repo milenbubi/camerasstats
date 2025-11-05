@@ -1,5 +1,5 @@
+import { isMobile } from "@ffilip/chan180-utils";
 import { SiteUrl } from "../../../Utils/constants";
-import { isMobile } from "../../../Utils/navigator";
 
 
 

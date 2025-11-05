@@ -1,12 +1,12 @@
 import "dayjs/locale/bg";
 import dayjs, { Dayjs } from "dayjs";
-import { Button, Grid, Option, Select } from "@mui/joy";
+import { useMergedState } from "@ffilip/mui-react-utils/react";
+import { MenuItem, Select, Grid, Button } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { forwardRef, Ref, useEffect, useImperativeHandle } from "react";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 
-import { useMergedState } from "../../Utils/reactHooks";
-import { dtPickerSlotProps, dtSelectSlotProps } from "./slotProps";
+import { dtPickerSlotProps, dtSelecSx } from "./slotProps";
 import { PeriodLengthInDays, usePeriodOptions } from "./dtPeriods";
 import { IPeriodBoundaries, calculatePeriodBoundaries } from "./dtPeriodParser";
 
@@ -198,23 +198,27 @@ function DateTimeFilter(props: IProps, ref: Ref<DTFilterRefresh>) {
 
         <Grid sx={{ display: "flex", alignItems: "center" }}>
           <Select
-            size="sm"
+            size="small"
             value={state.dropdownValue}
-            sx={{ mr: 3, minWidth: 170, height: 40 }}
-            onChange={(_, newValue) => onPeriodPickerChange(newValue)}
-            slotProps={dtSelectSlotProps}
+            sx={dtSelecSx}
+            onChange={e => onPeriodPickerChange(e.target.value)}
           >
             {periodOptions.map((option, index) => (
-              <Option key={index} value={option.value}>
+              <MenuItem key={index} value={option.value}>
                 {option.text}
-              </Option>
+              </MenuItem>
             ))}
           </Select>
 
           <Button
-            sx={{ display: props.hideFilterButton ? "none" : "initial" }}
-            size="sm"
-            variant="solid"
+            sx={{
+              display: props.hideFilterButton ? "none" : "initial",
+              background: "#256cc6", color: "#ffffff",
+              textTransform: "initial", fontSize: 14, fontWeight: 600,
+              letterSpacing: "0.5px"
+            }}
+            size="small"
+            variant="contained"
             disabled={state.filterButtonDisabled}
             children={"Filter"}
             onClick={onFilter}

@@ -387,11 +387,26 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.21.5.tgz#acad351d582d157bb145535db2a6ff53dd514b5c"
   integrity sha512-tQd/1efJuzPC6rCFwEvLtci/xNFcTZknmXs98FYDfGE4wP9ClFV98nyKrzJKVPMhdDnjzLhdUyMX4PsQAPjwIw==
 
-"@ffilip/mui-react-utils@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@ffilip/mui-react-utils/-/mui-react-utils-1.0.2.tgz#906675e1af19fe127a0cc9ce718dee0414036341"
-  integrity sha512-ZHwhRN5tChzx/tZFS7TPo5islGuCuVB2FZ3yjrsNAtcS2Z6HctQ/jzLcp154lDOApDkM/loiqw5PNXz2u/AYfg==
+"@ffilip/chan180-utils@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.npmjs.org/@ffilip/chan180-utils/-/chan180-utils-3.0.1.tgz"
+  integrity sha512-CQajN58J4WCMhgkfDQrelS0H0cfu/RwJ8EwABHbrnl7B7m9fhygRmcU0oWJBxn4a3XhLhY5Q4PLTBlA4KafHYw==
   dependencies:
+    big.js "^7.0.1"
+
+"@ffilip/chan180-utils@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@ffilip/chan180-utils/-/chan180-utils-3.0.2.tgz#de2e694f4b3abb723814ebf1837a7c2fe009c515"
+  integrity sha512-eYSBLTiiBPqpkmOe6TcwaW6fd69M298+gbgnQ1zgCdkibgNG3S9x+7JE1PvR8S3uOk2Xdqs6gdROdSdMDAQnvw==
+  dependencies:
+    big.js "^7.0.1"
+
+"@ffilip/mui-react-utils@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@ffilip/mui-react-utils/-/mui-react-utils-2.2.1.tgz#c8c075d87f4ea4a3a3fc75bd4c491a013087261f"
+  integrity sha512-b+Ue0M+ew81Y2bBus10WkPOf7VgfdE0RoyQE2l3w0OteWFyoJnEtqZUPAtvFukMUuhVuBsWw2Fc66QjTf0lINQ==
+  dependencies:
+    "@ffilip/chan180-utils" "^3.0.1"
     "@iconify/react" "^6.0.2"
 
 "@floating-ui/core@^1.7.3":
@@ -423,14 +438,14 @@
 
 "@iconify/react@^6.0.2":
   version "6.0.2"
-  resolved "https://registry.npmjs.org/@iconify/react/-/react-6.0.2.tgz"
+  resolved "https://registry.yarnpkg.com/@iconify/react/-/react-6.0.2.tgz#b6d9bd0e13f9cb85b3a7fddbc70bbf71f5da1d33"
   integrity sha512-SMmC2sactfpJD427WJEDN6PMyznTFMhByK9yLW0gOTtnjzzbsi/Ke/XqsumsavFPwNiXs8jSiYeZTmLCLwO+Fg==
   dependencies:
     "@iconify/types" "^2.0.0"
 
 "@iconify/types@^2.0.0":
   version "2.0.0"
-  resolved "https://registry.npmjs.org/@iconify/types/-/types-2.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/@iconify/types/-/types-2.0.0.tgz#ab0e9ea681d6c8a1214f30cd741fe3a20cc57f57"
   integrity sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==
 
 "@jridgewell/gen-mapping@^0.3.12", "@jridgewell/gen-mapping@^0.3.5":

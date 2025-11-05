@@ -1,12 +1,13 @@
 import { Sheet } from "@mui/joy";
+import { C180Modal } from "@ffilip/mui-react-utils/components";
+import { useAdminScrollbar } from "@ffilip/mui-react-utils/mui";
 import { Table, TableBody, TableContainer } from "@mui/material";
+import { useDidUpdateEffect, useMergedState } from "@ffilip/mui-react-utils/react";
 import { ReactNode, Ref, forwardRef, useImperativeHandle, useRef, useState } from "react";
 
 import C180TableHeader from "./C180TableHeader";
 import C180TablePagination from "./C180TablePagination";
-import { useAdminScrollbar } from "../../Utils/muiHooks";
 import C180NoTableRecordsLabel from "./C180NoTableRecordsLabel";
-import { useDidUpdateEffect, useMergedState } from "../../Utils/reactHooks";
 import { ITableDataQuery, ITableHeader, ITablePage, ITableSort, SortDirection, buildPaginationOptions } from "./tableUtils";
 
 interface IProps {
@@ -17,6 +18,7 @@ interface IProps {
   initialSortColumn?: string;
   queryData: (props: ITableDataQuery) => void;
   rowsPerPageOptions?: number[];
+  loading?: boolean;
 }
 
 export interface TableRefresh {
@@ -104,8 +106,8 @@ function FullTable({ initialSortColumn = "", initialSortDirection = "desc", ...p
 
   return (
     <Sheet variant="outlined" sx={{ borderRadius: "6px" }}>
-
-      <TableContainer className={admScrlBarClass} sx={{ borderRadius: "6px" }}>
+      <TableContainer className={admScrlBarClass} sx={{ borderRadius: "6px", position: "relative" }}>
+        <C180Modal open={props.loading} />
         <Table size="small" sx={{ width: 1, overflowX: "auto" }}>
           <C180TableHeader
             sortDirection={sort.direction}

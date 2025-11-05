@@ -1,8 +1,8 @@
 import { GlobalStyles, Box, List } from "@mui/joy";
 import { Sheet, listItemButtonClasses } from "@mui/joy";
+import { C180ZIndex, useAdminScrollbar } from "@ffilip/mui-react-utils/mui";
 
 import SidebarTop from "./components/SidebarTop";
-import { C180ZIndex } from "../../../Theme/utils";
 import SidebarCard from "./components/SidebarCard";
 import { cssVars } from "../../../Utils/htmlUtils";
 import NavLinkButton from "./common/NavLinkButton";
@@ -10,7 +10,6 @@ import { useNavData } from "./utils/sidebarNavData";
 import SidebarBottom from "./components/SidebarBottom";
 import { layoutConfig } from "../utilities/layoutConfig";
 import SidebarBackdrop from "./components/SidebarBackdrop";
-import { useAdminScrollbar } from "../../../Utils/muiHooks";
 import NavLinkButtonWithChilds from "./common/NavLinkButtonWithChilds";
 
 
