@@ -9,6 +9,7 @@ export interface IVisit {
   visitTime: string;   // ISO8601 string, UTC
   ipAddress: string;
   userAgent: string;
+  location_json: string;
 }
 
 
