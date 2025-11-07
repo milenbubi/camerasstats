@@ -1,7 +1,7 @@
-import { createLocalStorageHelper } from "@ffilip/chan180-utils";
+import { createSafeTypedLocalStorage } from "@ffilip/chan180-utils";
 
 
-const LS = createLocalStorageHelper([
+const LS = createSafeTypedLocalStorage([
   "themeMode"
 ]);
 
