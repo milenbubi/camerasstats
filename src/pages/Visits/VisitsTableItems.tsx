@@ -3,6 +3,7 @@ import { TableCell, TableRow } from "@mui/material";
 import { useChan180Colors } from "@ffilip/mui-react-utils/mui";
 import { formatUTCDateToLocalDateString } from "@ffilip/chan180-utils/time";
 
+import VisitIpLabel from "./VisitIpLabel";
 import { IVisit } from "../../Utils/models";
 import VisitDeviceLabel from "./VisitDeviceLabel";
 import { ITableHeader } from "../../Components/Table/tableUtils";
@@ -14,16 +15,14 @@ interface IProps {
 
 
 export function useVisitsTableHeaders() {
-  const tableHeaders = useMemo<ITableHeader[]>(
-    () => [
-      { key: "city", text: "City", sortable: true },
-      { key: "region", text: "Region", sortable: true },
-      { key: "country", text: "Country", sortable: true },
-      { key: "visit_time", text: "Visit Time", sortable: true },
-      { key: "device", text: "Device", sortable: true },
-      { key: "ipAddress", text: "IP Address", sortable: false }
-    ], []
-  );
+  const tableHeaders = useMemo<ITableHeader[]>(() => [
+    { key: "city", text: "City", sortable: true },
+    { key: "region", text: "Region", sortable: true },
+    { key: "country", text: "Country", sortable: true },
+    { key: "visit_time", text: "Visit Time", sortable: true },
+    { key: "device", text: "Device", sortable: true },
+    { key: "ipAddress", text: "IP Address", sortable: false }
+  ], []);
 
   return tableHeaders;
 }
@@ -48,7 +47,9 @@ function ItemsRenderer({ data }: IProps) {
             <VisitDeviceLabel visit={visit} blueC={blueC} greenC={greenC} isDark={isDark} yellowC={yellowC} />
           </TableCell>
 
-          <TableCell>{visit.ipAddress}</TableCell>
+          <TableCell>
+            <VisitIpLabel visit={visit} blueC={blueC} greenC={greenC} isDark={isDark} yellowC={yellowC} redC={redC} />
+          </TableCell>
         </TableRow>
       ))}
     </>
