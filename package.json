@@ -1,15 +1,15 @@
 {
   "name": "stats-web-cameras",
   "author": "PCC",
-  "version": "8.4.0",
+  "version": "8.4.1",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite --port 3614 --host",
     "build": "rm -rf dist && vite build",
-    "version:major": "yarn version --major --no-git-tag-version --no-prompt",
-    "version:minor": "yarn version --minor --no-git-tag-version --no-prompt",
-    "version:patch": "yarn version --patch --no-git-tag-version --no-prompt"
+    "version:major": "yarn version --major && git push && git push --tags",
+    "version:minor": "yarn version --minor && git push && git push --tags",
+    "version:patch": "yarn version --patch && git push && git push --tags"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
