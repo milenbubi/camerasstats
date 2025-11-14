@@ -3,7 +3,7 @@ import { MouseEvent, useEffect, useState } from "react";
 import { C180ZIndex } from "@ffilip/mui-react-utils/mui";
 import { Backdrop, ClickAwayListener, Fade, Popper } from "@mui/material";
 import { formatUTCDateToLocalDateString } from "@ffilip/chan180-utils/time";
-import { ILocationJSON, IVisit } from "../../Utils/models";
+import { IGeoLocation, IVisit } from "../../Utils/models";
 
 
 interface IProps {
@@ -23,7 +23,7 @@ function PopperContent({ visit, blueC, greenC }: IProps) {
 
   useEffect(() => {
     try {
-      const locationData: ILocationJSON = JSON.parse(visit.locationJson);
+      const locationData: IGeoLocation = JSON.parse(visit.locationJson);
       setIsp(locationData?.isp || "Unknown");
     }
     catch (error) {

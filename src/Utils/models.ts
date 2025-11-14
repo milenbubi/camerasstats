@@ -1,20 +1,4 @@
-export interface IVisit {
-  id: number;
-  place: string;
-  city: string;
-  region: string;
-  country: string;
-  device: string;
-  os: string;
-  visitTime: string;   // ISO8601 string, UTC
-  ipAddress: string;
-  userAgent: string;
-  locationJson: string;
-  browserVisitCount: number;
-}
-
-
-const json: ILocationJSON = {
+const geoLoaction: IGeoLocation = {
   as: "AS8866 Vivacom Bulgaria EAD",
   city: "Sofia",
   country: "Bulgaria",
@@ -31,7 +15,8 @@ const json: ILocationJSON = {
   zip: "1000"
 };
 
-export interface ILocationJSON {
+
+export interface IGeoLocation {
   as: string;
   city: string;
   country: string;
@@ -49,29 +34,19 @@ export interface ILocationJSON {
 }
 
 
-const data: ILocationData = {
-  city: "Sofia",
-  country: "Bulgaria",
-  countryCode: "BG",
-  isp: "Vivacom Bulgaria EAD",
-  coordinates: "42.6826, 23.3223",
-  ipAddress: "111.111.111.111",
-  regionName: "Sofia-Capital",
-  timezone: "Europe/Sofia",
-  postalCode: "1000"
-};
-
-
-export interface ILocationData {
+export interface IVisit {
+  id: number;
+  place: string;
   city: string;
+  region: string;
   country: string;
-  countryCode: string;
-  isp: string;
-  coordinates: string;
+  device: string;
+  os: string;
+  visitTime: string;   // ISO8601 string, UTC
   ipAddress: string;
-  regionName: string;
-  timezone: string;
-  postalCode: string;
+  userAgent: string;
+  locationJson: string;
+  browserVisitCount: number;
 }
 
 
