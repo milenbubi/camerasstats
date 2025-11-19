@@ -24,9 +24,12 @@ function Sidebar() {
       sx={{
         position: "fixed",
         transform: {
-          xs: `translateX(calc(100% * (var(${cssVars.sidebarSlideIn}, 0) - 1)))`,
+          xs: `translateX(calc(100% * (1 - var(${cssVars.sidebarSlideIn}, 0))))`,
           md: "none"
         },
+
+        left: { md: 0 },
+        right: { xs: 0 },
         transition: "transform 0.4s, width 0.4s",
         zIndex: C180ZIndex.sidebar,
         height: "100dvh",
@@ -36,8 +39,15 @@ function Sidebar() {
         flexShrink: 0,
         display: "flex",
         flexDirection: "column",
-        borderRight: "1px solid",
-        borderColor: "divider"
+        borderRight: { md: "1px solid" },
+        borderLeft: {
+          xs: "1px solid",
+          md: "none"
+        },
+        borderColor: {
+          xs: "divider",
+          md: "divider"
+        }
       }}
     >
       <GlobalStyles
