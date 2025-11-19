@@ -3,6 +3,11 @@ export type Place = "News" | "Bulgaria" | "Horgos" | "Djala" | "Kelebia" | "Turk
 
 export const ALL_DEVICE_NAME = "ALL";
 
+interface IDevice {
+  name: string;
+  icon: string;
+}
+
 export const ALL_DEVICES = [
   { name: ALL_DEVICE_NAME, icon: "ix:tasks-all" },
   { name: "Mobile", icon: "fa:mobile" },
@@ -13,7 +18,7 @@ export const ALL_DEVICES = [
   { name: "TV", icon: "streamline-logos:youtube-tv-logo-solid" },
   { name: "Car Media", icon: "fa-solid:car" },
   { name: "Unknown", icon: "fluent-mdl2:unknown-solid" }
-] as const;
+] as const satisfies readonly IDevice[];
 
 
 export type DeviceName = typeof ALL_DEVICES[number]["name"];

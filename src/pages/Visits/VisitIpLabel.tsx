@@ -5,7 +5,6 @@ import { Backdrop, ClickAwayListener, Fade, Popper } from "@mui/material";
 import { formatUTCDateToLocalDateString } from "@ffilip/chan180-utils/time";
 import { IGeoLocation, IVisit } from "../../Utils/models";
 
-
 interface IProps {
   visit: IVisit;
   blueC: string;
@@ -16,26 +15,44 @@ interface IProps {
 }
 
 
+const LocationData = ({ data }: { data: string; }) => (
+  <Typography
+    sx={{ fontSize: "sm", fontWeight: "lg" }}
+    children={data}
+  />
+);
+
+const ProviderData = ({ label, data }: { label: string; data: string; }) => (
+  <Box sx={{ display: "flex", alignItems: "baseline" }}>
+    <Typography
+      sx={{ width: 35, fontSize: "xs", fontWeight: "lg" }}
+      children={label + ":"}
+    />
+    <Typography
+      sx={{ fontSize: "sm", fontWeight: "xl" }}
+      children={data || "Unknown"}
+    />
+  </Box>
+);
+
 
 function PopperContent({ visit, blueC, greenC }: IProps) {
-  const [isp, setIsp] = useState("");
+  const [geoData, setGeoData] = useState({ isp: "", as: "", org: "" });
 
 
   useEffect(() => {
     try {
-      const locationData: IGeoLocation = JSON.parse(visit.locationJson);
-      setIsp(locationData?.isp || "Unknown");
+      const geoLocation: IGeoLocation = JSON.parse(visit.locationJson);
+      setGeoData({ isp: geoLocation.isp, as: geoLocation.as, org: geoLocation.org });
     }
-    catch (error) {
-      setIsp("Unknown");
-    }
+    catch (error) { }
   }, []);
 
 
   return (
     <Sheet
       variant="outlined"
-      sx={{ minWidth: 300, maxWidth: { xs: 375, sm: 500 }, p: "14px 18px", background: t => t.palette.background.popup, borderRadius: "8px" }}
+      sx={{ minWidth: 300, maxWidth: { xs: 385, sm: 550 }, p: "14px 18px", background: t => t.palette.background.popup, borderRadius: "8px" }}
     >
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", mb: 0.5, flexWrap: "wrap", columnGap: 2 }}>
         <Typography
@@ -43,33 +60,22 @@ function PopperContent({ visit, blueC, greenC }: IProps) {
           children={visit.ipAddress}
         />
         <Typography
-          sx={{ fontSize: 12, fontWeight: 600 }}
+          textColor="grey"
+          sx={{ fontSize: "xs", fontWeight: "xl", fontStyle: "italic" }}
           children={formatUTCDateToLocalDateString(visit.visitTime, "date", "en-GB")}
         />
       </Box>
 
       <Box sx={{ m: "8px 16px", "& p": { color: blueC } }}>
-        <Typography
-          sx={{ fontWeight: "lg", fontSize: "sm" }}
-          children={visit.city}
-        />
-        <Typography
-          sx={{ fontWeight: "lg", fontSize: "sm" }}
-          children={visit.region}
-        />
-        <Typography
-          sx={{ fontWeight: "lg", fontSize: "sm" }}
-          children={visit.country}
-        />
+        <LocationData data={visit.city} />
+        <LocationData data={visit.region} />
+        <LocationData data={visit.country} />
       </Box>
 
-      <Box sx={{}}>
-        <Typography sx={{ fontSize: "xs", fontWeight: "lg" }}>
-          {"ISP:"}
-          <Typography sx={{ fontSize: "md", fontWeight: "xl", ml: 1, color: greenC }}>
-            {isp}
-          </Typography>
-        </Typography>
+      <Box sx={{ "& p:last-of-type": { color: greenC } }}>
+        <ProviderData label="isp" data={geoData.isp} />
+        <ProviderData label="asn" data={geoData.as} />
+        <ProviderData label="org" data={geoData.org} />
       </Box>
     </Sheet>
   );
@@ -116,7 +122,7 @@ function VisitIpLabel({ visit, blueC, greenC, isDark, yellowC, redC }: IProps) {
         sx={{ zIndex: C180ZIndex.popper }}
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
-        placement="bottom-end"
+        placement="bottom"
         transition
       >
         {({ TransitionProps }) => (
