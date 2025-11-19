@@ -25,7 +25,7 @@ function NotFoundPage() {
         sx={{
           textAlign: "center",
           maxWidth: 400,
-          width: "100%"
+          width: 1
         }}
       >
         {/* <Typography level="h4" sx={{ fontWeight: "bold", color: "danger.500" }}>

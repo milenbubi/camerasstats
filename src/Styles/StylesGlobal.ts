@@ -8,15 +8,17 @@ const globalStyles = (theme: Theme) => ({
     WebkitFontSmoothing: "antialiased",  //"auto"
     MozOsxFontSmoothing: "grayscale",
     width: "100%",
-    height: "100vh",
-    overflowY: "hidden"
+    height: "100dvh",
+    overflowX: "hidden"
+    // DO NOT add overflowY: hidden → breaks pull-to-refresh
   },
   body: {
-    height: "100vh",
-    width: "100%",
     margin: 0,
     padding: 0,
-    overflowY: "auto"
+    height: "100dvh",
+    width: "100%",
+    overflowY: "auto",
+    overflowX: "hidden"
   },
   "#Root": {
     height: "100%",

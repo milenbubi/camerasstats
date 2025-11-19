@@ -15,13 +15,14 @@ function GeneralLayout() {
 
 
   return (
-    <Box>
+    <Box sx={{ height: 1 }}>
 
       <Header />
       <Sidebar />
 
       <Box
         sx={{
+          height: 1,
           marginLeft: `var(${cssVars.contentAreaMarginLeft})`,
           pt: { xs: layoutConfig.HeaderHeight, md: 0 }
         }}
@@ -38,7 +39,10 @@ function GeneralLayout() {
         />
         <Box
           component="main"
-          sx={{ p: { xs: 1, sm: 2 } }}
+          sx={{
+            height: 1,
+            p: { xs: 1, sm: 2 }
+          }}
         >
           <__OutletWithRefresh />
           <__ScrollResetListener />
