@@ -13,11 +13,8 @@ function __OutletWithRefresh() {
   const handleSoftRefresh = useCallback((data: BusEventPayloads["softRefresh"]) => {
     setOutletKey(data.key);
 
-    const contentWrapper = getGeneralLayoutWrapperElement();
-
-    if (contentWrapper) {
-      contentWrapper.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    const layoutWrapper = getGeneralLayoutWrapperElement();
+    layoutWrapper.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
 

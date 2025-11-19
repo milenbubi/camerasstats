@@ -1,6 +1,5 @@
-import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-
+import { useLocation } from "react-router-dom";
 import { getGeneralLayoutWrapperElement } from "../../../Utils/htmlUtils";
 
 
@@ -10,11 +9,9 @@ function __ScrollResetListener() {
 
 
   useEffect(() => {
-    const contentWrapper = getGeneralLayoutWrapperElement();
+    const layoutWrapper = getGeneralLayoutWrapperElement();
 
-    if (contentWrapper) {
-      contentWrapper.scrollTo({ top: 0, behavior: "auto" });
-    }
+    layoutWrapper.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.pathname]);
 
 

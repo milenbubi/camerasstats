@@ -16,7 +16,7 @@ import NavLinkButtonWithChilds from "./common/NavLinkButtonWithChilds";
 
 function Sidebar() {
   const navData = useNavData();
-  const adminscrollbar = useAdminScrollbar();
+  const { admScrlBarClassName } = useAdminScrollbar();
 
 
   return (
@@ -69,7 +69,7 @@ function Sidebar() {
 
       {/* Content */}
       <Box
-        className={adminscrollbar}
+        className={admScrlBarClassName}
         sx={{
           minHeight: 0,
           overflow: "hidden auto",

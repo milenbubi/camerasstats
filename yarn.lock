@@ -401,10 +401,10 @@
   dependencies:
     big.js "^7.0.1"
 
-"@ffilip/mui-react-utils@^2.2.2":
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/@ffilip/mui-react-utils/-/mui-react-utils-2.2.2.tgz#33d92c900ba3602c3e7cb6ea4c784fb1bd609656"
-  integrity sha512-T4JdBLK4CR6QTxs2HrO12iWC0u/HDdxsUurmMrYU7R0bHmHHq79iqEJol9pcJ0HlSpPB6WxAP4TlKiJG603Y0A==
+"@ffilip/mui-react-utils@^2.4.3":
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/@ffilip/mui-react-utils/-/mui-react-utils-2.4.3.tgz#6059774b3f406d6ebc53d852b832c9487f2d8124"
+  integrity sha512-TbBYsAUpCLZjildGr57XK2Whk/obzW+mu+kSRl7IFlPwadooIX1T7wT5s7cPSxfS7Zjk7JT/QfYnOIm1CFOp3A==
   dependencies:
     "@ffilip/chan180-utils" "^3.0.1"
     "@iconify/react" "^6.0.2"

@@ -29,7 +29,7 @@ export interface TableRefresh {
 
 
 function FullTable({ initialSortColumn = "", initialSortDirection = "desc", ...props }: IProps, ref: Ref<TableRefresh>) {
-  const admScrlBarClass = useAdminScrollbar();
+  const { admScrlBarClassName } = useAdminScrollbar();
   useImperativeHandle(ref, () => ({ refresh, refreshWithSameSettings: triggerFetch }));
   const mayUpdate = useRef(true); // Avoid updating, when new page rows count is bigger than records
 
@@ -106,7 +106,7 @@ function FullTable({ initialSortColumn = "", initialSortDirection = "desc", ...p
 
   return (
     <Sheet variant="outlined" sx={{ borderRadius: "6px" }}>
-      <TableContainer className={admScrlBarClass} sx={{ borderRadius: "6px", position: "relative" }}>
+      <TableContainer className={admScrlBarClassName} sx={{ borderRadius: "6px", position: "relative" }}>
         <C180Modal open={props.loading} />
         <Table size="small" sx={{ width: 1, overflowX: "auto" }}>
           <C180TableHeader

@@ -1,41 +1,28 @@
 import { Box, GlobalStyles } from "@mui/joy";
-import { useAdminScrollbar } from "@ffilip/mui-react-utils/mui";
 
 import Header from "./header/Header";
 import Sidebar from "./sidebar/Sidebar";
 import { layoutConfig } from "./utilities/layoutConfig";
 
+import { cssVars } from "../../Utils/htmlUtils";
+import __BodyScrollbar from "./internals/__BodyScrollbar";
 import __OutletWithRefresh from "./internals/__OutletWithRefresh";
 import __ScrollResetListener from "./internals/__ScrollResetListener";
-import { cssVars, ContentWrapperElementId } from "../../Utils/htmlUtils";
 
 
 
 function GeneralLayout() {
-  const adminscrollbar = useAdminScrollbar();
 
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        height: "100vh",
-        overflow: "hidden"
-      }}
-    >
+    <Box>
 
       <Header />
       <Sidebar />
 
       <Box
         sx={{
-          flexGrow: 1,
           marginLeft: `var(${cssVars.contentAreaMarginLeft})`,
-          display: "flex",
-          flexDirection: "column",
-          height: "100vh",
-          overflowY: "hidden",
-          overflowX: "hidden",
           pt: { xs: layoutConfig.HeaderHeight, md: 0 }
         }}
       >
@@ -51,12 +38,11 @@ function GeneralLayout() {
         />
         <Box
           component="main"
-          className={adminscrollbar}
-          id={ContentWrapperElementId}
-          sx={{ flexGrow: 1, overflowY: "auto", p: { xs: 1, sm: 2 } }}
+          sx={{ p: { xs: 1, sm: 2 } }}
         >
           <__OutletWithRefresh />
           <__ScrollResetListener />
+          <__BodyScrollbar />
         </Box>
       </Box>
     </Box>
