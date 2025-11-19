@@ -1,37 +1,15 @@
-import { isMobile } from "@ffilip/chan180-utils";
+import { openFacebookProfile, openNewTab } from "@ffilip/chan180-utils/env";
 import { SiteUrl } from "../../../Utils/constants";
 
 
 
 export function openChan180Website() {
-  window.open(SiteUrl, "_blank", "noopener,noreferrer");
+  openNewTab(SiteUrl);
 }
 
 
 
 export function openAuthorProfile() {
   const fbUserId = "100000461091188";
-
-  const openNewTab = () => {
-    const newWindow = window.open(`https://www.facebook.com/${fbUserId}`, "_blank", "noopener,noreferrer");
-
-    if (newWindow) {
-      newWindow.opener = null;
-    }
-  };
-
-  if (!isMobile()) {
-    openNewTab();
-    return;
-  }
-
-  const now = Date.now();
-
-  window.location.href = `fb://profile/${fbUserId}`;
-
-  setTimeout(() => {
-    if (Date.now() - now < 1600) {
-      openNewTab();
-    }
-  }, 1500);
+  openFacebookProfile(fbUserId);
 }
