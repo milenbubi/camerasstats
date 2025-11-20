@@ -31,20 +31,22 @@ const SoftRefreshContext = createContext<SoftRefreshContextType>({} as SoftRefre
  * Calls `onLocationChange` whenever `location.pathname` changes.
  */
 function __LocationConfigurator({ onLocationChange }: { onLocationChange: (newPath: string) => void; }) {
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     onLocationChange(location.pathname)
-  }, [location.pathname]);
+  }, [pathname]);
 
   return null;
 }
 
 
 /**
- * Wraps children with the SoftRefreshContext and listens for
- * navigation refresh triggers (same-path soft refreshes) and
- * propagates them to subscribed listeners such as `<OutletWithRefresh />`.
+ * Provides Soft Refresh functionality for same-path navigations.
+ *
+ * Components can request a soft refresh by calling `triggerSoftRefresh(path)`.
+ * If the target path matches the current route, a "softRefresh" event is emitted
+ * for subscribers such as `<OutletWithRefresh />`.
  */
 function SoftRefreshProvider({ children }: PropsWithChildren) {
   // Keep track of the last known path

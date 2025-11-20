@@ -1,15 +1,16 @@
 import { useMemo } from "react";
-import type { SelectProps, } from "@mui/material/Select";
+import { MenuProps } from "@mui/material/Menu";
+import type { SelectProps } from "@mui/material/Select";
 import { useChan180Colors } from "@ffilip/mui-react-utils";
 import { DateTimePickerSlotProps } from "@mui/x-date-pickers";
 
 
 
-export function useDTSlotProps() {
+export function useDTComponentProps() {
   const { bgrC } = useChan180Colors();
 
 
-  const slotProps = useMemo(() => {
+  const componentProps = useMemo(() => {
     const dtSelectSlotProps: SelectProps["slotProps"] = {
       root: {
         sx: {
@@ -44,9 +45,22 @@ export function useDTSlotProps() {
       }
     };
 
-    return { dtSelectSlotProps, dtPickerSlotProps };
+    const dtSelectMenuProps: Partial<MenuProps> = {
+      disableScrollLock: true,
+      slotProps: {
+        paper: {
+          sx: {
+            my: "4px", borderRadius: "4px",
+            border: t => `1px solid ${t.palette.text.disabled}`,
+            background: t => t.palette.background.paper
+          }
+        }
+      }
+    };
+
+    return { dtSelectSlotProps, dtPickerSlotProps, dtSelectMenuProps };
   }, [bgrC]);
 
 
-  return slotProps;
+  return componentProps;
 }

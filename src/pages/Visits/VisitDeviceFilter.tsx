@@ -77,7 +77,7 @@ function VisitDeviceFilter({ initialDevices, onFilterChanged, setInitialFilters 
           {"Devices"}
         </Typography>
 
-        <Box sx={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: { xs: 1.2, sm: 1.6, md: 2 } }}>
+        <Box sx={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: { xs: 1.2, sm: 1.6, md: 2, lg: 2.2 } }}>
           {ALL_DEVICES.map((device, index) => {
             const { icon, name } = device;
             const checked = selected.includes(name);

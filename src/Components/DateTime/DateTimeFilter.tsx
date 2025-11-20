@@ -6,7 +6,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { forwardRef, Ref, useEffect, useImperativeHandle } from "react";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 
-import { useDTSlotProps } from "./slotProps";
+import { useDTComponentProps } from "./dtComponentProps";
 import { PeriodLengthInDays, usePeriodOptions } from "./dtPeriods";
 import { IPeriodBoundaries, calculatePeriodBoundaries } from "./dtPeriodParser";
 
@@ -39,7 +39,7 @@ export interface DTFilterRefresh {
 function DateTimeFilter(props: IProps, ref: Ref<DTFilterRefresh>) {
   useImperativeHandle(ref, () => ({ refresh: onFilter }));
   const periodOptions = usePeriodOptions(props.excludePeriods);
-  const { dtPickerSlotProps, dtSelectSlotProps } = useDTSlotProps();
+  const { dtPickerSlotProps, dtSelectSlotProps, dtSelectMenuProps } = useDTComponentProps();
 
   const [state, setState] = useMergedState<IState>(() => {
     const { start, end } = calculatePeriodBoundaries(props.initialFilterPeriod);
@@ -166,7 +166,7 @@ function DateTimeFilter(props: IProps, ref: Ref<DTFilterRefresh>) {
 
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en" >
+    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en">
       <Grid container justifyContent="center" spacing={2}>
         <Grid>
           <DateTimePicker
@@ -201,6 +201,7 @@ function DateTimeFilter(props: IProps, ref: Ref<DTFilterRefresh>) {
             size="small"
             value={state.dropdownValue}
             slotProps={dtSelectSlotProps}
+            MenuProps={dtSelectMenuProps}
             onChange={e => onPeriodPickerChange(e.target.value)}
           >
             {periodOptions.map((option, index) => (

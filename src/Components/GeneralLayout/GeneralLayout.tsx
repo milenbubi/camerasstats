@@ -8,12 +8,10 @@ import { cssVars } from "../../Utils/htmlUtils";
 import __BodyScrollbar from "./internals/__BodyScrollbar";
 import __OutletWithRefresh from "./internals/__OutletWithRefresh";
 import __ScrollResetListener from "./internals/__ScrollResetListener";
-
+import __PreventMuiScrollLock from "./internals/__PreventMuiScrollLock";
 
 
 function GeneralLayout() {
-
-
   return (
     <Box sx={{ height: 1 }}>
 
@@ -47,6 +45,7 @@ function GeneralLayout() {
           <__OutletWithRefresh />
           <__ScrollResetListener />
           <__BodyScrollbar />
+          <__PreventMuiScrollLock />
         </Box>
       </Box>
     </Box>
