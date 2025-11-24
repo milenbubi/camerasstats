@@ -6,6 +6,7 @@ import { formatUTCDateToLocalDateString } from "@ffilip/chan180-utils/time";
 import VisitIpLabel from "./VisitIpLabel";
 import { IVisit } from "../../Utils/models";
 import VisitDeviceLabel from "./VisitDeviceLabel";
+import VisitMoreDataLabel from "./VisitMoreDataLabel";
 import { ITableHeader } from "../../Components/Table/tableUtils";
 
 interface IProps {
@@ -21,7 +22,8 @@ export function useVisitsTableHeaders() {
     { key: "country", text: "Country", sortable: true },
     { key: "visit_time", text: "Visit Time", sortable: true },
     { key: "device", text: "Device", sortable: true },
-    { key: "ipAddress", text: "IP Address", sortable: false }
+    { key: "ipAddress", text: "IP Address", sortable: false },
+    { key: "_more", text: "More", sortable: false }
   ], []);
 
   return tableHeaders;
@@ -33,8 +35,8 @@ function ItemsRenderer({ data }: IProps) {
   const { greenC, blueC, yellowC, redC, isDark } = useChan180Colors();
   return (
     <>
-      {data.map((visit, index) => (
-        <TableRow key={index} hover>
+      {data.map(visit => (
+        <TableRow key={visit.id} hover>
           <TableCell sx={{ color: greenC, fontWeight: 600 }}>{visit.city}</TableCell>
           <TableCell>{visit.region}</TableCell>
           <TableCell>{visit.country}</TableCell>
@@ -49,6 +51,10 @@ function ItemsRenderer({ data }: IProps) {
 
           <TableCell>
             <VisitIpLabel visit={visit} blueC={blueC} greenC={greenC} isDark={isDark} yellowC={yellowC} redC={redC} />
+          </TableCell>
+
+          <TableCell>
+            <VisitMoreDataLabel visit={visit} yellowC={yellowC} />
           </TableCell>
         </TableRow>
       ))}

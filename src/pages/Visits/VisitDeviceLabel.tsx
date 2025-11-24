@@ -32,12 +32,10 @@ function VisitDeviceLabel({ visit, blueC, greenC, isDark, yellowC }: IProps) {
   return (
     <>
       <Link
-        component={Box}
         sx={{
           fontSize: 14,
           fontWeight: "lg",
           color: blueC,
-          cursor: "pointer",
           "&:hover": {
             textDecoration: "underline"
           }

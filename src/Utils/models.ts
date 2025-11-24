@@ -47,6 +47,7 @@ export interface IVisit {
   userAgent: string;
   locationJson: string;
   browserVisitCount: number;
+  clientHintsJson: string;
 }
 
 

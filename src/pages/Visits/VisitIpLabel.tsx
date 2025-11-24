@@ -95,11 +95,9 @@ function VisitIpLabel({ visit, blueC, greenC, isDark, yellowC, redC }: IProps) {
   return (
     <>
       <Link
-        component={Box}
         sx={{
           fontSize: 14,
           fontWeight: "md",
-          cursor: "pointer",
           color: redC,
           "&:hover": {
             textDecoration: "underline"
