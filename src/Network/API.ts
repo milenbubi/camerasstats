@@ -1,3 +1,4 @@
+import { safeJsonStringify } from "@ffilip/chan180-utils/helpers";
 import { BackendUrl } from "../Utils/constants";
 import { IResponse, RequestMethod } from "./types";
 
@@ -24,7 +25,7 @@ class APIRequestor {
 
   request<T>(endpoint: string, method: RequestMethod, data?: any,) {
     const url = this.API_URL + endpoint;
-    const body = method !== "GET" ? JSON.stringify(data) : undefined;
+    const body = method !== "GET" ? safeJsonStringify(data) : undefined;
     const options: RequestInit = { method, body, headers: {} };
 
     return this.requestServer<T>(url, options);

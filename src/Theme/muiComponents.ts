@@ -13,6 +13,20 @@ export function globalMUIOverrides(defaultTheme: Theme): ThemeOptions {
           }
         }
       },
+
+      MuiPopover: {
+        defaultProps: {
+          slotProps: {
+            backdrop: {
+              sx: {
+                backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                backdropFilter: 'blur(0.5px)'
+              }
+            }
+          }
+        }
+      },
+
       ...muiTable(defaultTheme)
     }
   };

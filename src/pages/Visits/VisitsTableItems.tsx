@@ -32,7 +32,9 @@ export function useVisitsTableHeaders() {
 
 
 function ItemsRenderer({ data }: IProps) {
-  const { greenC, blueC, yellowC, redC, isDark } = useChan180Colors();
+  const { greenC, blueC, yellowC, redC } = useChan180Colors();
+
+
   return (
     <>
       {data.map(visit => (
@@ -41,19 +43,19 @@ function ItemsRenderer({ data }: IProps) {
           <TableCell>{visit.region}</TableCell>
           <TableCell>{visit.country}</TableCell>
 
-          <TableCell sx={{ whiteSpace: "nowrap", color: isDark ? yellowC : redC }}>
+          <TableCell sx={{ whiteSpace: "nowrap", color: yellowC }}>
             {formatUTCDateToLocalDateString(visit.visitTime, "fullDateTime", "en", true)}
           </TableCell>
 
           <TableCell>
-            <VisitDeviceLabel visit={visit} blueC={blueC} greenC={greenC} isDark={isDark} yellowC={yellowC} />
+            <VisitDeviceLabel visit={visit} blueC={blueC} greenC={greenC} yellowC={yellowC} />
           </TableCell>
 
           <TableCell>
-            <VisitIpLabel visit={visit} blueC={blueC} greenC={greenC} isDark={isDark} yellowC={yellowC} redC={redC} />
+            <VisitIpLabel visit={visit} blueC={blueC} greenC={greenC} redC={redC} />
           </TableCell>
 
-          <TableCell>
+          <TableCell align="center">
             <VisitMoreDataLabel visit={visit} yellowC={yellowC} />
           </TableCell>
         </TableRow>

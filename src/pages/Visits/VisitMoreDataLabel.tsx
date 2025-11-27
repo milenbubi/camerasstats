@@ -2,6 +2,7 @@ import { Popover } from "@mui/material";
 import { Box, Typography, Link, Sheet } from "@mui/joy";
 import { MouseEvent, useCallback, useState } from "react";
 import { Iconify } from "@ffilip/mui-react-utils/components";
+import { safeJsonParse } from "@ffilip/chan180-utils/helpers";
 import { C180ZIndex, fixMuiOverlayFocus } from "@ffilip/mui-react-utils/mui";
 import { IVisit } from "../../Utils/models";
 
@@ -37,13 +38,14 @@ function VisitMoreDataLabel({ visit, yellowC }: IProps) {
 
 
   const openPopover = useCallback((event: MouseEvent<HTMLElement>) => {
-    try {
-      const jsonData: Record<string, string> = JSON.parse(visit.clientHintsJson);
+    const jsonData = safeJsonParse<Record<string, string>>(visit.clientHintsJson);
+
+    if (jsonData) {
       const data = Object.entries(jsonData).map(([label, data]) => ({ label, data }));
+
       setSecChData(data);
       setAnchorEl(event.currentTarget);
     }
-    catch (error) { }
   }, []);
 
 
@@ -65,9 +67,8 @@ function VisitMoreDataLabel({ visit, yellowC }: IProps) {
   return (
     <>
       <Link
-        sx={{ color: "text.primary" }}
         onClick={openPopover}
-        children={<Iconify icon="uiw:more" width={20} />}
+        children={<Iconify icon="uiw:more" width={16} sx={{ transform: "translate(-2px, 2px) scale(1.4)" }} />}
       />
       <Popover
         sx={{ zIndex: C180ZIndex.popper }}
@@ -90,7 +91,7 @@ function VisitMoreDataLabel({ visit, yellowC }: IProps) {
             p: "14px 18px",
             borderRadius: "8px",
             background: t => t.palette.background.popup,
-            minWidth: 300, maxWidth: { xs: 385, sm: 550 }
+            minWidth: 300, maxWidth: { xs: 380, sm: 550 }
           }}
         >
           <Typography level="title-lg" textAlign="center" sx={{ mb: 2 }}>
