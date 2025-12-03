@@ -41,7 +41,11 @@ function VisitMoreDataLabel({ visit, yellowC }: IProps) {
     const jsonData = safeJsonParse<Record<string, string>>(visit.clientHintsJson);
 
     if (jsonData) {
-      const data = Object.entries(jsonData).map(([label, data]) => ({ label, data }));
+      const data = Object.keys(jsonData)
+        .map<ISecChData>(key => ({
+          label: key,
+          data: jsonData[key]
+        }));
 
       setSecChData(data);
       setAnchorEl(event.currentTarget);

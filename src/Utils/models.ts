@@ -1,19 +1,5 @@
-const geoLoaction: IGeoLocation = {
-  as: "AS8866 Vivacom Bulgaria EAD",
-  city: "Sofia",
-  country: "Bulgaria",
-  countryCode: "BG",
-  isp: "Vivacom Bulgaria EAD",
-  lat: 42.6826,
-  lon: 23.3223,
-  org: "Vivacom GPON Sofia",
-  query: "111.111.111.111",
-  region: "22",
-  regionName: "Sofia-Capital",
-  status: "success",
-  timezone: "Europe/Sofia",
-  zip: "1000"
-};
+import { DeviceName } from "./statsUtils";
+
 
 
 export interface IGeoLocation {
@@ -40,7 +26,7 @@ export interface IVisit {
   city: string;
   region: string;
   country: string;
-  device: string;
+  device: DeviceName;
   os: string;
   visitTime: string;   // ISO8601 string, UTC
   ipAddress: string;
@@ -48,6 +34,21 @@ export interface IVisit {
   locationJson: string;
   browserVisitCount: number;
   clientHintsJson: string;
+}
+
+
+export interface IDeviceStat {
+  name: string;
+  visits: number;
+}
+
+
+export interface IDashboardDataResponse {
+  totalVisits: number;
+  uniqueCountries: number;
+  uniqueCities: number;
+  uniqueRegions: number;
+  devices: IDeviceStat[];
 }
 
 
