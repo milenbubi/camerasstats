@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { useEffect, useRef } from "react";
 import { urlQueryStringFromObject } from "@ffilip/chan180-utils";
 import { useLatestRequestGuard, useMergedState } from "@ffilip/mui-react-utils/react";
@@ -55,6 +55,9 @@ function Dashboard() {
   return (
     <Stack sx={{ gap: 4, pt: 2, alignItems: "center" }}>
 
+      <Typography align="center" variant="h4" sx={{ color: t=>t.palette.mode==="dark"?"orange":"red" }}>
+        {"{ Dashboard is under construction }"}
+      </Typography>
 
       {/* <Paper sx={{ p: 7 }}> */}
       {/* <Sheet variant="outlined" sx={{ p: 4 }}> */}
