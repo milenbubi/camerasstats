@@ -387,24 +387,17 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.21.5.tgz#acad351d582d157bb145535db2a6ff53dd514b5c"
   integrity sha512-tQd/1efJuzPC6rCFwEvLtci/xNFcTZknmXs98FYDfGE4wP9ClFV98nyKrzJKVPMhdDnjzLhdUyMX4PsQAPjwIw==
 
-"@ffilip/chan180-utils@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.npmjs.org/@ffilip/chan180-utils/-/chan180-utils-3.0.1.tgz"
-  integrity sha512-CQajN58J4WCMhgkfDQrelS0H0cfu/RwJ8EwABHbrnl7B7m9fhygRmcU0oWJBxn4a3XhLhY5Q4PLTBlA4KafHYw==
-  dependencies:
-    big.js "^7.0.1"
-
-"@ffilip/chan180-utils@^3.4.0":
+"@ffilip/chan180-utils@^3.0.1", "@ffilip/chan180-utils@^3.4.0":
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/@ffilip/chan180-utils/-/chan180-utils-3.4.0.tgz#006ca573789eb9cd70b425e3d22f6447e206d4fe"
   integrity sha512-QxKu8tcICD5IxX28+BSU5OIUmXwJBfTOiTbDHtcmxrWiYgrGY7fCcUnYS6icqjBAqPIqWNmaWZ2PsJTZ3iQEHA==
   dependencies:
     big.js "^7.0.1"
 
-"@ffilip/mui-react-utils@^2.5.1":
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/@ffilip/mui-react-utils/-/mui-react-utils-2.5.1.tgz#709bf55876f968f1bda7337915bc62ab74aba48d"
-  integrity sha512-rSysGt2COqSk6P0IxNowpIXqOQ8FORMpO5uQzYpW4hLUw5pAw6seWb7BtDIdZu/FObCHdsSvuWbdnuPso2CQlA==
+"@ffilip/mui-react-utils@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@ffilip/mui-react-utils/-/mui-react-utils-2.6.0.tgz#92ee4c0c41530f6cead0bc68dfd5946f70acfc55"
+  integrity sha512-+lf14bV92pTvWIiYvBsnZsu+TGtGvipnKesvcGMbKJKxKbY4Fx7AUCEQAxxLNIc7rAY1JO5J5AuTPPGRY2Ha6g==
   dependencies:
     "@ffilip/chan180-utils" "^3.0.1"
     "@iconify/react" "^6.0.2"

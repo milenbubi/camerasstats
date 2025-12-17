@@ -32,7 +32,7 @@ export function useVisitsTableHeaders() {
 
 
 function ItemsRenderer({ data }: IProps) {
-  const { greenC, blueC, yellowC, redC } = useChan180Colors();
+  const { greenC, blueC, yellowC, redC, isDark } = useChan180Colors();
 
 
   return (
@@ -48,7 +48,7 @@ function ItemsRenderer({ data }: IProps) {
           </TableCell>
 
           <TableCell>
-            <VisitDeviceLabel visit={visit} blueC={blueC} greenC={greenC} yellowC={yellowC} />
+            <VisitDeviceLabel visit={visit} blueC={blueC} greenC={greenC} yellowC={yellowC} isDark={isDark} />
           </TableCell>
 
           <TableCell>

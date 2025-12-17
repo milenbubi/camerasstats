@@ -3,7 +3,7 @@ import { MouseEvent, useCallback, useState } from "react";
 import { Box, Typography, Chip, Link, Sheet } from "@mui/joy";
 import { formatUTCDateToLocalDateString } from "@ffilip/chan180-utils/time";
 import { C180ZIndex, fixMuiOverlayFocus } from "@ffilip/mui-react-utils/mui";
-import { Iconify, ClipboardCopyButton } from "@ffilip/mui-react-utils/components";
+import { ClipboardCopyButton, Iconify } from "@ffilip/mui-react-utils/components";
 
 import { IVisit } from "../../Utils/models";
 import { UserAgentParserUrl } from "../../Utils/constants";
@@ -13,13 +13,14 @@ interface IProps {
   blueC: string;
   greenC: string;
   yellowC: string;
+  isDark: boolean;
 }
 
 const getPreposition = (device: string) => ["Bot", "API Client"].includes(device) ? "via" : "on";
 
 
 
-function VisitDeviceLabel({ visit, blueC, greenC, yellowC }: IProps) {
+function VisitDeviceLabel({ visit, blueC, greenC, yellowC, isDark }: IProps) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   const openPopover = useCallback((event: MouseEvent<HTMLElement>) => {
@@ -89,11 +90,17 @@ function VisitDeviceLabel({ visit, blueC, greenC, yellowC }: IProps) {
           </Box>
 
           <Box sx={{ m: 2 }}>
-            <Typography
-              startDecorator={<Iconify color={yellowC} icon="ic:baseline-adjust" width={18} />}
-              sx={{ fontWeight: "lg", fontSize: "sm", mb: "2px" }}
-              children={`Visited from ${visit.country}`}
-            />
+            <Box sx={{ display: "flex", gap: "6px", mb: "6px", alignItems: "center" }}>
+              <Iconify color={yellowC} icon="ic:baseline-adjust" width={18} />
+              <Typography sx={{ fontWeight: "lg", fontSize: "sm" }}>
+                {`Visited from ${visit.country}`}
+                <Typography
+                  textColor={isDark ? "danger.300" : "danger.600"}
+                  sx={{ fontWeight: "lg", fontSize: "xs", fontStyle: "italic", whiteSpace: "nowrap", ml: 6 }}
+                  children={`${visit.browserVisitCount} visit${visit.browserVisitCount > 1 ? "s" : ""}`}
+                />
+              </Typography>
+            </Box>
             <Typography
               textColor="text.secondary"
               sx={{ fontSize: "sm" }}
@@ -102,13 +109,7 @@ function VisitDeviceLabel({ visit, blueC, greenC, yellowC }: IProps) {
           </Box>
 
           <Box sx={{ display: "flex", justifyContent: "center", gap: 4 }}>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 0 }}>
-              <ClipboardCopyButton defaultTitle="Copy user agent" textToCopy={visit.userAgent} />
-
-              <Typography level="body-xs" sx={{ fontStyle: "italic", color: "text.secondary" }}>
-                {"Copy"}
-              </Typography>
-            </Box>
+            <ClipboardCopyButton defaultTitle="Copy user agent" textToCopy={visit.userAgent} label="Copy" labelPosition="right" />
 
             <Chip
               title="Opens a website where you can paste the copied user agent for analysis"
