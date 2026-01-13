@@ -8,8 +8,10 @@ export function useChartPalette() {
 
 
   const chartPalette = useMemo(() => {
+    const isDark = theme.palette.mode === "dark";
+
     return {
-      barColor: theme.palette.primary[500],
+      barColor: theme.palette.success[isDark ? 300 : 600],
       gridColor: theme.palette.divider,
       axisTextColor: theme.palette.text.secondary,
       bgColor: theme.palette.background.surface,

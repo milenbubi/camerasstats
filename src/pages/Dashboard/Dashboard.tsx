@@ -1,27 +1,30 @@
-import { Stack, Typography } from "@mui/material";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { Stack } from "@mui/material";
 import { urlQueryStringFromObject } from "@ffilip/chan180-utils";
 import { useLatestRequestGuard, useMergedState } from "@ffilip/mui-react-utils/react";
 
 import DevicesChart from "./DevicesChart";
+import DashboardTitle from "./DashboardTitle";
+import DashboardFilters from "./DashboardFilters";
 import { useAPIRequest } from "../../Network/apiHooks";
 import { IDashboardDataResponse } from "../../Utils/models";
 import { useContextSnack } from "../../Contexts/SnackbarContext";
-import { DashboardPeriods, DEFAULT_DASHBOARD_STATE } from "./utils";
+import { DashboardPeriod, DEFAULT_DASHBOARD_STATE } from "./utils";
 
 
 
 function Dashboard() {
   const { showSnack } = useContextSnack();
   const { RequestToApi } = useAPIRequest();
-  const period = useRef<DashboardPeriods>("all");
+  const period = useRef<DashboardPeriod>("24h");
   const { register, isOutdated } = useLatestRequestGuard();
   const [state, setState] = useMergedState({ ...DEFAULT_DASHBOARD_STATE });
 
 
-  useEffect(() => {
+  const changePeriod = (newPeriod: DashboardPeriod) => {
+    period.current = newPeriod;
     loadDashboardData();
-  }, []);
+  };
 
 
   const loadDashboardData = async () => {
@@ -53,23 +56,11 @@ function Dashboard() {
 
 
   return (
-    <Stack sx={{ gap: 4, pt: 2, alignItems: "center" }}>
-
-      <Typography align="center" variant="h4" sx={{ color: t=>t.palette.mode==="dark"?"orange":"red" }}>
-        {"{ Dashboard is under construction }"}
-      </Typography>
-
-      {/* <Paper sx={{ p: 7 }}> */}
-      {/* <Sheet variant="outlined" sx={{ p: 4 }}> */}
-
-      {state.data && (
-        <DevicesChart data={state.data?.devices} title="Devices that visited chan180.net" />
-      )}
-      {/* </Sheet> */}
-      {/* </Paper> */}
-
+    <Stack sx={{ gap: 3, pt: 2, alignItems: "center" }}>
+      <DashboardTitle />
+      <DashboardFilters onChange={changePeriod} loading={state.loading} />
+      <DevicesChart data={state.data?.devices} />
     </Stack>
-
   );
 }
 

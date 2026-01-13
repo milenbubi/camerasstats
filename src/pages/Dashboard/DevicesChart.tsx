@@ -1,18 +1,16 @@
 import { useMediaQuery } from "@mui/material";
 import { Box, Typography, Sheet, colors } from "@mui/joy";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from "recharts";
-
 import { IDeviceStat } from "../../Utils/models";
 import { useChartPalette } from "./chartPalette";
 
 interface IProps {
-  data: IDeviceStat[];
-  title: string;
+  data?: IDeviceStat[];
 }
 
 
 
-function DevicesChart({ data, title }: IProps) {
+function DevicesChart({ data }: IProps) {
   const isSmall = useMediaQuery("(max-width:520px)");
   const { axisTextColor, barColor, bgColor, gridColor, secondaryColor, toolTipBgcolor } = useChartPalette();
 
@@ -36,7 +34,7 @@ function DevicesChart({ data, title }: IProps) {
       }}
     >
       <Typography level="title-lg" textAlign="center">
-        {title}
+        {"Traffic by Device Type"}
       </Typography>
 
       <Box sx={{ flex: 1, minHeight: 0 }}>
