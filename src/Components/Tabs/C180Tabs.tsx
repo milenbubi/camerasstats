@@ -1,8 +1,9 @@
+import { blueGrey } from "@mui/material/colors";
 import { SyntheticEvent, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useIsThemeDark } from "@ffilip/mui-react-utils/mui";
+import { hexToRgba } from "@ffilip/chan180-utils/helpers";
 import { Centered } from "@ffilip/mui-react-utils/components";
-import { darken, lighten, SxProps, Tab, Tabs, Theme } from "@mui/material";
+import { SxProps, Tab, tabClasses, Tabs, Theme } from "@mui/material";
 import { ITabPanelItem, indexToTabParam, tabParamToIndex } from "./utils";
 
 interface IProps {
@@ -16,7 +17,6 @@ interface IProps {
 
 
 function C180Tabs({ tabIndex, items, searchParamName, sx, onTabChange }: IProps) {
-  const { isThemeDark } = useIsThemeDark();
   const [searchParams, setSearchParams] = useSearchParams();
 
 
@@ -74,28 +74,29 @@ function C180Tabs({ tabIndex, items, searchParamName, sx, onTabChange }: IProps)
             borderRadius: "2px"
           },
           "& .MuiTab-root": {
-            py: "10px",
+            py: "9px",
+            px: { xs: "9px", md: "14px" },
+            fontSize: { xs: 14, md: 16 },
             minHeight: 0,
-            borderRadius: 0,
             fontWeight: 600,
-            textTransform: "none"
+            textTransform: "none",
+            [`&:not(.${tabClasses.selected})`]: {
+              color: t => t.palette.text.disabled,
+            },
+            [`&.${tabClasses.selected}`]: {
+              pointerEvents: "none",
+              background: hexToRgba(blueGrey[100], 0.07)
+            },
+            "&:hover": {
+              background: hexToRgba(blueGrey[500], 0.2)
+            },
+            "&:not(:last-of-type)": {
+              mr: { sm: 1 }
+            }
           }
         }}
       >
-        {items.map((item, index) => (
-          <Tab
-            key={index}
-            label={item.title}
-            sx={{
-              px: "14px",
-              fontSize: 16,
-              borderRadius: "8px",
-              "&:hover": {
-                background: t => (isThemeDark ? darken : lighten)(t.palette.background.neutral, 0.6)
-              }
-            }}
-          />
-        ))}
+        {items.map((item, index) => <Tab key={index} label={item.title} />)}
       </Tabs>
     </Centered>
   );

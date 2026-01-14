@@ -6,11 +6,12 @@ import { useChartPalette } from "./chartPalette";
 
 interface IProps {
   data?: IDeviceStat[];
+  totalVisits?: number;
 }
 
 
 
-function DevicesChart({ data }: IProps) {
+function DevicesChart({ data, totalVisits = -1 }: IProps) {
   const isSmall = useMediaQuery("(max-width:520px)");
   const { axisTextColor, barColor, bgColor, gridColor, secondaryColor, toolTipBgcolor } = useChartPalette();
 
@@ -19,23 +20,28 @@ function DevicesChart({ data }: IProps) {
     <Sheet
       variant="outlined"
       sx={{
-        py: 2,
-        px: 1,
+        padding: "12px 8px 4px",
         borderRadius: "lg",
         height: 300,
         display: "flex",
         flexDirection: "column",
         gap: 1,
         width: "100%",
-        maxWidth: 565,
+        maxWidth: 700,
         "svg:focus, g:focus, path:focus": {
           outline: "none"
         }
       }}
     >
       <Typography level="title-lg" textAlign="center">
-        {"Traffic by Device Type"}
+        {"Traffic by Device"}
       </Typography>
+
+      {totalVisits >= 0 && (
+        <Typography level="title-sm" fontStyle="italic" textAlign="center">
+          {totalVisits ? `${totalVisits} visits` : "No visits for the selected period"}
+        </Typography>
+      )}
 
       <Box sx={{ flex: 1, minHeight: 0 }}>
         <ResponsiveContainer initialDimension={{ width: 1, height: 1 }}>
@@ -51,7 +57,7 @@ function DevicesChart({ data }: IProps) {
               interval={0}
               tick={{
                 fill: axisTextColor,
-                fontSize: isSmall ? 11 : 13,
+                fontSize: isSmall ? 11 : 15,
                 fontWeight: 600,
                 textAnchor: "middle"
               }}

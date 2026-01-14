@@ -4,7 +4,7 @@ import { C180Loader } from "@ffilip/mui-react-utils/components";
 
 import C180Tabs from "../../Components/Tabs/C180Tabs";
 import { ITabPanelItem } from "../../Components/Tabs/utils";
-import { DashboardPeriod, dashboardTimeOptions, isDashboardPeriod } from "./utils";
+import { DashboardPeriod, dashboardPeriodOptions, isDashboardPeriod } from "./utils";
 
 interface IProps {
   loading: boolean;
@@ -18,18 +18,17 @@ function DashboardFilters({ loading, onChange }: IProps) {
 
 
   const tabItems = useMemo(() => {
-    return dashboardTimeOptions.map<ITabPanelItem>(dto => ({
-      title: dto.text,
-      paramName: dto.value
+    return dashboardPeriodOptions.map<ITabPanelItem>(dpo => ({
+      title: dpo.text,
+      paramName: dpo.value
     }));
   }, []);
 
 
   const onTabChange = (newTabIndex: number) => {
-    const isValidTabIndex = newTabIndex >= 0 && newTabIndex < tabItems.length;
-    const newValue = dashboardTimeOptions[newTabIndex]?.value;
+    const newValue = dashboardPeriodOptions[newTabIndex]?.value;
 
-    if (isValidTabIndex && isDashboardPeriod(newValue)) {
+    if (isDashboardPeriod(newValue)) {
       setTabIndex(newTabIndex);
       newValue && onChange(newValue);
     }

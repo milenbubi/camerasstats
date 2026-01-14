@@ -9,15 +9,15 @@ import DashboardFilters from "./DashboardFilters";
 import { useAPIRequest } from "../../Network/apiHooks";
 import { IDashboardDataResponse } from "../../Utils/models";
 import { useContextSnack } from "../../Contexts/SnackbarContext";
-import { DashboardPeriod, DEFAULT_DASHBOARD_STATE } from "./utils";
+import { DashboardPeriod, DEFAULT_DASHBOARD_STATE, DEFAULT_DASHBOARD_PERIOD } from "./utils";
 
 
 
 function Dashboard() {
   const { showSnack } = useContextSnack();
   const { RequestToApi } = useAPIRequest();
-  const period = useRef<DashboardPeriod>("24h");
   const { register, isOutdated } = useLatestRequestGuard();
+  const period = useRef<DashboardPeriod>(DEFAULT_DASHBOARD_PERIOD);
   const [state, setState] = useMergedState({ ...DEFAULT_DASHBOARD_STATE });
 
 
@@ -59,7 +59,7 @@ function Dashboard() {
     <Stack sx={{ gap: 3, pt: 2, alignItems: "center" }}>
       <DashboardTitle />
       <DashboardFilters onChange={changePeriod} loading={state.loading} />
-      <DevicesChart data={state.data?.devices} />
+      <DevicesChart data={state.data?.devices} totalVisits={state.data?.totalVisits} />
     </Stack>
   );
 }
