@@ -1,8 +1,8 @@
 import { createRef, useEffect, useRef } from "react";
 import { Container, Paper, Stack } from "@mui/material";
-import { getLocalToUTCString } from "@ffilip/chan180-utils/time";
 import { SearchField } from "@ffilip/mui-react-utils/components";
 import { urlQueryStringFromObject } from "@ffilip/chan180-utils/env";
+import { getLocalToUTCString, IPeriodBoundaries } from "@ffilip/chan180-utils/time";
 import { useLatestRequestGuard, useMergedState } from "@ffilip/mui-react-utils/react";
 
 import { DeviceName } from "../../Utils/statsUtils";
@@ -14,7 +14,6 @@ import { ITableDataQuery } from "../../Components/Table/tableUtils";
 import DateTimeFilter from "../../Components/DateTime/DateTimeFilter";
 import FullTable, { TableRefresh } from "../../Components/Table/FullTable";
 import { DEFAULT_VISITS_TABLE_STATE, normalizeDeviceNames } from "./utils";
-import { IPeriodBoundaries } from "../../Components/DateTime/dtPeriodParser";
 import VisitsTableItems, { useVisitsTableHeaders } from "./VisitsTableItems";
 
 

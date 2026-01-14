@@ -3,12 +3,10 @@ import dayjs, { Dayjs } from "dayjs";
 import { useMergedState } from "@ffilip/mui-react-utils/react";
 import { MenuItem, Select, Grid, Button } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { forwardRef, Ref, useEffect, useImperativeHandle } from "react";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
-
+import { forwardRef, Ref, useEffect, useImperativeHandle, useMemo } from "react";
+import { calculatePeriodBoundaries, getPeriodOptions, IPeriodBoundaries, PeriodLengthInDays } from "@ffilip/chan180-utils/time";
 import { useDTComponentProps } from "./dtComponentProps";
-import { PeriodLengthInDays, usePeriodOptions } from "./dtPeriods";
-import { IPeriodBoundaries, calculatePeriodBoundaries } from "./dtPeriodParser";
 
 interface IProps {
   initialFilterPeriod: PeriodLengthInDays;
@@ -38,7 +36,7 @@ export interface DTFilterRefresh {
 
 function DateTimeFilter(props: IProps, ref: Ref<DTFilterRefresh>) {
   useImperativeHandle(ref, () => ({ refresh: onFilter }));
-  const periodOptions = usePeriodOptions(props.excludePeriods);
+  const periodOptions = useMemo(() => getPeriodOptions(props.excludePeriods), []);
   const { dtPickerSlotProps, dtSelectSlotProps, dtSelectMenuProps } = useDTComponentProps();
 
   const [state, setState] = useMergedState<IState>(() => {
