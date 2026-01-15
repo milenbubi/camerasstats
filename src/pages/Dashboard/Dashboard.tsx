@@ -1,13 +1,14 @@
 import { useRef } from "react";
 import { Stack } from "@mui/material";
-import { urlQueryStringFromObject } from "@ffilip/chan180-utils";
 import { useLatestRequestGuard, useMergedState } from "@ffilip/mui-react-utils/react";
+import { calculatePeriodBoundaries, getLocalToUTCString, IPeriodBoundaries, urlQueryStringFromObject } from "@ffilip/chan180-utils";
 
 import DevicesChart from "./DevicesChart";
 import DashboardTitle from "./DashboardTitle";
 import DashboardFilters from "./DashboardFilters";
+import { transformDashboardItems } from "./parsers";
 import { useAPIRequest } from "../../Network/apiHooks";
-import { IDashboardDataResponse } from "../../Utils/models";
+import { IDashboardResponse } from "../../Utils/models";
 import { useContextSnack } from "../../Contexts/SnackbarContext";
 import { DashboardPeriod, DEFAULT_DASHBOARD_STATE, DEFAULT_DASHBOARD_PERIOD } from "./utils";
 
@@ -31,11 +32,14 @@ function Dashboard() {
     setState({ loading: true });
     const requestId = register();
 
+    const { start, end }: IPeriodBoundaries = calculatePeriodBoundaries(period.current);
+
     const urlParams = urlQueryStringFromObject({
-      _period: period.current
+      _visitTimeFrom: getLocalToUTCString(start),
+      _visitTimeTo: getLocalToUTCString(end)
     });
 
-    const { Data, Error } = await RequestToApi<IDashboardDataResponse>("/dashboard.php" + urlParams, "GET");
+    const { Data, Error } = await RequestToApi<IDashboardResponse>("/dashboard.php" + urlParams, "GET");
 
     if (isOutdated(requestId)) {  // Abort, if there is new request
       setState({ loading: false });
@@ -48,7 +52,9 @@ function Dashboard() {
     }
     else {
       setState({
-        data: Data,
+        items: Data.items,
+        ...transformDashboardItems(Data.items),
+        totalCount: Data.totalCount,
         loading: false
       });
     }
@@ -59,7 +65,7 @@ function Dashboard() {
     <Stack sx={{ gap: 3, pt: 2, alignItems: "center" }}>
       <DashboardTitle />
       <DashboardFilters onChange={changePeriod} loading={state.loading} />
-      <DevicesChart data={state.data?.devices} totalVisits={state.data?.totalVisits} />
+      <DevicesChart data={state.devices} totalVisits={state.totalCount} />
     </Stack>
   );
 }

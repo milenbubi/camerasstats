@@ -1,34 +1,45 @@
-import { IDashboardDataResponse } from "../../Utils/models";
+import { PeriodLengthInDays } from "@ffilip/chan180-utils";
+import { ITabPanelItem } from "../../Components/Tabs/utils";
+import { IDashboardItem, IEntityVisit, ILocationStat } from "../../Utils/models";
 
 
-export const dashboardPeriodOptions = [
-  { value: "24h", text: "24 Hours" },
-  { value: "3d", text: "3 Days" },
-  { value: "7d", text: "7 Days" },
-  { value: "30d", text: "30 Days" },
-  { value: "90d", text: "90 Days" },
-  { value: "allTime", text: "All Time" }
+export const dashboardPeriodOptions: ITabPanelItem<PeriodLengthInDays>[] = [
+  { title: "Today", value: PeriodLengthInDays.Today, paramName: "today" },
+  { title: "24 Hours", value: PeriodLengthInDays.One, paramName: "24h" },
+  { title: "3 Days", value: PeriodLengthInDays.Three, paramName: "3d" },
+  { title: "7 Days", value: PeriodLengthInDays.Seven, paramName: "7d" },
+  { title: "30 Days", value: PeriodLengthInDays.Thirty, paramName: "30d" },
+  { title: "90 Days", value: PeriodLengthInDays.ThreeMonths, paramName: "90d" },
 ] as const;
 
 export type DashboardPeriod = typeof dashboardPeriodOptions[number]["value"];
 
-
 const dashboardPeriodValues = dashboardPeriodOptions.map(o => o.value);
+export const DEFAULT_DASHBOARD_PERIOD = dashboardPeriodValues[0];
 
 export function isDashboardPeriod(value: unknown): value is DashboardPeriod {
-  return typeof value === "string" && dashboardPeriodValues.includes(value as DashboardPeriod);
+  return typeof value === "number" && dashboardPeriodValues.includes(value as DashboardPeriod);
 }
 
 
 interface IDashboardState {
-  data: IDashboardDataResponse | null;
+  items: IDashboardItem[] | null;
+  devices: IEntityVisit[] | undefined;
+  cities: IEntityVisit[] | undefined;
+  countries: IEntityVisit[] | undefined;
+  oses: IEntityVisit[] | undefined;
+  locations: ILocationStat | null;
+  totalCount: number;
   loading: boolean;
 }
 
 export const DEFAULT_DASHBOARD_STATE: IDashboardState = {
-  data: null,
+  items: null,
+  devices: undefined,
+  cities: undefined,
+  countries: undefined,
+  oses: undefined,
+  locations: null,
+  totalCount: 0,
   loading: false
 };
-
-
-export const DEFAULT_DASHBOARD_PERIOD = dashboardPeriodOptions[0].value;

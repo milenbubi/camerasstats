@@ -1,7 +1,7 @@
 import { DeviceName } from "./statsUtils";
 
 
-
+/* Table statisctics */
 export interface IGeoLocation {
   as: string;
   city: string;
@@ -37,22 +37,35 @@ export interface IVisit {
 }
 
 
-export interface IDeviceStat {
-  name: string;
-  visits: number;
-}
-
-
-export interface IDashboardDataResponse {
-  totalVisits: number;
-  uniqueCountries: number;
-  uniqueCities: number;
-  uniqueRegions: number;
-  devices: IDeviceStat[];
-}
-
-
 export interface IVisitStatsResponse {
   totalCount: number;
   items: IVisit[];
 }
+/* End Table statisctics */
+
+/* Dashboard data */
+export interface IDashboardItem {
+  id: number;
+  city: string;
+  country: string;
+  device: string;
+  os: string;
+  visitTime: string;
+}
+
+export interface IDashboardResponse {
+  totalCount: number;
+  items: IDashboardItem[];
+}
+
+
+export interface IEntityVisit {
+  name: string;
+  visits: number;
+}
+
+export interface ILocationStat {
+  uniqueCountries: number;
+  uniqueCities: number;
+}
+/* End Dashboard data */

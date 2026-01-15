@@ -6,17 +6,16 @@ import { Centered } from "@ffilip/mui-react-utils/components";
 import { SxProps, Tab, tabClasses, Tabs, Theme } from "@mui/material";
 import { ITabPanelItem, indexToTabParam, tabParamToIndex } from "./utils";
 
-interface IProps {
+interface IProps<TValue> {
   tabIndex: number;
-  items: ITabPanelItem[];
-  searchParamName?: string;
   sx?: SxProps<Theme>;
-  onTabChange: (index: number, value?: string) => void;
+  searchParamName?: string;
+  items: ITabPanelItem<TValue>[];
+  onTabChange: (index: number, value: TValue) => void;
 }
 
 
-
-function C180Tabs({ tabIndex, items, searchParamName, sx, onTabChange }: IProps) {
+function C180Tabs<TValue>({ tabIndex, sx, items, searchParamName, onTabChange }: IProps<TValue>) {
   const [searchParams, setSearchParams] = useSearchParams();
 
 
@@ -24,10 +23,15 @@ function C180Tabs({ tabIndex, items, searchParamName, sx, onTabChange }: IProps)
     if (searchParamName) {
       const param = searchParams.get(searchParamName);
       const newTabIndex = tabParamToIndex(param, items);
-      onTabChange(newTabIndex);
+
+      if (tabIndex === newTabIndex) {
+        return;
+      }
+
+      onTabChange(newTabIndex, items[newTabIndex].value);
 
       // Set to first tab, if "searchParamName" is invalid
-      if (searchParamName && param && items.every(i => i.paramName !== param)) {
+      if (items.every(i => i.paramName !== param)) {
         setSearchParams(
           p => {
             p.set(searchParamName, indexToTabParam(newTabIndex, items));
@@ -48,12 +52,12 @@ function C180Tabs({ tabIndex, items, searchParamName, sx, onTabChange }: IProps)
       });
     }
     else {
-      onTabChange(newTabIndex);
+      onTabChange(newTabIndex, items[newTabIndex].value);
     }
   };
 
 
-  if (tabIndex < 0) {  // Render nothing while search params set the correct tabIndex
+  if (tabIndex < 0 || items.length === 0) {  // Render nothing while search params set the correct tabIndex
     return null;
   }
 

@@ -1,11 +1,11 @@
 import { useMediaQuery } from "@mui/material";
 import { Box, Typography, Sheet, colors } from "@mui/joy";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from "recharts";
-import { IDeviceStat } from "../../Utils/models";
 import { useChartPalette } from "./chartPalette";
+import { IEntityVisit } from "../../Utils/models";
 
 interface IProps {
-  data?: IDeviceStat[];
+  data?: IEntityVisit[];
   totalVisits?: number;
 }
 
@@ -37,7 +37,7 @@ function DevicesChart({ data, totalVisits = -1 }: IProps) {
         {"Traffic by Device"}
       </Typography>
 
-      {totalVisits >= 0 && (
+      {data && totalVisits >= 0 && (
         <Typography level="title-sm" fontStyle="italic" textAlign="center">
           {totalVisits ? `${totalVisits} visits` : "No visits for the selected period"}
         </Typography>
@@ -48,7 +48,7 @@ function DevicesChart({ data, totalVisits = -1 }: IProps) {
           <BarChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
             <CartesianGrid stroke={gridColor} vertical={false} />
             <XAxis
-              dataKey="device"
+              dataKey="name"
               stroke={axisTextColor}
               tickLine={false}
               axisLine={{ stroke: gridColor }}
