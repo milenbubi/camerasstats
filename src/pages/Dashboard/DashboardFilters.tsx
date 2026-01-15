@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Container } from "@mui/material";
-import { PeriodLengthInDays } from "@ffilip/chan180-utils";
 import { C180Loader } from "@ffilip/mui-react-utils/components";
+import { calculatePeriodBoundaries, IPeriodBoundaries, PeriodLengthInDays } from "@ffilip/chan180-utils";
 import C180Tabs from "../../Components/Tabs/C180Tabs";
-import { DashboardPeriod, dashboardPeriodOptions, isDashboardPeriod } from "./utils";
+import { dashboardPeriodOptions, isDashboardPeriod } from "./utils";
 
 interface IProps {
   loading: boolean;
-  onChange: (value: DashboardPeriod) => void;
+  onChange: (value: IPeriodBoundaries) => void;
 }
 
 
@@ -19,7 +19,7 @@ function DashboardFilters({ loading, onChange }: IProps) {
   const onTabChange = (newTabIndex: number, period: PeriodLengthInDays) => {
     if (isDashboardPeriod(period)) {
       setTabIndex(newTabIndex);
-      onChange(period);
+      onChange(calculatePeriodBoundaries(period));
     }
   };
 

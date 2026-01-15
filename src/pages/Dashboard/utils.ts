@@ -3,19 +3,18 @@ import { ITabPanelItem } from "../../Components/Tabs/utils";
 import { IDashboardItem, IEntityVisit, ILocationStat } from "../../Utils/models";
 
 
-export const dashboardPeriodOptions: ITabPanelItem<PeriodLengthInDays>[] = [
+export const dashboardPeriodOptions = [
   { title: "Today", value: PeriodLengthInDays.Today, paramName: "today" },
   { title: "24 Hours", value: PeriodLengthInDays.One, paramName: "24h" },
   { title: "3 Days", value: PeriodLengthInDays.Three, paramName: "3d" },
   { title: "7 Days", value: PeriodLengthInDays.Seven, paramName: "7d" },
   { title: "30 Days", value: PeriodLengthInDays.Thirty, paramName: "30d" },
-  { title: "90 Days", value: PeriodLengthInDays.ThreeMonths, paramName: "90d" },
-] as const;
+  { title: "90 Days", value: PeriodLengthInDays.ThreeMonths, paramName: "90d" }
+] satisfies ITabPanelItem<PeriodLengthInDays>[];
 
-export type DashboardPeriod = typeof dashboardPeriodOptions[number]["value"];
 
+type DashboardPeriod = typeof dashboardPeriodOptions[number]["value"];
 const dashboardPeriodValues = dashboardPeriodOptions.map(o => o.value);
-export const DEFAULT_DASHBOARD_PERIOD = dashboardPeriodValues[0];
 
 export function isDashboardPeriod(value: unknown): value is DashboardPeriod {
   return typeof value === "number" && dashboardPeriodValues.includes(value as DashboardPeriod);

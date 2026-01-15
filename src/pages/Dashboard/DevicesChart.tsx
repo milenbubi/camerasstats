@@ -38,7 +38,7 @@ function DevicesChart({ data, totalVisits = -1 }: IProps) {
       </Typography>
 
       {data && totalVisits >= 0 && (
-        <Typography level="title-sm" fontStyle="italic" textAlign="center">
+        <Typography level="title-sm" fontStyle="italic" textAlign="center" fontWeight={600}>
           {totalVisits ? `${totalVisits} visits` : "No visits for the selected period"}
         </Typography>
       )}

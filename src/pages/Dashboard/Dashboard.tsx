@@ -1,16 +1,16 @@
 import { useRef } from "react";
 import { Stack } from "@mui/material";
 import { useLatestRequestGuard, useMergedState } from "@ffilip/mui-react-utils/react";
-import { calculatePeriodBoundaries, getLocalToUTCString, IPeriodBoundaries, urlQueryStringFromObject } from "@ffilip/chan180-utils";
+import { getLocalToUTCString, IPeriodBoundaries, urlQueryStringFromObject } from "@ffilip/chan180-utils";
 
 import DevicesChart from "./DevicesChart";
 import DashboardTitle from "./DashboardTitle";
 import DashboardFilters from "./DashboardFilters";
+import { DEFAULT_DASHBOARD_STATE } from "./utils";
 import { transformDashboardItems } from "./parsers";
 import { useAPIRequest } from "../../Network/apiHooks";
 import { IDashboardResponse } from "../../Utils/models";
 import { useContextSnack } from "../../Contexts/SnackbarContext";
-import { DashboardPeriod, DEFAULT_DASHBOARD_STATE, DEFAULT_DASHBOARD_PERIOD } from "./utils";
 
 
 
@@ -18,11 +18,11 @@ function Dashboard() {
   const { showSnack } = useContextSnack();
   const { RequestToApi } = useAPIRequest();
   const { register, isOutdated } = useLatestRequestGuard();
-  const period = useRef<DashboardPeriod>(DEFAULT_DASHBOARD_PERIOD);
+  const period = useRef<IPeriodBoundaries>({ start: 0, end: 0 });
   const [state, setState] = useMergedState({ ...DEFAULT_DASHBOARD_STATE });
 
 
-  const changePeriod = (newPeriod: DashboardPeriod) => {
+  const changePeriod = (newPeriod: IPeriodBoundaries) => {
     period.current = newPeriod;
     loadDashboardData();
   };
@@ -32,11 +32,9 @@ function Dashboard() {
     setState({ loading: true });
     const requestId = register();
 
-    const { start, end }: IPeriodBoundaries = calculatePeriodBoundaries(period.current);
-
     const urlParams = urlQueryStringFromObject({
-      _visitTimeFrom: getLocalToUTCString(start),
-      _visitTimeTo: getLocalToUTCString(end)
+      _visitTimeFrom: getLocalToUTCString(period.current.start),
+      _visitTimeTo: getLocalToUTCString(period.current.end)
     });
 
     const { Data, Error } = await RequestToApi<IDashboardResponse>("/dashboard.php" + urlParams, "GET");
