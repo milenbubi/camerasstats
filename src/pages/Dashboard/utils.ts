@@ -1,6 +1,6 @@
 import { PeriodLengthInDays } from "@ffilip/chan180-utils";
 import { ITabPanelItem } from "../../Components/Tabs/utils";
-import { IDashboardItem, IEntityVisit, ILocationStat } from "../../Utils/models";
+import { IDashboardItem, IEntityVisit, IUniqueLocations } from "../../Utils/models";
 
 
 export const dashboardPeriodOptions = [
@@ -27,7 +27,7 @@ interface IDashboardState {
   cities: IEntityVisit[] | undefined;
   countries: IEntityVisit[] | undefined;
   oses: IEntityVisit[] | undefined;
-  locations: ILocationStat | null;
+  uniqueLocations: IUniqueLocations | null;
   totalCount: number;
   loading: boolean;
 }
@@ -38,7 +38,7 @@ export const DEFAULT_DASHBOARD_STATE: IDashboardState = {
   cities: undefined,
   countries: undefined,
   oses: undefined,
-  locations: null,
+  uniqueLocations: null,
   totalCount: 0,
   loading: false
 };

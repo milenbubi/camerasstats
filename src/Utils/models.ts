@@ -64,7 +64,7 @@ export interface IEntityVisit {
   visits: number;
 }
 
-export interface ILocationStat {
+export interface IUniqueLocations {
   uniqueCountries: number;
   uniqueCities: number;
 }

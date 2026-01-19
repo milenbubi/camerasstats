@@ -1,4 +1,4 @@
-import { IDashboardItem, IEntityVisit, ILocationStat } from "../../Utils/models";
+import { IDashboardItem, IEntityVisit, IUniqueLocations } from "../../Utils/models";
 
 
 type EntityCount = Record<string, number>;
@@ -55,7 +55,7 @@ export function transformDashboardItems(items: IDashboardItem[]) {
   const uniqueCountries = new Set(items.map(v => v.country)).size;
   const uniqueCities = new Set(items.map(v => v.city)).size;
 
-  const locations: ILocationStat = {
+  const uniqueLocations: IUniqueLocations = {
     uniqueCountries,
     uniqueCities
   };
@@ -66,6 +66,6 @@ export function transformDashboardItems(items: IDashboardItem[]) {
     cities: sortByVisits(cities),
     countries: sortByVisits(countries),
     oses: sortByVisits(oses),
-    locations
+    uniqueLocations
   };
 }

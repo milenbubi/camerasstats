@@ -5,6 +5,7 @@ import { getLocalToUTCString, IPeriodBoundaries, urlQueryStringFromObject } from
 
 import DevicesChart from "./DevicesChart";
 import DashboardTitle from "./DashboardTitle";
+import UniqueLocations from "./UniqueLocations";
 import DashboardFilters from "./DashboardFilters";
 import { DEFAULT_DASHBOARD_STATE } from "./utils";
 import { transformDashboardItems } from "./parsers";
@@ -64,6 +65,7 @@ function Dashboard() {
       <DashboardTitle />
       <DashboardFilters onChange={changePeriod} loading={state.loading} />
       <DevicesChart data={state.devices} totalVisits={state.totalCount} />
+      {state.uniqueLocations && <UniqueLocations data={state.uniqueLocations} />}
     </Stack>
   );
 }
