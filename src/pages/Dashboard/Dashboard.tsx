@@ -3,16 +3,17 @@ import { Stack } from "@mui/material";
 import { useLatestRequestGuard, useMergedState } from "@ffilip/mui-react-utils/react";
 import { getLocalToUTCString, IPeriodBoundaries, urlQueryStringFromObject } from "@ffilip/chan180-utils";
 
+import "../../Styles/Main.scss"
 import DevicesChart from "./DevicesChart";
+import DistinctStats from "./DistinctStats";
 import DashboardTitle from "./DashboardTitle";
-import UniqueLocations from "./UniqueLocations";
 import DashboardFilters from "./DashboardFilters";
 import { DEFAULT_DASHBOARD_STATE } from "./utils";
 import { transformDashboardItems } from "./parsers";
+import OtherEntitiesChart from "./OtherEntitiesChart";
 import { useAPIRequest } from "../../Network/apiHooks";
 import { IDashboardResponse } from "../../Utils/models";
 import { useContextSnack } from "../../Contexts/SnackbarContext";
-
 
 
 function Dashboard() {
@@ -61,11 +62,14 @@ function Dashboard() {
 
 
   return (
-    <Stack sx={{ gap: 3, pt: 2, alignItems: "center" }}>
+    <Stack sx={{ py: 2, alignItems: "center" }}>
       <DashboardTitle />
       <DashboardFilters onChange={changePeriod} loading={state.loading} />
-      <DevicesChart data={state.devices} totalVisits={state.totalCount} />
-      {state.uniqueLocations && <UniqueLocations data={state.uniqueLocations} />}
+      <Stack sx={{ width: 1, pt: 2, gap: { xs: 2, sm: 2 }, alignItems: "center" }}>
+        {state.uniqueEntities && <DevicesChart data={state.uniqueEntities.devices} />}
+        {state.uniqueCounts && <DistinctStats data={state.uniqueCounts} />}
+        {/* {state.uniqueEntities && <OtherEntitiesChart data={state.uniqueEntities.oses} />} */}
+      </Stack>
     </Stack>
   );
 }

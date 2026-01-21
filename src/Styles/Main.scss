@@ -1,3 +1,8 @@
-.someStatsClass {
-  pointer-events: all;
+.noRechartsSvgOutline {
+
+  svg:focus,
+  g:focus,
+  path:focus {
+    outline: none;
+  }
 }

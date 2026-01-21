@@ -1,4 +1,4 @@
-import { IDashboardItem, IEntityVisit, IUniqueLocations } from "../../Utils/models";
+import { IDashboardItem, IEntityVisit, IUniqueCounts } from "../../Utils/models";
 
 
 type EntityCount = Record<string, number>;
@@ -20,15 +20,15 @@ function sortByVisits(items: IEntityVisit[]): IEntityVisit[] {
 
 export function transformDashboardItems(items: IDashboardItem[]) {
   const deviceCounts: EntityCount = {};
-  const cityCounts: EntityCount = {};
   const countryCounts: EntityCount = {};
+  const cityCounts: EntityCount = {};
   const osCounts: EntityCount = {};
 
   // Aggregate the number of visits per device, city, country and OS
   for (const item of items) {
     deviceCounts[item.device] = (deviceCounts[item.device] || 0) + 1;
-    cityCounts[item.city] = (cityCounts[item.city] || 0) + 1;
     countryCounts[item.country] = (countryCounts[item.country] || 0) + 1;
+    cityCounts[item.city] = (cityCounts[item.city] || 0) + 1;
     osCounts[item.os] = (osCounts[item.os] || 0) + 1;
   }
 
@@ -38,11 +38,11 @@ export function transformDashboardItems(items: IDashboardItem[]) {
     ([name, visits]) => ({ name, visits })
   );
 
-  const cities: IEntityVisit[] = Object.entries(cityCounts).map(
+  const countries: IEntityVisit[] = Object.entries(countryCounts).map(
     ([name, visits]) => ({ name, visits })
   );
 
-  const countries: IEntityVisit[] = Object.entries(countryCounts).map(
+  const cities: IEntityVisit[] = Object.entries(cityCounts).map(
     ([name, visits]) => ({ name, visits })
   );
 
@@ -54,18 +54,22 @@ export function transformDashboardItems(items: IDashboardItem[]) {
   // Compute unique counts for countries and cities
   const uniqueCountries = new Set(items.map(v => v.country)).size;
   const uniqueCities = new Set(items.map(v => v.city)).size;
+  const uniqueOses = new Set(items.map(v => v.os)).size;
 
-  const uniqueLocations: IUniqueLocations = {
+  const uniqueCounts: IUniqueCounts = {
     uniqueCountries,
-    uniqueCities
+    uniqueCities,
+    uniqueOses
   };
 
 
   return {
-    devices: sortByVisits(devices),
-    cities: sortByVisits(cities),
-    countries: sortByVisits(countries),
-    oses: sortByVisits(oses),
-    uniqueLocations
+    uniqueEntities: {
+      devices: sortByVisits(devices),
+      countries: sortByVisits(countries),
+      cities: sortByVisits(cities),
+      oses: sortByVisits(oses)
+    },
+    uniqueCounts
   };
 }

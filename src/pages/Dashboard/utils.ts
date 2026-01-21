@@ -1,6 +1,6 @@
 import { PeriodLengthInDays } from "@ffilip/chan180-utils";
 import { ITabPanelItem } from "../../Components/Tabs/utils";
-import { IDashboardItem, IEntityVisit, IUniqueLocations } from "../../Utils/models";
+import { IDashboardItem, IEntityVisit, IUniqueCounts } from "../../Utils/models";
 
 
 export const dashboardPeriodOptions = [
@@ -23,22 +23,21 @@ export function isDashboardPeriod(value: unknown): value is DashboardPeriod {
 
 interface IDashboardState {
   items: IDashboardItem[] | null;
-  devices: IEntityVisit[] | undefined;
-  cities: IEntityVisit[] | undefined;
-  countries: IEntityVisit[] | undefined;
-  oses: IEntityVisit[] | undefined;
-  uniqueLocations: IUniqueLocations | null;
+  uniqueEntities: {
+    devices: IEntityVisit[];
+    countries: IEntityVisit[];
+    cities: IEntityVisit[];
+    oses: IEntityVisit[];
+  } | null;
+  uniqueCounts: IUniqueCounts | null;
   totalCount: number;
   loading: boolean;
 }
 
 export const DEFAULT_DASHBOARD_STATE: IDashboardState = {
   items: null,
-  devices: undefined,
-  cities: undefined,
-  countries: undefined,
-  oses: undefined,
-  uniqueLocations: null,
+  uniqueEntities: null,
+  uniqueCounts: null,
   totalCount: 0,
   loading: false
 };

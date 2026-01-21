@@ -19,7 +19,6 @@ export interface IGeoLocation {
   zip: string;
 }
 
-
 export interface IVisit {
   id: number;
   place: string;
@@ -36,12 +35,12 @@ export interface IVisit {
   clientHintsJson: string;
 }
 
-
 export interface IVisitStatsResponse {
   totalCount: number;
   items: IVisit[];
 }
 /* End Table statisctics */
+
 
 /* Dashboard data */
 export interface IDashboardItem {
@@ -58,14 +57,14 @@ export interface IDashboardResponse {
   items: IDashboardItem[];
 }
 
-
 export interface IEntityVisit {
   name: string;
   visits: number;
 }
 
-export interface IUniqueLocations {
+export interface IUniqueCounts {
   uniqueCountries: number;
   uniqueCities: number;
+  uniqueOses: number;
 }
 /* End Dashboard data */
