@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useTheme } from "@mui/joy/styles";
+import { colors } from "@mui/material";
 
 
 
@@ -11,12 +12,14 @@ export function useChartPalette() {
     const isDark = theme.palette.mode === "dark";
 
     return {
-      barColor: theme.palette.success[isDark ? 300 : 600],
+      barColor: isDark ? "#a7e9af" : "#d8345f",
       gridColor: theme.palette.divider,
       axisTextColor: theme.palette.text.secondary,
       bgColor: theme.palette.background.surface,
       toolTipBgcolor: theme.palette.background.popup,
-      secondaryColor: theme.palette.primary[300]
+      toolTipcolor: isDark ? colors.yellow[600] : colors.blue[900],
+      secondaryColor: theme.palette.primary[300],
+      areaColor: "#feda2d",
     };
   }, [theme]);
 

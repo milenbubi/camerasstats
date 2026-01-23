@@ -7,13 +7,14 @@ import "../../Styles/Main.scss"
 import DevicesChart from "./DevicesChart";
 import DistinctStats from "./DistinctStats";
 import DashboardTitle from "./DashboardTitle";
+import DayOfWeekChart from "./DayOfWeekChart";
 import DashboardFilters from "./DashboardFilters";
-import { DEFAULT_DASHBOARD_STATE } from "./utils";
-import { transformDashboardItems } from "./parsers";
-import OtherEntitiesChart from "./OtherEntitiesChart";
 import { useAPIRequest } from "../../Network/apiHooks";
 import { IDashboardResponse } from "../../Utils/models";
+import { DEFAULT_DASHBOARD_STATE } from "./helpers/utils";
+import { transformDashboardItems } from "./helpers/parsers";
 import { useContextSnack } from "../../Contexts/SnackbarContext";
+
 
 
 function Dashboard() {
@@ -36,7 +37,8 @@ function Dashboard() {
 
     const urlParams = urlQueryStringFromObject({
       _visitTimeFrom: getLocalToUTCString(period.current.start),
-      _visitTimeTo: getLocalToUTCString(period.current.end)
+      _visitTimeTo: getLocalToUTCString(period.current.end),
+      _timeZoneoffsetInMinutes: new Date().getTimezoneOffset()
     });
 
     const { Data, Error } = await RequestToApi<IDashboardResponse>("/dashboard.php" + urlParams, "GET");
@@ -65,10 +67,10 @@ function Dashboard() {
     <Stack sx={{ py: 2, alignItems: "center" }}>
       <DashboardTitle />
       <DashboardFilters onChange={changePeriod} loading={state.loading} />
-      <Stack sx={{ width: 1, pt: 2, gap: { xs: 2, sm: 2 }, alignItems: "center" }}>
-        {state.uniqueEntities && <DevicesChart data={state.uniqueEntities.devices} />}
+      <Stack sx={{ width: 1, pt: 2, gap: { xs: 2, sm: 3 }, alignItems: "center" }}>
+        {state.uniqueEntities && <DevicesChart data={state.uniqueEntities.devices} totalVisits={state.totalCount} />}
         {state.uniqueCounts && <DistinctStats data={state.uniqueCounts} />}
-        {/* {state.uniqueEntities && <OtherEntitiesChart data={state.uniqueEntities.oses} />} */}
+        {state.uniqueEntities && <DayOfWeekChart data={state.uniqueEntities.daysOfWeek} />}
       </Stack>
     </Stack>
   );

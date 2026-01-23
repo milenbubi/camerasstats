@@ -1,12 +1,12 @@
 import { useMemo } from "react";
+import { Sheet } from "@mui/joy";
 import { useMediaQuery } from "@mui/material";
-import { Box, Typography, Sheet } from "@mui/joy";
+import { Centered } from "@ffilip/mui-react-utils/components";
 import { useChan180Colors } from "@ffilip/mui-react-utils/mui";
 import { getRandomPastelColors } from "@ffilip/chan180-utils/helpers";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Cell, BarProps } from "recharts";
-import { useChartPalette } from "./chartPalette";
 import { IEntityVisit } from "../../Utils/models";
-import { Centered } from "@ffilip/mui-react-utils";
+import { useChartPalette } from "./helpers/chartPalette";
 
 interface IProps {
   data: IEntityVisit[];
@@ -23,31 +23,30 @@ const getPath = (x: number, y: number, width: number, height: number) => (
 );
 
 
-
 const TriangleBar = ({ fill, x, y, width, height }: BarProps) => (
   <path d={getPath(Number(x), Number(y), Number(width), Number(height))} stroke="none" fill={fill} />
 );
 
 
 
-function OtherEntitiesChart({ data, }: IProps) {
+function SingleEntity({ data, }: IProps) {
   const { labelC } = useChan180Colors();
   const isSmall = useMediaQuery("(max-width:920px)");
+  const { axisTextColor, gridColor } = useChartPalette();
   const colors = useMemo(() => getRandomPastelColors(MAX_ITEM_COUNTS), []);
-  const { axisTextColor, barColor, bgColor, gridColor, secondaryColor, toolTipBgcolor } = useChartPalette();
+
 
   const filteredData = useMemo(() => {
     return data.length > MAX_ITEM_COUNTS ? data.slice(0, MAX_ITEM_COUNTS) : data;
   }, [data]);
 
-  const xAxisHeight = useMemo(() => {
-    // if (isSmall) {
-      const longestNameLenght = data
-        .reduce((prev, curr) => curr.name.length > prev.length ? curr.name : prev, "")
-        .length;
 
-      return longestNameLenght * (isSmall?4.2:3.5);
-    // }
+  const xAxisHeight = useMemo(() => {
+    const longestNameLenght = data
+      .reduce((prev, curr) => curr.name.length > prev.length ? curr.name : prev, "")
+      .length;
+
+    return longestNameLenght * 5.2;
   }, [isSmall, filteredData]);
 
 
@@ -63,11 +62,7 @@ function OtherEntitiesChart({ data, }: IProps) {
       }}
     >
 
-      <BarChart
-        style={{
-          // width: "100%",
-          aspectRatio: isSmall ? 3 : 1
-        }}
+      <BarChart style={{ aspectRatio: isSmall ? 3 : 1 }}
         responsive
         data={filteredData}
         margin={{
@@ -84,7 +79,6 @@ function OtherEntitiesChart({ data, }: IProps) {
           height={xAxisHeight}
           tickLine={false}
           angle={isSmall ? -40 : -40}
-          //  axisLine={false}
           tick={{
             fill: axisTextColor,
             fontSize: isSmall ? 11 : filteredData.length > 5 ? 10 : 15,
@@ -122,19 +116,18 @@ function OtherEntitiesChart({ data, }: IProps) {
 
 
 
-function SSSS({ data }: IProps) {
+function OtherEntitiesCustomChart({ data }: IProps) {
   const isSmall = useMediaQuery("(max-width:720px)");
 
   return (
     <Centered sx={{ width: 1, gap: 2, flexDirection: isSmall ? "column" : "row", alignItems: "stretch" }} className="noRechartsSvgOutline">
-      <OtherEntitiesChart data={data} />
-      <OtherEntitiesChart data={data} />
-      <OtherEntitiesChart data={data} />
+      <SingleEntity data={data} />
+      <SingleEntity data={data} />
+      <SingleEntity data={data} />
     </Centered>
   );
 }
 
 
-export default SSSS;
 
-
+export default OtherEntitiesCustomChart;

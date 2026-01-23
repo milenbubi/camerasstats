@@ -1,20 +1,20 @@
-import { useMemo } from "react";
 import { useMediaQuery } from "@mui/material";
-import { Box, Typography, Sheet, colors } from "@mui/joy";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from "recharts";
-import { useChartPalette } from "./chartPalette";
+import { Box, Typography, Sheet } from "@mui/joy";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from "recharts";
+import { useChartPalette } from "./helpers/chartPalette";
 import { IEntityVisit } from "../../Utils/models";
+import C180ChartTooltip from "./helpers/C180ChartTooltip";
 
 interface IProps {
   data: IEntityVisit[];
+  totalVisits: number;
 }
 
 
 
-function DevicesChart({ data }: IProps) {
+function DevicesChart({ data, totalVisits }: IProps) {
   const isSmall = useMediaQuery("(max-width:720px)");
-  const totalVisits = useMemo(() => data.length, [data]);
-  const { axisTextColor, barColor, bgColor, gridColor, secondaryColor, toolTipBgcolor } = useChartPalette();
+  const { axisTextColor, barColor, gridColor } = useChartPalette();
 
 
   return (
@@ -24,25 +24,34 @@ function DevicesChart({ data }: IProps) {
       sx={{
         padding: `12px 8px ${totalVisits ? 4 : 12}px`,
         borderRadius: "lg",
-        height: totalVisits ? 300 : "auto",
+        height: totalVisits ? 220 : 220,
         display: "flex",
         flexDirection: "column",
-        gap: 1,
         width: "100%",
         maxWidth: 700
       }}
     >
 
-      <Typography level="title-lg" textAlign="center">
+      <Typography level="title-lg" textAlign="center" sx={{ mb: "4px" }}>
         {"Traffic by Device"}
       </Typography>
 
-      <Typography level="title-sm" fontStyle="italic" textAlign="center" fontWeight={600}>
+      <Typography
+        level={totalVisits ? "title-sm" : "h4"}
+        sx={{
+          fontWeight: 600,
+          flex: totalVisits ? 0 : 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: totalVisits ? "auto" : barColor
+        }}
+      >
         {totalVisits ? `${totalVisits} visits` : "No visits for the selected period"}
       </Typography>
 
       {totalVisits > 0 && (
-        <Box sx={{ flex: 1, minHeight: 0 }}>
+        <Box sx={{ flex: 1, minHeight: 0, mt: 1 }}>
           <ResponsiveContainer initialDimension={{ width: 1, height: 1 }}>
             <BarChart data={data.length ? data : undefined} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
               <CartesianGrid stroke={gridColor} vertical={false} />
@@ -62,31 +71,16 @@ function DevicesChart({ data }: IProps) {
                 }}
               />
               <YAxis
+                width={40}
                 stroke={axisTextColor}
                 tick={{ fill: axisTextColor }}
                 tickLine={false}
                 axisLine={{ stroke: gridColor }}
                 allowDecimals={false}
                 fontSize={12} fontWeight={600}
-                width={45}
               />
-              <Tooltip
-                // Highlight overlay on hovered bar (semi-transparent background)
-                cursor={{ opacity: 0.03 }}
-                separator=": "
-                contentStyle={{
-                  borderRadius: 8,
-                  border: `1px solid ${gridColor}`,
-                  background: toolTipBgcolor
-                }}
-                itemStyle={{
-                  fontWeight: 600
-                }}
-                labelStyle={{
-                  fontWeight: 600,
-                  color: colors.yellow[400]
-                }}
-              />
+
+              <C180ChartTooltip />
               <Bar
                 dataKey="visits"
                 fill={barColor}

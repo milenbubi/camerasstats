@@ -1,6 +1,6 @@
 import { PeriodLengthInDays } from "@ffilip/chan180-utils";
-import { ITabPanelItem } from "../../Components/Tabs/utils";
-import { IDashboardItem, IEntityVisit, IUniqueCounts } from "../../Utils/models";
+import { ITabPanelItem } from "../../../Components/Tabs/utils";
+import { IDashboardItem, IEntityVisit, IUniqueCounts } from "../../../Utils/models";
 
 
 export const dashboardPeriodOptions = [
@@ -28,6 +28,7 @@ interface IDashboardState {
     countries: IEntityVisit[];
     cities: IEntityVisit[];
     oses: IEntityVisit[];
+    daysOfWeek: IEntityVisit[];
   } | null;
   uniqueCounts: IUniqueCounts | null;
   totalCount: number;
