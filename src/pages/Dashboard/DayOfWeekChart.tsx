@@ -1,11 +1,9 @@
 import { Typography, Sheet } from "@mui/joy";
 import { useMediaQuery } from "@mui/material";
-import { useChan180Colors } from "@ffilip/mui-react-utils/mui";
 import { XAxis, YAxis, CartesianGrid, AreaChart, Area, LabelList } from "recharts";
 
 import { IEntityVisit } from "../../Utils/models";
 import { useChartPalette } from "./helpers/chartPalette";
-import C180ChartTooltip from "./helpers/C180ChartTooltip";
 
 interface IProps {
   data: IEntityVisit[];
@@ -14,9 +12,8 @@ interface IProps {
 
 
 function DayOfWeekChart({ data, }: IProps) {
-  const { labelC } = useChan180Colors();
   const isSmall = useMediaQuery("(max-width:600px)");
-  const { axisTextColor, areaColor } = useChartPalette();
+  const { axisTextColor, areaColor, labelColor } = useChartPalette();
 
 
   return (
@@ -36,7 +33,7 @@ function DayOfWeekChart({ data, }: IProps) {
       </Typography>
 
       <AreaChart
-        style={{ width: '100%', maxWidth: '700px', minHeight: 180, aspectRatio: 2.7 }}
+        style={{ width: '100%', maxWidth: '700px', minHeight: 210, aspectRatio: 2.9 }}
         responsive
         data={data}
         syncId="anyId"
@@ -59,9 +56,7 @@ function DayOfWeekChart({ data, }: IProps) {
             fill: axisTextColor,
             fontSize: isSmall ? 11 : 13,
             fontWeight: 600,
-            textAnchor: "middle",
-            transformOrigin: "50px"
-
+            textAnchor: "middle"
           }}
           tickMargin={isSmall ? 12 : 3}
         />
@@ -70,6 +65,7 @@ function DayOfWeekChart({ data, }: IProps) {
           width={40}
           tickLine={false}
           allowDecimals={false}
+          tickCount={4}
           domain={[0, dataMax => Math.ceil(dataMax * (isSmall ? 1.15 : 1.08))]}
           axisLine={{ stroke: "gridColor" }}
           tick={{
@@ -80,15 +76,14 @@ function DayOfWeekChart({ data, }: IProps) {
           }}
         />
 
-        <C180ChartTooltip />
         <Area type="monotone" dataKey="visits" stroke="#82ca9d" fill={areaColor}>
           <LabelList
             dataKey="visits"
             position="top"
             fontWeight={600}
             fontSize={isSmall ? 13 : 17}
-            offset={isSmall ? 6 : 8}
-            fill={labelC}
+            offset={8}
+            fill={labelColor}
           />
         </Area>
 

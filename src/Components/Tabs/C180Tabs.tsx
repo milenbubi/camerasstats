@@ -68,7 +68,7 @@ function C180Tabs<TValue>({ tabIndex, sx, items, searchParamName, onTabChange }:
         value={tabIndex}
         onChange={handleChange}
         variant="scrollable"
-        allowScrollButtonsMobile={false}
+        allowScrollButtonsMobile={true}
         sx={{
           minHeight: 0,
           borderTopLeftRadius: "5px",
@@ -77,15 +77,19 @@ function C180Tabs<TValue>({ tabIndex, sx, items, searchParamName, onTabChange }:
             height: 2,
             borderRadius: "2px"
           },
+          "& .MuiTabScrollButton-root svg": {
+            fontSize: 26
+          },
           "& .MuiTab-root": {
             py: "9px",
-            px: { xs: "9px", md: "14px" },
+            px: { xs: "24px", md: "12px" },
             fontSize: { xs: 14, md: 16 },
             minHeight: 0,
-            fontWeight: 600,
+            fontWeight: 1000,
             textTransform: "none",
             [`&:not(.${tabClasses.selected})`]: {
-              color: t => t.palette.text.disabled,
+              fontWeight: 600,
+              opacity: 0.9
             },
             [`&.${tabClasses.selected}`]: {
               pointerEvents: "none",

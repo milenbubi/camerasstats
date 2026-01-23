@@ -67,7 +67,7 @@ function Dashboard() {
     <Stack sx={{ py: 2, alignItems: "center" }}>
       <DashboardTitle />
       <DashboardFilters onChange={changePeriod} loading={state.loading} />
-      <Stack sx={{ width: 1, pt: 2, gap: { xs: 2, sm: 3 }, alignItems: "center" }}>
+      <Stack sx={{ width: 1, pt: 3, gap: { xs: 2, sm: 3 }, alignItems: "center" }}>
         {state.uniqueEntities && <DevicesChart data={state.uniqueEntities.devices} totalVisits={state.totalCount} />}
         {state.uniqueCounts && <DistinctStats data={state.uniqueCounts} />}
         {state.uniqueEntities && <DayOfWeekChart data={state.uniqueEntities.daysOfWeek} />}
