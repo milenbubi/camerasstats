@@ -43,28 +43,30 @@ export interface IVisitStatsResponse {
 
 
 /* Dashboard data */
-export interface IDashboardItem {
-  id: number;
-  city: string;
-  country: string;
-  device: string;
-  os: string;
-  visitTime: string;
-}
-
-export interface IDashboardResponse {
-  totalCount: number;
-  items: IDashboardItem[];
-}
-
 export interface IEntityVisit {
   name: string;
   visits: number;
 }
 
+export interface IUniqueEntities {
+  devices: IEntityVisit[];
+  countries: IEntityVisit[];
+  cities: IEntityVisit[];
+  oses: IEntityVisit[];
+  daysOfWeek: IEntityVisit[];
+};
+
 export interface IUniqueCounts {
   uniqueCountries: number;
   uniqueCities: number;
   uniqueOses: number;
+}
+
+export interface IDashboardResponse {
+  totalCount: number;
+  data: {
+    uniqueEntities: IUniqueEntities;
+    uniqueCounts: IUniqueCounts;
+  }
 }
 /* End Dashboard data */

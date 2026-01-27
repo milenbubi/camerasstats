@@ -12,7 +12,6 @@ import DashboardFilters from "./DashboardFilters";
 import { useAPIRequest } from "../../Network/apiHooks";
 import { IDashboardResponse } from "../../Utils/models";
 import { DEFAULT_DASHBOARD_STATE } from "./helpers/utils";
-import { transformDashboardItems } from "./helpers/parsers";
 import { useContextSnack } from "../../Contexts/SnackbarContext";
 
 
@@ -54,8 +53,7 @@ function Dashboard() {
     }
     else {
       setState({
-        items: Data.items,
-        ...transformDashboardItems(Data.items),
+        data: Data.data,
         totalCount: Data.totalCount,
         loading: false
       });
@@ -67,11 +65,13 @@ function Dashboard() {
     <Stack sx={{ py: 2, alignItems: "center" }}>
       <DashboardTitle />
       <DashboardFilters onChange={changePeriod} loading={state.loading} />
-      <Stack sx={{ width: 1, pt: { xs: 3, lg: 6 }, gap: { xs: 2, sm: 3, lg: 6 }, alignItems: "center" }}>
-        {state.uniqueEntities && <DevicesChart data={state.uniqueEntities.devices} totalVisits={state.totalCount} />}
-        {state.uniqueCounts && <DistinctStats data={state.uniqueCounts} />}
-        {state.uniqueEntities && <DayOfWeekChart data={state.uniqueEntities.daysOfWeek} />}
-      </Stack>
+      {state.data && (
+        <Stack sx={{ width: 1, pt: { xs: 3, lg: 6 }, gap: { xs: 2, sm: 3, lg: 6 }, alignItems: "center" }}>
+          <DevicesChart data={state.data.uniqueEntities.devices} totalVisits={state.totalCount} />
+          <DistinctStats data={state.data.uniqueCounts} />
+          <DayOfWeekChart data={state.data.uniqueEntities.daysOfWeek} />
+        </Stack>
+      )}
     </Stack>
   );
 }

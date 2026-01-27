@@ -1,10 +1,10 @@
 import { PeriodLengthInDays } from "@ffilip/chan180-utils";
 import { ITabPanelItem } from "../../../Components/Tabs/utils";
-import { IDashboardItem, IEntityVisit, IUniqueCounts } from "../../../Utils/models";
+import { IUniqueCounts, IUniqueEntities } from "../../../Utils/models";
 
 
 export const dashboardPeriodOptions = [
-  { title: "Today", value: PeriodLengthInDays.Today, paramName: "today" },
+  // { title: "Today", value: PeriodLengthInDays.Today, paramName: "today" },
   { title: "24 Hours", value: PeriodLengthInDays.One, paramName: "24h" },
   { title: "3 Days", value: PeriodLengthInDays.Three, paramName: "3d" },
   { title: "7 Days", value: PeriodLengthInDays.Seven, paramName: "7d" },
@@ -23,23 +23,16 @@ export function isDashboardPeriod(value: unknown): value is DashboardPeriod {
 
 
 interface IDashboardState {
-  items: IDashboardItem[] | null;
-  uniqueEntities: {
-    devices: IEntityVisit[];
-    countries: IEntityVisit[];
-    cities: IEntityVisit[];
-    oses: IEntityVisit[];
-    daysOfWeek: IEntityVisit[];
+  data: {
+    uniqueEntities: IUniqueEntities;
+    uniqueCounts: IUniqueCounts;
   } | null;
-  uniqueCounts: IUniqueCounts | null;
   totalCount: number;
   loading: boolean;
 }
 
 export const DEFAULT_DASHBOARD_STATE: IDashboardState = {
-  items: null,
-  uniqueEntities: null,
-  uniqueCounts: null,
+  data: null,
   totalCount: 0,
   loading: false
 };
