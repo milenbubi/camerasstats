@@ -20,8 +20,9 @@ export function useChartPalette() {
       toolTipBgcolor: theme.palette.background.popup,
       toolTipcolor: isDark ? colors.yellow[600] : colors.blue[900],
       secondaryColor: theme.palette.primary[300],
-      areaColor: isDark ? "#f8ea22ff" : "#18a813ff",
-      labelColor: labelC
+      areaColor: isDark ? "#f8ea22ff" : "#288524ff",
+      labelColor: labelC,
+      isDarkTheme: isDark
     };
   }, [theme]);
 

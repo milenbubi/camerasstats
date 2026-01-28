@@ -6,7 +6,7 @@ export const joyTheme = extendTheme({
     light: {
       palette: {
         background: {
-          // surface: "#f0f6ff", 
+          surface: "#f7f9fe"
         },
         // primary: { solidBg: "#1976d2", solidColor: "#fff" }
       }
@@ -14,8 +14,7 @@ export const joyTheme = extendTheme({
     dark: {
       palette: {
         background: {
-          // surface: "#1a1a1a", 
-          // surface: "#000", 
+          surface: "#0f1012"
         },
         // primary: { solidBg: "#90caf9", solidColor: "#000" }
       }

@@ -4,7 +4,7 @@ import { useMediaQuery } from "@mui/material";
 import { Centered } from "@ffilip/mui-react-utils/components";
 import { useChan180Colors } from "@ffilip/mui-react-utils/mui";
 import { getRandomPastelColors } from "@ffilip/chan180-utils/helpers";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Cell, BarProps } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, BarShapeProps } from "recharts";
 import { IEntityVisit } from "../../Utils/models";
 import { useChartPalette } from "./helpers/chartPalette";
 
@@ -23,7 +23,7 @@ const getPath = (x: number, y: number, width: number, height: number) => (
 );
 
 
-const TriangleBar = ({ fill, x, y, width, height }: BarProps) => (
+const TriangleBar = ({ fill, x, y, width, height }: BarShapeProps) => (
   <path d={getPath(Number(x), Number(y), Number(width), Number(height))} stroke="none" fill={fill} />
 );
 
@@ -37,16 +37,21 @@ function SingleEntity({ data, }: IProps) {
 
 
   const filteredData = useMemo(() => {
-    return data.length > MAX_ITEM_COUNTS ? data.slice(0, MAX_ITEM_COUNTS) : data;
+    return data
+      .slice(0, MAX_ITEM_COUNTS)
+      .map((x, index) => ({
+        ...x,
+        fill: colors[index % colors.length]
+      }))
   }, [data]);
 
 
   const xAxisHeight = useMemo(() => {
-    const longestNameLenght = data
+    const longestNameLenght = filteredData
       .reduce((prev, curr) => curr.name.length > prev.length ? curr.name : prev, "")
       .length;
 
-    return longestNameLenght * 5.2;
+    return longestNameLenght * 8;
   }, [isSmall, filteredData]);
 
 
@@ -105,9 +110,7 @@ function SingleEntity({ data, }: IProps) {
           dataKey="visits"
           shape={TriangleBar}
           label={{ position: "top", fontWeight: 600, fontSize: isSmall ? 13 : 15, fill: labelC }}
-        >
-          {data.map((d, index) => <Cell key={index} fill={colors[index % colors.length]} />)}
-        </Bar>
+        />
 
       </BarChart>
     </Sheet>

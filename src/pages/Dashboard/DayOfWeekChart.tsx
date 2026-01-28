@@ -23,8 +23,7 @@ function DayOfWeekChart({ data, }: IProps) {
       sx={{
         padding: "12px 8px 4px",
         borderRadius: "lg",
-        width: "100%",
-        maxWidth: 700
+        width: 1
       }}
     >
 
@@ -33,7 +32,7 @@ function DayOfWeekChart({ data, }: IProps) {
       </Typography>
 
       <AreaChart
-        style={{ width: '100%', maxWidth: '700px', minHeight: 210, aspectRatio: 2.9 }}
+        style={{ width: "100%", minHeight: 210, aspectRatio: 2.9 }}
         responsive
         data={data}
         syncId="anyId"
@@ -76,7 +75,7 @@ function DayOfWeekChart({ data, }: IProps) {
           }}
         />
 
-        <Area type="monotone" dataKey="visits" stroke="#82ca9d" fill={areaColor}>
+        <Area type="monotone" dataKey="visits" fillOpacity={0.8} stroke="#82ca9d" fill={areaColor} animationDuration={400}>
           <LabelList
             dataKey="visits"
             position="top"

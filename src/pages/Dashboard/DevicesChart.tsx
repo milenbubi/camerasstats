@@ -1,5 +1,7 @@
+import { useMemo } from "react";
 import { useMediaQuery } from "@mui/material";
 import { Box, Typography, Sheet } from "@mui/joy";
+import { isMobile } from "@ffilip/chan180-utils/env";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, LabelList } from "recharts";
 import { IEntityVisit } from "../../Utils/models";
 import { useChartPalette } from "./helpers/chartPalette";
@@ -14,7 +16,23 @@ interface IProps {
 
 function DevicesChart({ data, totalVisits }: IProps) {
   const isSmall = useMediaQuery("(max-width:720px)");
+  const isDeviceMobile = useMemo(() => isMobile(), []);
   const { axisTextColor, barColor, gridColor, labelColor } = useChartPalette();
+  const isAngleEnabled = useMemo(() => isSmall && data.length > 5, [isSmall, data]);
+
+
+  const xAxisHeight = useMemo(() => {
+    if (!isAngleEnabled) {
+      return isSmall ? 22 : 26;
+    }
+
+    const longestNameLenght = data
+      .reduce((prev, curr) => curr.name.length > prev.length ? curr.name : prev, "")
+      .length;
+
+    return longestNameLenght * 4.2;
+  }, [isSmall, data]);
+
 
   return (
     <Sheet
@@ -26,8 +44,7 @@ function DevicesChart({ data, totalVisits }: IProps) {
         height: 240,
         display: "flex",
         flexDirection: "column",
-        width: "100%",
-        maxWidth: 700
+        width: 1
       }}
     >
 
@@ -55,13 +72,13 @@ function DevicesChart({ data, totalVisits }: IProps) {
             <BarChart data={data.length ? data : undefined} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
               <CartesianGrid stroke={gridColor} vertical={false} />
               <XAxis
-                height={isSmall ? 30 : 26}
+                height={xAxisHeight}
                 dataKey="name"
                 stroke={axisTextColor}
                 tickLine={false}
                 axisLine={{ stroke: gridColor }}
-                angle={isSmall ? -20 : 0}
-                tickMargin={isSmall ? 6 : 2}
+                angle={isAngleEnabled ? -20 : 0}
+                tickMargin={isAngleEnabled ? 6 : 2}
                 interval={0}
                 tick={{
                   fill: axisTextColor,
@@ -82,8 +99,10 @@ function DevicesChart({ data, totalVisits }: IProps) {
                 domain={[0, dataMax => Math.ceil(dataMax * (isSmall ? 1.08 : 1.11))]}
               />
 
-              <C180ChartTooltip />
+              {!isDeviceMobile && <C180ChartTooltip />}
+
               <Bar
+                animationDuration={400}
                 dataKey="visits"
                 fill={barColor}
                 radius={[10, 10, 0, 0]}

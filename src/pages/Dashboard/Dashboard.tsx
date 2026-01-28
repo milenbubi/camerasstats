@@ -8,6 +8,7 @@ import DevicesChart from "./DevicesChart";
 import DistinctStats from "./DistinctStats";
 import DashboardTitle from "./DashboardTitle";
 import DayOfWeekChart from "./DayOfWeekChart";
+import EntityPieCharts from "./EntityPieChart";
 import DashboardFilters from "./DashboardFilters";
 import { useAPIRequest } from "../../Network/apiHooks";
 import { IDashboardResponse } from "../../Utils/models";
@@ -65,13 +66,21 @@ function Dashboard() {
     <Stack sx={{ py: 2, alignItems: "center" }}>
       <DashboardTitle />
       <DashboardFilters onChange={changePeriod} loading={state.loading} />
+
       {state.data && (
-        <Stack sx={{ width: 1, pt: { xs: 3, lg: 6 }, gap: { xs: 2, sm: 3, lg: 6 }, alignItems: "center" }}>
-          <DevicesChart data={state.data.uniqueEntities.devices} totalVisits={state.totalCount} />
-          <DistinctStats data={state.data.uniqueCounts} />
-          <DayOfWeekChart data={state.data.uniqueEntities.daysOfWeek} />
+        <Stack sx={{ width: 1, pt: { xs: 3, lg: 5 }, gap: { xs: 2, sm: 2, lg: 4 }, alignItems: "center" }}>
+          <Stack sx={{ flexDirection: { xs: "column", xl: "row" }, maxWidth: { xs: "md", xl: "lg" }, width: 1, gap: { xs: 2, sm: 3, lg: 5 }, alignItems: "stretch" }}>
+            <DevicesChart data={state.data.uniqueEntities.devices} totalVisits={state.totalCount} />
+            <EntityPieCharts data={state.data.uniqueEntities} totalVisits={state.totalCount} />
+          </Stack>
+
+          <Stack sx={{ width: 1, gap: { xs: 2, sm: 2, lg: 5 }, alignItems: "center", maxWidth: "md" }}>
+            <DistinctStats data={state.data.uniqueCounts} />
+            <DayOfWeekChart data={state.data.uniqueEntities.daysOfWeek} />
+          </Stack>
         </Stack>
       )}
+
     </Stack>
   );
 }

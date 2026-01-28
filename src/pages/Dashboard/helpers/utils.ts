@@ -10,7 +10,8 @@ export const dashboardPeriodOptions = [
   { title: "7 Days", value: PeriodLengthInDays.Seven, paramName: "7d" },
   { title: "30 Days", value: PeriodLengthInDays.Thirty, paramName: "30d" },
   { title: "50 Days", value: PeriodLengthInDays.Fifty, paramName: "50d" },
-  { title: "90 Days", value: PeriodLengthInDays.ThreeMonths, paramName: "90d" }
+  { title: "90 Days", value: PeriodLengthInDays.ThreeMonths, paramName: "90d" },
+  { title: "All Time", value: PeriodLengthInDays.AllTime, paramName: "alltime" }
 ] satisfies ITabPanelItem<PeriodLengthInDays>[];
 
 
