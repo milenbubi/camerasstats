@@ -74,7 +74,7 @@ function Dashboard() {
             <EntityPieCharts data={state.data.uniqueEntities} totalVisits={state.totalCount} />
           </Stack>
 
-          <Stack sx={{ width: 1, gap: { xs: 2, sm: 2, lg: 6 }, alignItems: "center", maxWidth: { xs: "md", xl: "lg" } }}>
+          <Stack sx={{ width: 1, gap: { xs: 2, sm: 2, lg: 6 }, alignItems: "center", maxWidth: "md" }}>
             <DistinctStats data={state.data.uniqueCounts} />
             <DayOfWeekChart data={state.data.uniqueEntities.daysOfWeek} />
           </Stack>
