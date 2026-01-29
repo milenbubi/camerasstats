@@ -68,7 +68,7 @@ function Dashboard() {
       <DashboardFilters onChange={changePeriod} loading={state.loading} />
 
       {state.data && (
-        <Stack sx={{ width: 1, pt: { xs: 3, lg: 5 }, gap: { xs: 2, sm: 2, lg: 6 }, alignItems: "center" }}>
+        <Stack sx={{ width: 1, pt: { xs: 3, lg: 5 }, gap: { xs: 2, sm: 2, lg: 6 }, px: 1, alignItems: "center" }}>
           <Stack sx={{ flexDirection: { xs: "column", xl: "row" }, maxWidth: { xs: "md", xl: "lg" }, width: 1, gap: { xs: 2, sm: 3, lg: 6 }, alignItems: "stretch" }}>
             <DevicesChart data={state.data.uniqueEntities.devices} totalVisits={state.totalCount} />
             <EntityPieCharts data={state.data.uniqueEntities} totalVisits={state.totalCount} />

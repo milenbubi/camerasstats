@@ -32,7 +32,7 @@ function DayOfWeekChart({ data, }: IProps) {
       </Typography>
 
       <AreaChart
-        style={{ width: "100%", minHeight: 210, aspectRatio: 3.3 }}
+        style={{ width: "100%", minHeight: 210, aspectRatio: 4.5 }}
         responsive
         data={data}
         syncId="anyId"
@@ -43,7 +43,7 @@ function DayOfWeekChart({ data, }: IProps) {
         }}
       >
 
-        <CartesianGrid vertical={true} strokeDasharray="3 3" opacity={0.4} />
+        <CartesianGrid vertical={true} strokeDasharray="2 6" />
 
         <XAxis dataKey="name"
           height={isSmall ? 41 : 28}

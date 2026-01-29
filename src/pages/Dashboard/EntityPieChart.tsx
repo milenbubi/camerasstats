@@ -56,7 +56,7 @@ function SingleEntityPie({ data, title, labelColor }: ISingleEntityPie) {
     const croppedData = (data.length <= MAX_ITEM_COUNTS) ? data : data.slice(0, MAX_ITEM_COUNTS);
 
     return croppedData.map((cd, i) => ({
-      name: truncateText(cd.name + cd.name, isSmallPie),
+      name: truncateText(cd.name, isSmallPie),
       value: cd.visits,
       fill: randomColors[i % randomColors.length],
     }));
