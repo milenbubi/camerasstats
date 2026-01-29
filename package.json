@@ -15,7 +15,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@ffilip/chan180-utils": "^3.4.7",
-    "@ffilip/mui-react-utils": "^2.6.3",
+    "@ffilip/mui-react-utils": "^2.6.4",
     "@mui/joy": "^5.0.0-beta.52",
     "@mui/material": "^7.3.2",
     "@mui/x-date-pickers": "^8.14.0",

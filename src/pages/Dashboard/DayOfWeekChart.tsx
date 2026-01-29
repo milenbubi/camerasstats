@@ -22,7 +22,7 @@ function DayOfWeekChart({ data, }: IProps) {
       className="noRechartsSvgOutline"
       sx={{
         padding: "12px 8px 4px",
-        borderRadius: "lg",
+        borderRadius: "md",
         width: 1
       }}
     >
@@ -32,7 +32,7 @@ function DayOfWeekChart({ data, }: IProps) {
       </Typography>
 
       <AreaChart
-        style={{ width: "100%", minHeight: 210, aspectRatio: 2.9 }}
+        style={{ width: "100%", minHeight: 210, aspectRatio: 3.3 }}
         responsive
         data={data}
         syncId="anyId"

@@ -40,7 +40,7 @@ function DevicesChart({ data, totalVisits }: IProps) {
       className="noRechartsSvgOutline"
       sx={{
         padding: `12px 8px ${totalVisits ? 4 : 12}px`,
-        borderRadius: "lg",
+        borderRadius: "md",
         height: 240,
         display: "flex",
         flexDirection: "column",

@@ -37,7 +37,7 @@ function DistinctStats({ data }: IProps) {
   const isSmall = useMediaQuery("(max-width:600px)");
 
   return (
-    <Centered sx={{ width: 1, gap: { xs: 2, sm: 4 }, alignItems: "stretch" }}>
+    <Centered sx={{ width: 1, maxWidth: "md", gap: { xs: 2, sm: 4 }, alignItems: "stretch" }}>
       <SingleStatCard title="Countries" subTitle="Distinct nations" count={data.uniqueCountries} icon="gis:globe-poi" isSmall={isSmall} />
       <SingleStatCard title="Cities" subTitle="Unique locations" count={data.uniqueCities} icon="hugeicons:city-01" isSmall={isSmall} />
       <SingleStatCard title="OS" subTitle="Singular OSes" count={data.uniqueOses} icon="cbi:blueos" isSmall={isSmall} />
