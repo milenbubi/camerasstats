@@ -13,7 +13,7 @@ interface IProps {
 
 function DayOfWeekChart({ data, }: IProps) {
   const isSmall = useMediaQuery("(max-width:600px)");
-  const { axisTextColor, areaColor, labelColor } = useChartPalette();
+  const { axisTextColor, areaColor, labelColor, barColor, isDarkTheme } = useChartPalette();
 
 
   return (
@@ -43,7 +43,7 @@ function DayOfWeekChart({ data, }: IProps) {
         }}
       >
 
-        <CartesianGrid vertical={true} strokeDasharray="2 6" />
+        <CartesianGrid vertical={true} strokeDasharray="2 5" opacity={isDarkTheme ? 0.6 : 1} />
 
         <XAxis dataKey="name"
           height={isSmall ? 41 : 28}
@@ -75,7 +75,7 @@ function DayOfWeekChart({ data, }: IProps) {
           }}
         />
 
-        <Area type="monotone" dataKey="visits" fillOpacity={0.8} stroke="#82ca9d" fill={areaColor} animationDuration={400}>
+        <Area type="monotone" dataKey="visits" fillOpacity={0.5} stroke={barColor} fill={areaColor} animationDuration={400}>
           <LabelList
             dataKey="visits"
             position="top"
