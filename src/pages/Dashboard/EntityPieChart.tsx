@@ -4,6 +4,7 @@ import { Centered } from "@ffilip/mui-react-utils/components";
 import { useResizeObserver } from "@ffilip/mui-react-utils/document";
 import { getRandomPastelColors } from "@ffilip/chan180-utils/helpers";
 import { PieChart, Pie, Tooltip, Sector, PieSectorShapeProps } from "recharts";
+
 import { useChartPalette } from "./helpers/chartPalette";
 import { IEntityVisit, IUniqueEntities } from "../../Utils/models";
 
@@ -47,12 +48,11 @@ const renderActiveShape = (p: PieSectorShapeProps) => {
 function SingleEntityPie({ data, title, labelColor }: ISingleEntityPie) {
   const [activeIndex, setActiveIndex] = useState(DEFAULT_INDEX);
   const { width, htmlElementRef } = useResizeObserver<HTMLDivElement>();
+  const randomColors = useMemo(() => getRandomPastelColors(MAX_ITEM_COUNTS), [data]);
   const isSmallPie = useMemo(() => width < 225, [width]);
   const fontSize = useMemo(() => Math.floor(width / (isSmallPie ? 11 : 12.5)), [width]);
 
-
   const pieData = useMemo(() => {
-    const randomColors = getRandomPastelColors(MAX_ITEM_COUNTS);
     const croppedData = (data.length <= MAX_ITEM_COUNTS) ? data : data.slice(0, MAX_ITEM_COUNTS);
 
     return croppedData.map((cd, i) => ({
