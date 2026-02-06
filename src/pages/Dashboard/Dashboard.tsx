@@ -4,15 +4,15 @@ import { useLatestRequestGuard, useMergedState } from "@ffilip/mui-react-utils/r
 import { getLocalToUTCString, IPeriodBoundaries, urlQueryStringFromObject } from "@ffilip/chan180-utils";
 
 import "../../Styles/Main.scss"
-import DevicesChart from "./DevicesChart";
-import DistinctStats from "./DistinctStats";
-import DashboardTitle from "./DashboardTitle";
-import DayOfWeekChart from "./DayOfWeekChart";
-import EntityPieCharts from "./EntityPieChart";
-import DashboardFilters from "./DashboardFilters";
+import DevicesChart from "./charts/DevicesChart";
+import DistinctStats from "./charts/DistinctStats";
+import DayOfWeekChart from "./charts/DayOfWeekChart";
+import EntityPieCharts from "./charts/EntityPieChart";
 import { useAPIRequest } from "../../Network/apiHooks";
 import { IDashboardResponse } from "../../Utils/models";
+import DashboardTitle from "./components/DashboardTitle";
 import { DEFAULT_DASHBOARD_STATE } from "./helpers/utils";
+import DashboardFilters from "./components/DashboardFilters";
 import { useContextSnack } from "../../Contexts/SnackbarContext";
 
 

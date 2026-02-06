@@ -3,10 +3,10 @@ import { Sheet } from "@mui/joy";
 import { useMediaQuery } from "@mui/material";
 import { Centered } from "@ffilip/mui-react-utils/components";
 import { useChan180Colors } from "@ffilip/mui-react-utils/mui";
-import { getRandomPastelColors } from "@ffilip/chan180-utils/helpers";
+import { getRandomPastelColors } from "@ffilip/chan180-utils/colors";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, BarShapeProps } from "recharts";
-import { IEntityVisit } from "../../Utils/models";
-import { useChartPalette } from "./helpers/chartPalette";
+import { IEntityVisit } from "../../../Utils/models";
+import { useChartPalette } from "../helpers/chartPalette";
 
 interface IProps {
   data: IEntityVisit[];
@@ -29,11 +29,11 @@ const TriangleBar = ({ fill, x, y, width, height }: BarShapeProps) => (
 
 
 
-function SingleEntity({ data, }: IProps) {
+function SingleEntity({ data }: IProps) {
   const { labelC } = useChan180Colors();
   const isSmall = useMediaQuery("(max-width:920px)");
   const { axisTextColor, gridColor } = useChartPalette();
-  const colors = useMemo(() => getRandomPastelColors(MAX_ITEM_COUNTS), []);
+  const colors = useMemo(() => getRandomPastelColors(MAX_ITEM_COUNTS), [data]);
 
 
   const filteredData = useMemo(() => {

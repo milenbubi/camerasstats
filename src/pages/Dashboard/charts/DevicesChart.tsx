@@ -3,9 +3,9 @@ import { useMediaQuery } from "@mui/material";
 import { Box, Typography, Sheet } from "@mui/joy";
 import { isMobile } from "@ffilip/chan180-utils/env";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, LabelList } from "recharts";
-import { IEntityVisit } from "../../Utils/models";
-import { useChartPalette } from "./helpers/chartPalette";
-import C180ChartTooltip from "./helpers/C180ChartTooltip";
+import { IEntityVisit } from "../../../Utils/models";
+import { useChartPalette } from "../helpers/chartPalette";
+import C180ChartTooltip from "../components/C180ChartTooltip";
 
 interface IProps {
   data: IEntityVisit[];

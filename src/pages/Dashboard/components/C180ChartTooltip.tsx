@@ -1,5 +1,5 @@
 import { Tooltip } from "recharts";
-import { useChartPalette } from "./chartPalette";
+import { useChartPalette } from "../helpers/chartPalette";
 
 
 

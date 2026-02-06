@@ -1,33 +1,29 @@
+import { useMemo } from "react";
 import { Typography, Sheet, Stack } from "@mui/joy";
-import { useEffect, useMemo, useState } from "react";
 import { Centered } from "@ffilip/mui-react-utils/components";
 import { useResizeObserver } from "@ffilip/mui-react-utils/document";
-import { getRandomPastelColors } from "@ffilip/chan180-utils/helpers";
-import { PieChart, Pie, Tooltip, Sector, PieSectorShapeProps } from "recharts";
+import { PieChart, Pie, Sector, PieSectorShapeProps } from "recharts";
 
-import { useChartPalette } from "./helpers/chartPalette";
-import { IEntityVisit, IUniqueEntities } from "../../Utils/models";
+import { useChartPalette } from "../helpers/chartPalette";
+import { truncatePieText, usePieData } from "../helpers/pieUtils";
+import { IEntityVisit, IUniqueEntities } from "../../../Utils/models";
 
 interface IProps {
   data: IUniqueEntities;
   totalVisits: number;
 }
 
-interface ISingleEntityPie {
+interface ISingleEntityPieProps {
   data: IEntityVisit[];
   title: string;
   labelColor: string;
 }
 
-const MAX_ITEM_COUNTS = 12;
-const DEFAULT_INDEX = 0;
-const NAME_MAX_LENGTH = 14;
-
-
-const truncateText = (text = "", isSmallPie?: boolean) => {
-  const maxLength = isSmallPie ? NAME_MAX_LENGTH - 2 : NAME_MAX_LENGTH;
-  return text.length > maxLength ? text.slice(0, maxLength) + "…" : text;
-};
+interface IPieLabelProps {
+  name?: string;
+  value?: number;
+  color: string;
+}
 
 
 const renderActiveShape = (p: PieSectorShapeProps) => {
@@ -44,60 +40,55 @@ const renderActiveShape = (p: PieSectorShapeProps) => {
 };
 
 
-
-function SingleEntityPie({ data, title, labelColor }: ISingleEntityPie) {
-  const [activeIndex, setActiveIndex] = useState(DEFAULT_INDEX);
+function PieLabel({ name, value, color }: IPieLabelProps) {
   const { width, htmlElementRef } = useResizeObserver<HTMLDivElement>();
-  const randomColors = useMemo(() => getRandomPastelColors(MAX_ITEM_COUNTS), [data]);
   const isSmallPie = useMemo(() => width < 225, [width]);
+
+  const label = useMemo(() => truncatePieText(name, isSmallPie), [name, isSmallPie]);
   const fontSize = useMemo(() => Math.floor(width / (isSmallPie ? 11 : 12.5)), [width]);
 
-  const pieData = useMemo(() => {
-    const croppedData = (data.length <= MAX_ITEM_COUNTS) ? data : data.slice(0, MAX_ITEM_COUNTS);
+  return (
+    <Centered
+      ref={htmlElementRef}
+      sx={{
+        position: "absolute",
+        inset: 0,
+        flexDirection: "column",
+        gap: fontSize / 2 + "px",
+        pt: fontSize + "px"
+      }}
+    >
+      <Typography sx={{ fontSize, lineHeight: 1, fontWeight: 600, color, zIndex: 10, cursor: "default" }}>
+        {label}
+      </Typography>
+      <Typography sx={{ fontSize: fontSize + 1, lineHeight: 1, fontWeight: 600, color, zIndex: 10, cursor: "default" }}>
+        {value}
+      </Typography>
+    </Centered>
+  );
+}
 
-    return croppedData.map((cd, i) => ({
-      name: truncateText(cd.name, isSmallPie),
-      value: cd.visits,
-      fill: randomColors[i % randomColors.length],
-    }));
-  }, [data, isSmallPie]);
 
 
-  useEffect(() => {
-    setActiveIndex(DEFAULT_INDEX);
-  }, [pieData]);
+function SingleEntityPie({ data, title, labelColor }: ISingleEntityPieProps) {
+  const { pieData, activeIndex, setActiveIndex } = usePieData(data);
 
 
   return (
-    <Stack ref={htmlElementRef} sx={{ flex: 1, gap: 1 }}>
+    <Stack sx={{ flex: 1, gap: 1 }}>
       <Typography level="title-lg" textAlign="center" sx={{ fontSize: { xs: 12, sm: 18 } }}>
         {title}
       </Typography>
 
       <Stack sx={{ width: 1, position: "relative", flex: 1, justifyContent: "center" }}>
-        <Centered
-          sx={{
-            position: "absolute",
-            inset: 0,
-            flexDirection: "column",
-            gap: fontSize / 2 + "px",
-            pt: fontSize + "px"
-          }}
-        >
-          <Typography sx={{ fontSize, lineHeight: 1, fontWeight: 600, color: labelColor, zIndex: 10, cursor: "default" }}>
-            {pieData[activeIndex]?.name}
-          </Typography>
-          <Typography sx={{ fontSize: fontSize + 1, lineHeight: 1, fontWeight: 600, color: labelColor, zIndex: 10, cursor: "default" }}>
-            {pieData[activeIndex]?.value}
-          </Typography>
-        </Centered>
+        <PieLabel name={pieData[activeIndex]?.name} value={pieData[activeIndex]?.visits} color={labelColor} />
 
         <PieChart style={{ width: "100%", aspectRatio: 1 }}>
           <Pie
             onMouseEnter={(_, index) => setActiveIndex(index)}
             shape={props => renderActiveShape({ ...props, isActive: activeIndex === props.index })}
             data={pieData}
-            dataKey="value"
+            dataKey="visits"
             nameKey="name"
             isAnimationActive={true}
             animationEasing="ease"
@@ -108,13 +99,9 @@ function SingleEntityPie({ data, title, labelColor }: ISingleEntityPie) {
             paddingAngle={3}
             cornerRadius={5}
             stroke="none"
-            style={{ minWidth: 330 }}
           />
-
-          <Tooltip content={() => null} defaultIndex={DEFAULT_INDEX} />
         </PieChart>
       </Stack>
-
     </Stack>
   );
 }
@@ -133,7 +120,7 @@ function EntityPieCharts({ data, totalVisits }: IProps) {
         pt: "12px", px: { xs: 1, sm: 1, xl: 1 },
         gap: { xs: 1, sm: 1, md: 2, xl: 1 },
         borderRadius: "md",
-        display: "flex",
+        display: "flex"
       }}
     >
 

@@ -2,8 +2,8 @@ import { Typography, Sheet } from "@mui/joy";
 import { useMediaQuery } from "@mui/material";
 import { XAxis, YAxis, CartesianGrid, AreaChart, Area, LabelList } from "recharts";
 
-import { IEntityVisit } from "../../Utils/models";
-import { useChartPalette } from "./helpers/chartPalette";
+import { IEntityVisit } from "../../../Utils/models";
+import { useChartPalette } from "../helpers/chartPalette";
 
 interface IProps {
   data: IEntityVisit[];
