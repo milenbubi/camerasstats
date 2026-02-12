@@ -19,11 +19,13 @@
     "@mui/joy": "^5.0.0-beta.52",
     "@mui/material": "^7.3.2",
     "@mui/x-date-pickers": "^8.14.0",
+    "@reduxjs/toolkit": "^2.11.2",
     "big.js": "^7.0.1",
     "dayjs": "^1.11.18",
     "react": "^18.3.1",
     "react-bus": "3.0.0",
     "react-dom": "^18.3.1",
+    "react-redux": "^9.2.0",
     "react-router-dom": "^7.9.3",
     "recharts": "^3.7.0"
   },

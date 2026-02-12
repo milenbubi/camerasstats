@@ -1,5 +1,5 @@
-import { getRandomPastelColors } from "@ffilip/chan180-utils/colors";
 import { useEffect, useMemo, useState } from "react";
+import { getRandomPastelColors } from "@ffilip/chan180-utils/colors";
 import { IEntityVisit } from "../../../Utils/models";
 
 const NAME_MAX_LENGTH = 14;
@@ -27,7 +27,9 @@ export function usePieData(data: IEntityVisit[]) {
 
 
   const pieData = useMemo(() => {
-    const croppedData = exceedsPieItemLimit ? data.slice(0, MAX_PIE_ITEMS_COUNT) : data;
+    const croppedData = exceedsPieItemLimit
+      ? data.slice(0, MAX_PIE_ITEMS_COUNT)
+      : data;
 
     return croppedData.map((cd, i) => ({
       ...cd,

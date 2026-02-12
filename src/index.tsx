@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { CssBaseline, GlobalStyles } from "@mui/material";
 import AppEntry from "./AppEntry";
+import StoreProvider from "./Store/Store";
 import globalStyles from "./Styles/StylesGlobal";
 import { ThemeProvider } from "./Contexts/theme";
 import { EventBusProvider } from "./Contexts/eventBus";
@@ -22,7 +23,9 @@ function CamerasStatsApp() {
         <EventBusProvider>
           <SoftRefreshProvider>
             <SnackbarProvider>
-              <AppEntry />
+              <StoreProvider>
+                <AppEntry />
+              </StoreProvider>
             </SnackbarProvider>
           </SoftRefreshProvider>
         </EventBusProvider>
