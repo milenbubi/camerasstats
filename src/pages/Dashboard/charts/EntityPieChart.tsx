@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Typography, Sheet, Stack } from "@mui/joy";
+import { Typography, Sheet, Stack, Box } from "@mui/joy";
 import { Centered } from "@ffilip/mui-react-utils/components";
 import { useResizeObserver } from "@ffilip/mui-react-utils/document";
 import { PieChart, Pie, Sector, PieSectorShapeProps } from "recharts";
@@ -117,7 +117,8 @@ function EntityPieCharts({ data, totalVisits }: IProps) {
       className="noRechartsSvgOutline"
       sx={{
         width: 1,
-        pt: "12px", px: { xs: 1, sm: 1, xl: 1 },
+        pt: "12px", px: 1,
+        pb: totalVisits ? 0 : "12px",
         gap: { xs: 1, sm: 1, md: 2, xl: 1 },
         borderRadius: "md",
         display: "flex"
@@ -125,17 +126,22 @@ function EntityPieCharts({ data, totalVisits }: IProps) {
     >
 
       {totalVisits === 0 && (
-        <Typography
-          level="h4"
-          sx={{
-            width: 1, height: 110,
-            fontWeight: 600, color: barColor,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center"
-          }}
-          children={"No Records"}
-        />
+        <Box sx={{ width: 1 }}>
+          <Typography level="title-lg" textAlign="center" sx={{ mb: "4px" }}>
+            {"Countries, Cities, OSes"}
+          </Typography>
+
+          <Typography
+            level="h4"
+            sx={{
+              fontWeight: 600, color: barColor,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+            children={"No Records"}
+          />
+        </Box>
       )}
 
       {totalVisits > 0 && (

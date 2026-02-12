@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { getRandomPastelColors } from "@ffilip/chan180-utils/colors";
 import { IEntityVisit } from "../../../Utils/models";
 
-const NAME_MAX_LENGTH = 14;
+const NAME_MAX_LENGTH = 13;
 const DEFAULT_PIE_INDEX = 0;
 const MAX_PIE_ITEMS_COUNT = 12;
 

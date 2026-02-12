@@ -41,7 +41,7 @@ function DevicesChart({ data, totalVisits }: IProps) {
       sx={{
         padding: `12px 8px ${totalVisits ? 4 : 12}px`,
         borderRadius: "md",
-        height: 240,
+        height: totalVisits ? 240 : "auto",
         display: "flex",
         flexDirection: "column",
         width: 1
