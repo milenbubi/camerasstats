@@ -22,12 +22,13 @@ export function isDashboardPeriod(value: unknown): value is DashboardPeriod {
   return typeof value === "number" && dashboardPeriodValues.includes(value as DashboardPeriod);
 }
 
+export type DashboardData = {
+  uniqueEntities: IUniqueEntities;
+  uniqueCounts: IUniqueCounts;
+};
 
 interface IDashboardState {
-  data: {
-    uniqueEntities: IUniqueEntities;
-    uniqueCounts: IUniqueCounts;
-  } | null;
+  data: DashboardData | null;
   totalCount: number;
   loading: boolean;
 }

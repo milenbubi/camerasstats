@@ -3,11 +3,7 @@ import { Stack } from "@mui/material";
 import { useLatestRequestGuard, useMergedState } from "@ffilip/mui-react-utils/react";
 import { getLocalToUTCString, IPeriodBoundaries, urlQueryStringFromObject } from "@ffilip/chan180-utils";
 
-import "../../Styles/Main.scss"
-import DevicesChart from "./charts/DevicesChart";
-import DistinctStats from "./charts/DistinctStats";
-import DayOfWeekChart from "./charts/DayOfWeekChart";
-import EntityPieCharts from "./charts/EntityPieChart";
+import ChartsSection from "./components/ChartsSection";
 import { useAPIRequest } from "../../Network/apiHooks";
 import { IDashboardResponse } from "../../Utils/models";
 import DashboardTitle from "./components/DashboardTitle";
@@ -66,21 +62,7 @@ function Dashboard() {
     <Stack sx={{ py: 2, alignItems: "center" }}>
       <DashboardTitle />
       <DashboardFilters onChange={changePeriod} loading={state.loading} />
-
-      {state.data && (
-        <Stack sx={{ width: 1, pt: { xs: 3, lg: 5 }, gap: { xs: 2, sm: 2, lg: 6 }, px: 1, alignItems: "center" }}>
-          <Stack sx={{ flexDirection: { xs: "column", xl: "row" }, maxWidth: { xs: "md", xl: "lg" }, width: 1, gap: { xs: 2, sm: 3, lg: 6 }, alignItems: "stretch" }}>
-            <DevicesChart data={state.data.uniqueEntities.devices} totalVisits={state.totalCount} />
-            <EntityPieCharts data={state.data.uniqueEntities} totalVisits={state.totalCount} />
-          </Stack>
-
-          <Stack sx={{ width: 1, gap: { xs: 2, sm: 2, lg: 6 }, alignItems: "center", maxWidth: "md" }}>
-            <DistinctStats data={state.data.uniqueCounts} />
-            <DayOfWeekChart data={state.data.uniqueEntities.daysOfWeek} />
-          </Stack>
-        </Stack>
-      )}
-
+      {state.data && <ChartsSection data={state.data} totalVisits={state.totalCount} />}
     </Stack>
   );
 }
