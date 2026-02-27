@@ -1,4 +1,4 @@
-import { safeJsonStringify } from "@ffilip/chan180-utils/helpers";
+import { safeJsonStringify } from "@ffilip/chan180-utils";
 import { BackendUrl } from "../Utils/constants";
 import { IResponse, RequestMethod } from "./types";
 

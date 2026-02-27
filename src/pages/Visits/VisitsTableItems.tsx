@@ -1,7 +1,7 @@
 import { memo, useMemo } from "react";
 import { TableCell, TableRow } from "@mui/material";
-import { useChan180Colors } from "@ffilip/mui-react-utils/mui";
-import { formatUTCDateToLocalDateString } from "@ffilip/chan180-utils/time";
+import { useChan180Colors } from "@ffilip/mui-react-utils";
+import { formatUTCDateToLocalDateString } from "@ffilip/chan180-utils";
 
 import VisitIpLabel from "./VisitIpLabel";
 import { IVisit } from "../../Utils/models";
@@ -44,7 +44,7 @@ function ItemsRenderer({ data }: IProps) {
           <TableCell>{visit.country}</TableCell>
 
           <TableCell sx={{ whiteSpace: "nowrap", color: yellowC }}>
-            {formatUTCDateToLocalDateString(visit.visitTime, "fullDateTime", "en", true)}
+            {formatUTCDateToLocalDateString({ source: visit.visitTime, unit: "fullDateTime", locale: "en-GB", noSeconds: true })}
           </TableCell>
 
           <TableCell>

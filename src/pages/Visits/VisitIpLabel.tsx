@@ -1,9 +1,8 @@
 import { Popover } from "@mui/material";
 import { Box, Typography, Link, Sheet } from "@mui/joy";
 import { MouseEvent, useCallback, useState } from "react";
-import { safeJsonParse } from "@ffilip/chan180-utils/helpers";
-import { formatUTCDateToLocalDateString } from "@ffilip/chan180-utils/time";
-import { C180ZIndex, fixMuiOverlayFocus } from "@ffilip/mui-react-utils/mui";
+import { C180ZIndex, fixMuiOverlayFocus } from "@ffilip/mui-react-utils";
+import { formatUTCDateToLocalDateString, safeJsonParse } from "@ffilip/chan180-utils";
 import { IGeoLocation, IVisit } from "../../Utils/models";
 
 interface IProps {
@@ -111,7 +110,7 @@ function VisitIpLabel({ visit, blueC, greenC, redC }: IProps) {
             <Typography
               textColor="grey"
               sx={{ fontSize: "xs", fontWeight: "xl", fontStyle: "italic" }}
-              children={formatUTCDateToLocalDateString(visit.visitTime, "date", "en-GB")}
+              children={formatUTCDateToLocalDateString({ source: visit.visitTime, unit: "date", locale: "en-GB" })}
             />
           </Box>
 

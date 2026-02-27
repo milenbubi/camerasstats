@@ -1,8 +1,7 @@
 import { Sheet } from "@mui/joy";
-import { C180Modal } from "@ffilip/mui-react-utils/components";
-import { useAdminScrollbar } from "@ffilip/mui-react-utils/mui";
 import { Table, TableBody, TableContainer } from "@mui/material";
-import { useDidUpdateEffect, useMergedState } from "@ffilip/mui-react-utils/react";
+import { useAdminScrollbar, C180Modal } from "@ffilip/mui-react-utils";
+import { useDidUpdateEffect, useMergedState } from "@ffilip/mui-react-utils";
 import { ReactNode, Ref, forwardRef, useImperativeHandle, useRef, useState } from "react";
 
 import C180TableHeader from "./C180TableHeader";

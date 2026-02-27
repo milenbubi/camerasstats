@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useMediaQuery } from "@mui/material";
+import { isMobile } from "@ffilip/chan180-utils";
 import { Box, Typography, Sheet } from "@mui/joy";
-import { isMobile } from "@ffilip/chan180-utils/env";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, LabelList } from "recharts";
 import { IEntityVisit } from "../../../Utils/models";
 import { useChartPalette } from "../helpers/chartPalette";

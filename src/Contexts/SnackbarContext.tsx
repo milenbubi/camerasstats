@@ -1,4 +1,4 @@
-import { Iconify } from "@ffilip/mui-react-utils/components";
+import { Iconify } from "@ffilip/mui-react-utils";
 import { Alert, ColorPaletteProp, VariantProp } from "@mui/joy";
 import { Snackbar, SlideProps, IconButton, Slide } from "@mui/material";
 import { createContext, useContext, useState, useCallback, PropsWithChildren } from "react";

@@ -388,23 +388,23 @@
   integrity sha512-tQd/1efJuzPC6rCFwEvLtci/xNFcTZknmXs98FYDfGE4wP9ClFV98nyKrzJKVPMhdDnjzLhdUyMX4PsQAPjwIw==
 
 "@ffilip/chan180-utils@^3.0.1":
-  version "3.4.7"
-  resolved "https://registry.yarnpkg.com/@ffilip/chan180-utils/-/chan180-utils-3.4.7.tgz#e0fff6615e22185a4bce4242df213f189751ebba"
-  integrity sha512-VfvnYH8qsnQFzY8Sp3fVFV0StVYMkgeFF6W21IhGyMPISao5+tWzBP/XuzCU7uu5G1Tna7rxz5uuYymbBaD2vw==
+  version "3.4.17"
+  resolved "https://registry.yarnpkg.com/@ffilip/chan180-utils/-/chan180-utils-3.4.17.tgz#ca6c06c59bb0f045cf0f29a84be4819d0070772d"
+  integrity sha512-dZIUV9laMkASwINvGtPEcRwVY3ysf+HBAzwsRWmYCGgLJBduxojg2z9HCjjC+729iYMqMJQ44AsE0mBZekzv3w==
   dependencies:
     big.js "^7.0.1"
 
-"@ffilip/chan180-utils@^3.4.8":
-  version "3.4.8"
-  resolved "https://registry.yarnpkg.com/@ffilip/chan180-utils/-/chan180-utils-3.4.8.tgz#c663fcd3f66309ab7608cffc671f6f6bb1c4fa8c"
-  integrity sha512-EXYZm5vmhEFctq1uTJnElkEPuJxOCj2C/kcJ4r30MJP+suQsOahS3zrWxJ+6e9yFRaFMMef6isIskBc//P6l8w==
+"@ffilip/chan180-utils@^3.4.18":
+  version "3.4.18"
+  resolved "https://registry.yarnpkg.com/@ffilip/chan180-utils/-/chan180-utils-3.4.18.tgz#c0e47d0226dc0a9c1bbe0da8d87d7b84fc9d987b"
+  integrity sha512-p3+LCviB+DZxduHyAgZZmQ+q3GjEhew87idcd3NdGdRfwecYENxONXM25BsXzMtrQKaQWy+qJp7kU1qQL2VEGQ==
   dependencies:
     big.js "^7.0.1"
 
-"@ffilip/mui-react-utils@^2.6.5":
-  version "2.6.5"
-  resolved "https://registry.yarnpkg.com/@ffilip/mui-react-utils/-/mui-react-utils-2.6.5.tgz#55bff34a55ceb326bbbd1ef67d2f6af732595988"
-  integrity sha512-W3OAtTWNA6LaZHcOM0Y820PMUnPcRZ8rNqOMesUJ65zyscnNTP4r0Z4Bj0s1mlD94i6sUZur8bbxgHXnLAnZcw==
+"@ffilip/mui-react-utils@^2.6.7":
+  version "2.6.7"
+  resolved "https://registry.yarnpkg.com/@ffilip/mui-react-utils/-/mui-react-utils-2.6.7.tgz#7969c7583e4f558823af192cc7ad9ced4b689cf9"
+  integrity sha512-yb/kZ0kS3L189Buw90X5YNPVvEJYBJ4TYXsjbi9HPp5LHst5cBeiyIGKxvAqjPmGwUQj25k3E87UCdMpVtt5fw==
   dependencies:
     "@ffilip/chan180-utils" "^3.0.1"
     "@iconify/react" "^6.0.2"

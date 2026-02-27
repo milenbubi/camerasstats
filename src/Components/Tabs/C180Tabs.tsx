@@ -1,8 +1,8 @@
 import { blueGrey } from "@mui/material/colors";
+import { hexToRgba } from "@ffilip/chan180-utils";
 import { SyntheticEvent, useEffect } from "react";
+import { Centered } from "@ffilip/mui-react-utils";
 import { useSearchParams } from "react-router-dom";
-import { hexToRgba } from "@ffilip/chan180-utils/colors";
-import { Centered } from "@ffilip/mui-react-utils/components";
 import { SxProps, Tab, tabClasses, Tabs, Theme } from "@mui/material";
 import { ITabPanelItem, indexToTabParam, tabParamToIndex } from "./utils";
 

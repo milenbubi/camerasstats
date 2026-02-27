@@ -1,6 +1,6 @@
 import { GlobalStyles, Box, List } from "@mui/joy";
 import { Sheet, listItemButtonClasses } from "@mui/joy";
-import { C180ZIndex, useAdminScrollbar } from "@ffilip/mui-react-utils/mui";
+import { C180ZIndex, useAdminScrollbar } from "@ffilip/mui-react-utils";
 
 import SidebarTop from "./components/SidebarTop";
 import SidebarCard from "./components/SidebarCard";

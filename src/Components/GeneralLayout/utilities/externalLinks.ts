@@ -1,4 +1,4 @@
-import { openFacebookProfile, openNewTab } from "@ffilip/chan180-utils/env";
+import { openFacebookProfile, openNewTab } from "@ffilip/chan180-utils";
 import { SiteUrl } from "../../../Utils/constants";
 
 

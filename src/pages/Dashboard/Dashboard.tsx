@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { Stack } from "@mui/material";
-import { useLatestRequestGuard, useMergedState } from "@ffilip/mui-react-utils/react";
+import { useLatestRequestGuard, useMergedState } from "@ffilip/mui-react-utils";
 import { getLocalToUTCString, IPeriodBoundaries, urlQueryStringFromObject } from "@ffilip/chan180-utils";
 
 import ChartsSection from "./components/ChartsSection";
@@ -39,7 +39,7 @@ function Dashboard() {
 
     const { Data, Error } = await RequestToApi<IDashboardResponse>("/dashboard.php" + urlParams, "GET");
 
-    if (isOutdated(requestId)) {  // Abort, if there is new request
+    if (isOutdated(requestId)) {  // Abort, if there is a new request
       setState({ loading: false });
       return;
     }

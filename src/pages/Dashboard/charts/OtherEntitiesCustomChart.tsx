@@ -1,9 +1,8 @@
 import { useMemo } from "react";
 import { Sheet } from "@mui/joy";
 import { useMediaQuery } from "@mui/material";
-import { Centered } from "@ffilip/mui-react-utils/components";
-import { useChan180Colors } from "@ffilip/mui-react-utils/mui";
-import { getRandomPastelColors } from "@ffilip/chan180-utils/colors";
+import { getRandomPastelColors } from "@ffilip/chan180-utils";
+import { useChan180Colors, Centered } from "@ffilip/mui-react-utils";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, BarShapeProps } from "recharts";
 import { IEntityVisit } from "../../../Utils/models";
 import { useChartPalette } from "../helpers/chartPalette";

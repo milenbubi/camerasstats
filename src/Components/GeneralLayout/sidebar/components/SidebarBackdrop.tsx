@@ -1,6 +1,6 @@
 import { Box } from "@mui/joy";
+import { C180ZIndex } from "@ffilip/mui-react-utils";
 import { cssVars } from "../../../../Utils/htmlUtils";
-import { C180ZIndex } from "@ffilip/mui-react-utils/mui";
 import { closeSidebar } from "../../utilities/toggleSidebar";
 
 

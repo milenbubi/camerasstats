@@ -1,6 +1,5 @@
-import ListItemButton from "@mui/joy/ListItemButton";
-import { Iconify } from "@ffilip/mui-react-utils/components";
-import { List, ListItem, ListItemContent, Typography } from "@mui/joy";
+import { Iconify } from "@ffilip/mui-react-utils";
+import { List, ListItem, ListItemContent, Typography, ListItemButton } from "@mui/joy";
 import NavLinkButton from "./NavLinkButton";
 import { NavItemWithSubMenu } from "../utils/navItem";
 import SidebarNestedItemsToggler from "../components/SidebarNestedItemsToggler";

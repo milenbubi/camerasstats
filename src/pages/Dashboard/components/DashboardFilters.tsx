@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Container } from "@mui/material";
-import { C180Loader } from "@ffilip/mui-react-utils/components";
-import { calculatePeriodBoundaries, IPeriodBoundaries, PeriodLengthInDays } from "@ffilip/chan180-utils/time";
+import { C180Loader } from "@ffilip/mui-react-utils";
+import { calculatePeriodBoundaries, IPeriodBoundaries, PeriodLengthInDays } from "@ffilip/chan180-utils";
 import C180Tabs from "../../../Components/Tabs/C180Tabs";
 import { dashboardPeriodOptions, isDashboardPeriod } from "../helpers/utils";
 

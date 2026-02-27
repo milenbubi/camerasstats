@@ -1,9 +1,7 @@
 import { createRef, useEffect, useRef } from "react";
 import { Container, Paper, Stack } from "@mui/material";
-import { SearchField } from "@ffilip/mui-react-utils/components";
-import { urlQueryStringFromObject } from "@ffilip/chan180-utils/env";
-import { getLocalToUTCString, IPeriodBoundaries } from "@ffilip/chan180-utils/time";
-import { useLatestRequestGuard, useMergedState } from "@ffilip/mui-react-utils/react";
+import { useLatestRequestGuard, useMergedState, SearchField } from "@ffilip/mui-react-utils";
+import { getLocalToUTCString, IPeriodBoundaries, urlQueryStringFromObject } from "@ffilip/chan180-utils";
 
 import { DeviceName } from "../../Utils/statsUtils";
 import VisitDeviceFilter from "./VisitDeviceFilter";
@@ -49,7 +47,7 @@ function VisitsStatsPage() {
 
     const { Data, Error } = await RequestToApi<IVisitStatsResponse>("/statistics.php" + urlParams, "GET");
 
-    if (isOutdated(requestId)) {  // Abort, if there is new request
+    if (isOutdated(requestId)) {  // Abort, if there is a new request
       setState({ loading: false });
       return;
     }

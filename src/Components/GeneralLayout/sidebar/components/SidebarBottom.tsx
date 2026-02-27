@@ -56,7 +56,7 @@ function SidebarBottom() {
         >
           <CardMedia
             component="img"
-            src="/shots/logochan180.jpg"
+            image="/shots/logochan180.jpg"
             sx={{ width: 20, borderRadius: "50%" }}
             onError={e => { e.currentTarget.style.display = "none"; }}
           />

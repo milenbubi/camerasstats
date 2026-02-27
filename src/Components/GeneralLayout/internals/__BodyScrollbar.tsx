@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useAdminScrollbar } from "@ffilip/mui-react-utils/mui";
+import { useAdminScrollbar } from "@ffilip/mui-react-utils";
 import { getGeneralLayoutWrapperElement } from "../../../Utils/htmlUtils";
 
 

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { getRandomPastelColors } from "@ffilip/chan180-utils/colors";
+import { getRandomPastelColors } from "@ffilip/chan180-utils";
 import { IEntityVisit } from "../../../Utils/models";
 
 const NAME_MAX_LENGTH = 13;

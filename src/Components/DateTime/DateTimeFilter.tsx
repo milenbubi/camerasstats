@@ -1,11 +1,11 @@
 import "dayjs/locale/bg";
 import dayjs, { Dayjs } from "dayjs";
-import { useMergedState } from "@ffilip/mui-react-utils/react";
+import { useMergedState } from "@ffilip/mui-react-utils";
 import { MenuItem, Select, Grid, Button } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { forwardRef, Ref, useEffect, useImperativeHandle, useMemo } from "react";
-import { calculatePeriodBoundaries, getPeriodOptions, IPeriodBoundaries, PeriodLengthInDays } from "@ffilip/chan180-utils/time";
+import { calculatePeriodBoundaries, getPeriodOptions, IPeriodBoundaries, PeriodLengthInDays } from "@ffilip/chan180-utils";
 import { useDTComponentProps } from "./dtComponentProps";
 
 interface IProps {

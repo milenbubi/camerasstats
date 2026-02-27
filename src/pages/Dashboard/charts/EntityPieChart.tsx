@@ -1,8 +1,7 @@
 import { useMemo } from "react";
 import { Typography, Sheet, Stack, Box } from "@mui/joy";
-import { Centered } from "@ffilip/mui-react-utils/components";
-import { useResizeObserver } from "@ffilip/mui-react-utils/document";
 import { PieChart, Pie, Sector, PieSectorShapeProps } from "recharts";
+import { Centered, useResizeObserver } from "@ffilip/mui-react-utils";
 
 import { useChartPalette } from "../helpers/chartPalette";
 import { truncatePieText, usePieData } from "../helpers/pieUtils";

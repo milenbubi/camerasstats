@@ -1,9 +1,8 @@
 import { Popover } from "@mui/material";
+import { safeJsonParse } from "@ffilip/chan180-utils";
 import { Box, Typography, Link, Sheet } from "@mui/joy";
 import { MouseEvent, useCallback, useState } from "react";
-import { Iconify } from "@ffilip/mui-react-utils/components";
-import { safeJsonParse } from "@ffilip/chan180-utils/helpers";
-import { C180ZIndex, fixMuiOverlayFocus } from "@ffilip/mui-react-utils/mui";
+import { C180ZIndex, fixMuiOverlayFocus, Iconify } from "@ffilip/mui-react-utils";
 import { IVisit } from "../../Utils/models";
 
 interface IProps {

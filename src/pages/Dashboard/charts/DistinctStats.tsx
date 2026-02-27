@@ -1,6 +1,6 @@
 import { Box, useMediaQuery } from "@mui/material";
 import { Typography, Card, CardContent, } from "@mui/joy";
-import { Centered, Iconify } from "@ffilip/mui-react-utils/components";
+import { Centered, Iconify } from "@ffilip/mui-react-utils";
 import { IUniqueCounts } from "../../../Utils/models";
 
 interface IProps {

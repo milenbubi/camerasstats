@@ -18,7 +18,7 @@ function HomePageButton() {
     >
       <CardMedia
         component="img"
-        src="/shots/logo.jpg"
+        image="/shots/logo.jpg"
         sx={{ width: 60, borderRadius: "13px" }}
         onError={e => { e.currentTarget.style.display = "none"; }}
       />

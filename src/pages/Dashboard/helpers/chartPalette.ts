@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { colors } from "@mui/material";
 import { useTheme } from "@mui/joy/styles";
-import { useChan180Colors } from "@ffilip/mui-react-utils/mui";
+import { useChan180Colors } from "@ffilip/mui-react-utils";
 
 
 

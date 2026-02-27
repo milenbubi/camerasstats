@@ -1,4 +1,4 @@
-import { Iconify } from "@ffilip/mui-react-utils/components";
+import { Iconify } from "@ffilip/mui-react-utils";
 
 interface IProps {
   name: string;

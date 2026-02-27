@@ -1,9 +1,8 @@
 import { Popover } from "@mui/material";
 import { MouseEvent, useCallback, useState } from "react";
 import { Box, Typography, Chip, Link, Sheet } from "@mui/joy";
-import { formatUTCDateToLocalDateString } from "@ffilip/chan180-utils/time";
-import { C180ZIndex, fixMuiOverlayFocus } from "@ffilip/mui-react-utils/mui";
-import { ClipboardCopyButton, Iconify } from "@ffilip/mui-react-utils/components";
+import { formatUTCDateToLocalDateString } from "@ffilip/chan180-utils";
+import { C180ZIndex, fixMuiOverlayFocus, ClipboardCopyButton, Iconify } from "@ffilip/mui-react-utils";
 
 import { IVisit } from "../../Utils/models";
 import { UserAgentParserUrl } from "../../Utils/constants";
@@ -78,7 +77,7 @@ function VisitDeviceLabel({ visit, blueC, greenC, yellowC, isDark }: IProps) {
               <Typography
                 textColor="grey"
                 sx={{ fontSize: "xs", fontStyle: "italic", ml: "5px" }}
-                children={`, ${formatUTCDateToLocalDateString(visit.visitTime, "date", "en-GB")}`}
+                children={`, ${formatUTCDateToLocalDateString({ source: visit.visitTime, unit: "date", locale: "en-GB" })}`}
               />
             </Typography>
             <Box sx={{ display: "flex" }}>

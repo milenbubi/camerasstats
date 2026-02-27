@@ -1,5 +1,5 @@
 import { Sheet, GlobalStyles } from "@mui/joy";
-import { C180ZIndex } from "@ffilip/mui-react-utils/mui";
+import { C180ZIndex } from "@ffilip/mui-react-utils";
 
 import HamburgerMenu from "./HamburgerMenu";
 import HomePageButton from "./HomePageButton";
