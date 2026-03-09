@@ -1,3 +1,23 @@
+# ==========================================
+# Кеширане на основни файлове (SPA)
+# index.html винаги свеж, JS/CSS дълъг кеш с immutable
+# ==========================================
+<IfModule mod_headers.c>
+    # index.html винаги свеж
+    <Files "index.html">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </Files>
+
+    # JS/CSS с дълъг кеш
+    <FilesMatch "\.(js|css)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+</IfModule>
+
+
+# ===== SPA Routing =====
 Options -MultiViews
 RewriteEngine On
 RewriteBase /
