@@ -168,7 +168,7 @@ function DateTimeFilter(props: IProps, ref: Ref<DTFilterRefresh>) {
       <Grid container justifyContent="center" spacing={2}>
         <Grid>
           <DateTimePicker
-            // format="DD MM YYYY  -  HH : mm"
+            format="DD MMM YYYY, HH:mm"
             ampm={false}
             defaultValue={null}
             value={dayjs(state.startDate)}
@@ -182,7 +182,7 @@ function DateTimeFilter(props: IProps, ref: Ref<DTFilterRefresh>) {
 
         <Grid>
           <DateTimePicker
-            // format="DD MM YYYY  -  HH : mm"
+            format="DD MMM YYYY, HH:mm"
             ampm={false}
             defaultValue={null}
             value={dayjs(state.endDate)}
