@@ -1,4 +1,4 @@
-# Cameras Statistics
+# Cameras Statistics Website
 
 This project provides a statistics and monitoring dashboard for the cameras website chan180.net.  
 It is designed as a back-office style interface with a left-side navigation panel,
