@@ -1,7 +1,7 @@
 import { Popover } from "@mui/material";
 import { Box, Typography, Link, Sheet } from "@mui/joy";
-import { MouseEvent, useCallback, useState } from "react";
-import { C180ZIndex, fixMuiOverlayFocus, Iconify } from "@ffilip/mui-react-utils";
+import { MouseEvent, useCallback, useRef, useState } from "react";
+import { C180ZIndex, fixMuiOverlayFocus } from "@ffilip/mui-react-utils";
 import { IVisit } from "../../Utils/models";
 
 interface IProps {
@@ -13,6 +13,13 @@ interface IProps {
 
 function PlacesLabel({ visit, yellowC }: IProps) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
+
+  const placesCount = useRef(
+    typeof visit.place === "string" && visit.place.trim()
+      ? visit.place.trim().split(/\s+/).length
+      : "n/a"
+  );
 
 
   const openPopover = useCallback((event: MouseEvent<HTMLElement>) => {
@@ -39,7 +46,13 @@ function PlacesLabel({ visit, yellowC }: IProps) {
     <>
       <Link
         onClick={openPopover}
-        children={<Iconify icon="mdi:place-outline" width={16} sx={{ color: "text.primary", opacity: 0.8, transform: "translate(-2px, 3px) scale(1.4)" }} />}
+        children={<Typography level="title-sm" fontWeight="md" sx={{ opacity: 0.9 }} >{placesCount.current}</Typography>}
+        sx={{
+          transition: "transform 0.3s ease",
+          "&:hover": {
+            transform: "scale(1.2)"
+          }
+        }}
       />
       <Popover
         sx={{ zIndex: C180ZIndex.popper }}
