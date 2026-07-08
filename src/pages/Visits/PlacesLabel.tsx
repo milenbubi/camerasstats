@@ -46,7 +46,7 @@ function PlacesLabel({ visit, yellowC }: IProps) {
     <>
       <Link
         onClick={openPopover}
-        children={<Typography level="title-sm" fontWeight="md" sx={{ opacity: 0.9 }} >{placesCount.current}</Typography>}
+        children={<Typography level="title-sm" fontWeight="md" sx={{ color: yellowC }} >{placesCount.current}</Typography>}
         sx={{
           transition: "transform 0.3s ease",
           "&:hover": {
