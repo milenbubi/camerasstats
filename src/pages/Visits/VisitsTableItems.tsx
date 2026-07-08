@@ -3,6 +3,7 @@ import { TableCell, TableRow } from "@mui/material";
 import { useChan180Colors } from "@ffilip/mui-react-utils";
 import { formatUTCDateToLocalDateString } from "@ffilip/chan180-utils";
 
+import PlacesLabel from "./PlacesLabel";
 import VisitIpLabel from "./VisitIpLabel";
 import { IVisit } from "../../Utils/models";
 import VisitDeviceLabel from "./VisitDeviceLabel";
@@ -23,6 +24,7 @@ export function useVisitsTableHeaders() {
     { key: "visit_time", text: "Visit Time", sortable: true },
     { key: "device", text: "Device", sortable: true },
     { key: "ipAddress", text: "IP Address", sortable: false },
+    { key: "place", text: "Places", sortable: false },
     { key: "_more", text: "More", sortable: false }
   ], []);
 
@@ -53,6 +55,10 @@ function ItemsRenderer({ data }: IProps) {
 
           <TableCell>
             <VisitIpLabel visit={visit} blueC={blueC} greenC={greenC} redC={redC} />
+          </TableCell>
+
+          <TableCell align="center">
+            <PlacesLabel visit={visit} yellowC={yellowC} />
           </TableCell>
 
           <TableCell align="center">
